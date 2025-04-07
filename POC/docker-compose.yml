@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ddf-network
+
+  sdr-api:
+    build:
+      context: ./src/SDR.Core.API
+      dockerfile: Dockerfile
+    container_name: sdr-api
+    ports:
+      - "5000:80"
+    depends_on:
+      - mongodb
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MongoDB=mongodb://mongodb:27017
+    networks:
+      - ddf-network
+
+  study-builder-adapter:
+    build:
+      context: ./src/StudyBuilder.Adapter
+      dockerfile: Dockerfile
+    container_name: study-builder-adapter
+    depends_on:
+      - sdr-api
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - SdrApi__BaseUrl=http://sdr-api/api
+    networks:
+      - ddf-network
+
+  edc-adapter:
+    build:
+      context: ./src/EDC.Adapter
+      dockerfile: Dockerfile
+    container_name: edc-adapter
+    depends_on:
+      - sdr-api
+    environment:
+      - DOTNET_ENVIRONMENT=Development
+      - SdrApi__BaseUrl=http://sdr-api/api
+    networks:
+      - ddf-network
+
+networks:
+  ddf-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

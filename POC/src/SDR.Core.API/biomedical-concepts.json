@@ -1,0 +1,167 @@
+{
+  "biomedicalConcepts": [
+    {
+      "id": "BC_VITAL_SIGNS",
+      "name": "Vital Signs",
+      "label": "Vital Signs",
+      "synonyms": ["VS"],
+      "reference": "Standard vital signs measurements",
+      "code": {
+        "code": "VS",
+        "codeSystem": "CDISC",
+        "codeSystemVersion": "1.0",
+        "decode": "Vital Signs"
+      },
+      "properties": [
+        {
+          "id": "BCP_SYSTOLIC_BP",
+          "name": "Systolic Blood Pressure",
+          "label": "Systolic BP",
+          "isRequired": true,
+          "isEnabled": true,
+          "datatype": "number",
+          "unitOfMeasure": "mmHg",
+          "minValue": 70,
+          "maxValue": 220,
+          "code": {
+            "code": "SYSBP",
+            "codeSystem": "CDISC",
+            "codeSystemVersion": "1.0",
+            "decode": "Systolic Blood Pressure"
+          }
+        },
+        {
+          "id": "BCP_DIASTOLIC_BP",
+          "name": "Diastolic Blood Pressure",
+          "label": "Diastolic BP",
+          "isRequired": true,
+          "isEnabled": true,
+          "datatype": "number",
+          "unitOfMeasure": "mmHg",
+          "minValue": 40,
+          "maxValue": 120,
+          "code": {
+            "code": "DIABP",
+            "codeSystem": "CDISC",
+            "codeSystemVersion": "1.0",
+            "decode": "Diastolic Blood Pressure"
+          }
+        },
+        {
+          "id": "BCP_HEART_RATE",
+          "name": "Heart Rate",
+          "label": "Heart Rate",
+          "isRequired": true,
+          "isEnabled": true,
+          "datatype": "number",
+          "unitOfMeasure": "beats/min",
+          "minValue": 30,
+          "maxValue": 220,
+          "code": {
+            "code": "HR",
+            "codeSystem": "CDISC",
+            "codeSystemVersion": "1.0",
+            "decode": "Heart Rate"
+          }
+        },
+        {
+          "id": "BCP_RESPIRATORY_RATE",
+          "name": "Respiratory Rate",
+          "label": "Resp Rate",
+          "isRequired": true,
+          "isEnabled": true,
+          "datatype": "number",
+          "unitOfMeasure": "breaths/min",
+          "minValue": 8,
+          "maxValue": 60,
+          "code": {
+            "code": "RESP",
+            "codeSystem": "CDISC",
+            "codeSystemVersion": "1.0",
+            "decode": "Respiratory Rate"
+          }
+        },
+        {
+          "id": "BCP_TEMPERATURE",
+          "name": "Body Temperature",
+          "label": "Temperature",
+          "isRequired": true,
+          "isEnabled": true,
+          "datatype": "number",
+          "unitOfMeasure": "C",
+          "minValue": 35,
+          "maxValue": 42,
+          "code": {
+            "code": "TEMP",
+            "codeSystem": "CDISC",
+            "codeSystemVersion": "1.0",
+            "decode": "Body Temperature"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BC_PAIN_ASSESSMENT",
+      "name": "Pain Assessment",
+      "label": "Pain Assessment",
+      "synonyms": ["Pain Scale"],
+      "reference": "Numeric pain scale assessment",
+      "code": {
+        "code": "PAIN",
+        "codeSystem": "CDISC",
+        "codeSystemVersion": "1.0",
+        "decode": "Pain Assessment"
+      },
+      "properties": [
+        {
+          "id": "BCP_PAIN_SCORE",
+          "name": "Pain Score",
+          "label": "Pain Score",
+          "isRequired": true,
+          "isEnabled": true,
+          "datatype": "integer",
+          "minValue": 0,
+          "maxValue": 10,
+          "code": {
+            "code": "PAINSCORE",
+            "codeSystem": "CDISC",
+            "codeSystemVersion": "1.0",
+            "decode": "Pain Score"
+          },
+          "responseCodes": [
+            {
+              "id": "PAIN_0",
+              "isEnabled": true,
+              "code": {
+                "code": "0",
+                "codeSystem": "CDISC",
+                "codeSystemVersion": "1.0",
+                "decode": "No Pain"
+              }
+            },
+            {
+              "id": "PAIN_5",
+              "isEnabled": true,
+              "code": {
+                "code": "5",
+                "codeSystem": "CDISC",
+                "codeSystemVersion": "1.0",
+                "decode": "Moderate Pain"
+              }
+            },
+            {
+              "id": "PAIN_10",
+              "isEnabled": true,
+              "code": {
+                "code": "10",
+                "codeSystem": "CDISC",
+                "codeSystemVersion": "1.0",
+                "decode": "Worst Pain Possible"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

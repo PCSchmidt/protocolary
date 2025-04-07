@@ -1,0 +1,318 @@
+{
+  "clinicalStudy": {
+    "studyId": "SAMPLE-STUDY-001",
+    "studyTitle": "Sample Study for POC",
+    "studyVersion": "1.0",
+    "studyPhase": {
+      "code": "PHASE_2",
+      "codeSystem": "CDISC",
+      "codeSystemVersion": "1.0",
+      "decode": "Phase 2"
+    },
+    "studyType": {
+      "code": "INTERVENTIONAL",
+      "codeSystem": "CDISC",
+      "codeSystemVersion": "1.0",
+      "decode": "Interventional"
+    },
+    "studyDesigns": [
+      {
+        "studyDesignId": "SD-001",
+        "studyDesignName": "Main Study Design",
+        "studyDesignDescription": "Sample study design for POC",
+        "interventionModel": {
+          "code": "PARALLEL",
+          "codeSystem": "CDISC",
+          "codeSystemVersion": "1.0",
+          "decode": "Parallel"
+        },
+        "trialType": {
+          "code": "EFFICACY",
+          "codeSystem": "CDISC",
+          "codeSystemVersion": "1.0",
+          "decode": "Efficacy"
+        },
+        "trialIntentType": {
+          "code": "TREATMENT",
+          "codeSystem": "CDISC",
+          "codeSystemVersion": "1.0",
+          "decode": "Treatment"
+        },
+        "studyPopulations": [
+          {
+            "populationId": "POP-001",
+            "populationDescription": "Adult patients with condition X"
+          }
+        ],
+        "studyArms": [
+          {
+            "studyArmId": "ARM-001",
+            "studyArmName": "Treatment Arm",
+            "studyArmType": {
+              "code": "EXPERIMENTAL",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Experimental"
+            },
+            "studyArmDescription": "Patients receiving experimental treatment"
+          },
+          {
+            "studyArmId": "ARM-002",
+            "studyArmName": "Control Arm",
+            "studyArmType": {
+              "code": "PLACEBO_COMPARATOR",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Placebo Comparator"
+            },
+            "studyArmDescription": "Patients receiving placebo"
+          }
+        ],
+        "studyEpochs": [
+          {
+            "studyEpochId": "EPOCH-001",
+            "studyEpochName": "Screening",
+            "studyEpochDescription": "Screening period",
+            "studyEpochType": {
+              "code": "SCREENING",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Screening"
+            }
+          },
+          {
+            "studyEpochId": "EPOCH-002",
+            "studyEpochName": "Treatment",
+            "studyEpochDescription": "Treatment period",
+            "studyEpochType": {
+              "code": "TREATMENT",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Treatment"
+            }
+          },
+          {
+            "studyEpochId": "EPOCH-003",
+            "studyEpochName": "Follow-up",
+            "studyEpochDescription": "Follow-up period",
+            "studyEpochType": {
+              "code": "FOLLOW_UP",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Follow-up"
+            }
+          }
+        ],
+        "studyCells": [
+          {
+            "studyCellId": "CELL-001",
+            "studyArmId": "ARM-001",
+            "studyEpochId": "EPOCH-001"
+          },
+          {
+            "studyCellId": "CELL-002",
+            "studyArmId": "ARM-001",
+            "studyEpochId": "EPOCH-002"
+          },
+          {
+            "studyCellId": "CELL-003",
+            "studyArmId": "ARM-001",
+            "studyEpochId": "EPOCH-003"
+          },
+          {
+            "studyCellId": "CELL-004",
+            "studyArmId": "ARM-002",
+            "studyEpochId": "EPOCH-001"
+          },
+          {
+            "studyCellId": "CELL-005",
+            "studyArmId": "ARM-002",
+            "studyEpochId": "EPOCH-002"
+          },
+          {
+            "studyCellId": "CELL-006",
+            "studyArmId": "ARM-002",
+            "studyEpochId": "EPOCH-003"
+          }
+        ],
+        "scheduleTimelines": [
+          {
+            "scheduleTimelineId": "TL-001",
+            "scheduleTimelineName": "Main Timeline",
+            "scheduleTimelineDescription": "Main study timeline",
+            "scheduleTimelineEntries": [
+              {
+                "timelineEntryId": "ENTRY-001",
+                "timelineEntryName": "Screening Visit",
+                "timelineEntryDescription": "Screening visit activities",
+                "studyEpochId": "EPOCH-001",
+                "timelineEntryDay": -28,
+                "activities": [
+                  {
+                    "activityId": "ACT-001",
+                    "activityName": "Informed Consent",
+                    "activityDescription": "Obtain informed consent",
+                    "definedProcedures": [
+                      {
+                        "procedureId": "PROC-001",
+                        "procedureName": "Informed Consent Form",
+                        "procedureDescription": "Review and sign informed consent form"
+                      }
+                    ]
+                  },
+                  {
+                    "activityId": "ACT-002",
+                    "activityName": "Vital Signs",
+                    "activityDescription": "Collect vital signs",
+                    "biomedicalConceptIds": ["BC_VITAL_SIGNS"],
+                    "definedProcedures": [
+                      {
+                        "procedureId": "PROC-002",
+                        "procedureName": "Vital Signs Measurement",
+                        "procedureDescription": "Measure vital signs"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "timelineEntryId": "ENTRY-002",
+                "timelineEntryName": "Baseline Visit",
+                "timelineEntryDescription": "Baseline visit activities",
+                "studyEpochId": "EPOCH-002",
+                "timelineEntryDay": 1,
+                "activities": [
+                  {
+                    "activityId": "ACT-003",
+                    "activityName": "Vital Signs",
+                    "activityDescription": "Collect vital signs",
+                    "biomedicalConceptIds": ["BC_VITAL_SIGNS"],
+                    "definedProcedures": [
+                      {
+                        "procedureId": "PROC-002",
+                        "procedureName": "Vital Signs Measurement",
+                        "procedureDescription": "Measure vital signs"
+                      }
+                    ]
+                  },
+                  {
+                    "activityId": "ACT-004",
+                    "activityName": "Pain Assessment",
+                    "activityDescription": "Assess pain level",
+                    "biomedicalConceptIds": ["BC_PAIN_ASSESSMENT"],
+                    "definedProcedures": [
+                      {
+                        "procedureId": "PROC-003",
+                        "procedureName": "Pain Scale Assessment",
+                        "procedureDescription": "Assess pain using numeric scale"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "biomedicalConcepts": [
+          {
+            "id": "BC_VITAL_SIGNS",
+            "name": "Vital Signs",
+            "label": "Vital Signs",
+            "synonyms": ["VS"],
+            "reference": "Standard vital signs measurements",
+            "code": {
+              "code": "VS",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Vital Signs"
+            },
+            "properties": [
+              {
+                "id": "BCP_SYSTOLIC_BP",
+                "name": "Systolic Blood Pressure",
+                "label": "Systolic BP",
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "number",
+                "unitOfMeasure": "mmHg",
+                "minValue": 70,
+                "maxValue": 220,
+                "code": {
+                  "code": "SYSBP",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "1.0",
+                  "decode": "Systolic Blood Pressure"
+                }
+              },
+              {
+                "id": "BCP_DIASTOLIC_BP",
+                "name": "Diastolic Blood Pressure",
+                "label": "Diastolic BP",
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "number",
+                "unitOfMeasure": "mmHg",
+                "minValue": 40,
+                "maxValue": 120,
+                "code": {
+                  "code": "DIABP",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "1.0",
+                  "decode": "Diastolic Blood Pressure"
+                }
+              },
+              {
+                "id": "BCP_HEART_RATE",
+                "name": "Heart Rate",
+                "label": "Heart Rate",
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "number",
+                "unitOfMeasure": "beats/min",
+                "minValue": 30,
+                "maxValue": 220,
+                "code": {
+                  "code": "HR",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "1.0",
+                  "decode": "Heart Rate"
+                }
+              }
+            ]
+          },
+          {
+            "id": "BC_PAIN_ASSESSMENT",
+            "name": "Pain Assessment",
+            "label": "Pain Assessment",
+            "synonyms": ["Pain Scale"],
+            "reference": "Numeric pain scale assessment",
+            "code": {
+              "code": "PAIN",
+              "codeSystem": "CDISC",
+              "codeSystemVersion": "1.0",
+              "decode": "Pain Assessment"
+            },
+            "properties": [
+              {
+                "id": "BCP_PAIN_SCORE",
+                "name": "Pain Score",
+                "label": "Pain Score",
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "integer",
+                "minValue": 0,
+                "maxValue": 10,
+                "code": {
+                  "code": "PAINSCORE",
+                  "codeSystem": "CDISC",
+                  "codeSystemVersion": "1.0",
+                  "decode": "Pain Score"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
