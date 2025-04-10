@@ -8,7 +8,6 @@ The TransCelerate DDF project provides a sustainable open-source Study Definitio
 
 **Note**: This is not an official TransCelerate project. This is an independent commercial adaptation effort that leverages TransCelerate's open-source components.
 
-
 ## Original TransCelerate Components
 
 This project builds upon the following TransCelerate DDF repositories:
@@ -47,7 +46,6 @@ The commercial adaptation extends the integration capabilities with:
 - **Enhanced StudyBuilder Adapter** - Improved integration with study design systems
 - **Enhanced EDC Adapter** - Advanced integration with EDC systems
 - **Additional System Adapters** - Support for a wider range of upstream and downstream systems
-
 
 ## Commercial Adaptation Strategy
 
@@ -105,7 +103,6 @@ The POC is currently in the early stages of development, with the following comp
 - **StudyBuilder Adapter**: Initial structure only
 - **EDC Adapter**: Initial structure only
 - **BiomedicalConcepts**: Initial set defined
-
 
 ## Technical Architecture
 
@@ -168,7 +165,6 @@ The POC is currently in the early stages of development, with the following comp
 4. Access the SDR Core API at http://localhost:5000/swagger
 5. Access the UI at http://localhost:4200
 
-
 ## Next Steps
 
 The following steps are planned for the continued development of this commercial adaptation:
@@ -209,3 +205,95 @@ This commercial adaptation maintains the original Apache 2.0 license for all com
 - This commercial adaptation may collect and store personal data (user credentials, email address, IP address) for authentication and audit log purposes. Users are responsible for compliance with any relevant privacy laws or regulations in any applicable jurisdiction.
 - Any information put into the provided tools (including the UI or API) may be visible to all users, so it is recommended not to use commercially sensitive or confidential information.
 
+## Windows Setup Guide for POC
+
+You have all the necessary prerequisites installed except for MongoDB. Since you already have Docker installed, you can run MongoDB in a Docker container, which is the simplest approach.
+
+### Running MongoDB with Docker
+
+1. Open a command prompt and run the following command to start a MongoDB container:
+
+`
+docker run --name mongodb -d -p 27017:27017 mongo:latest
+`
+
+This will download the latest MongoDB image and start a container with the name 'mongodb', mapping port 27017 on your host to port 27017 in the container.
+
+2. To verify that MongoDB is running, you can execute:
+
+`
+docker ps
+`
+
+You should see the MongoDB container in the list of running containers.
+
+### Running the POC with Docker Compose
+
+The POC directory contains a docker-compose.yml file that will set up all the necessary components, including:
+
+- MongoDB
+- SDR Core API
+- StudyBuilder Adapter
+- EDC Adapter
+
+To run the entire POC using Docker Compose:
+
+1. Navigate to the POC directory:
+`
+cd transcelerate/POC
+`
+
+2. Run Docker Compose:
+`
+docker-compose up -d
+`
+
+3. Access the SDR Core API at http://localhost:5000/swagger
+4. Access the UI at http://localhost:4200
+
+### Stopping the POC
+
+When you're done, you can stop the containers:
+
+`
+docker-compose down
+`
+
+To stop just the MongoDB container (if you started it separately):
+
+`
+docker stop mongodb
+docker rm mongodb
+`
+
+### Data Persistence
+
+By default, the data in the MongoDB container will be lost when the container is removed. If you want to persist the data, you can add a volume mount to the docker run command:
+
+`
+docker run --name mongodb -d -p 27017:27017 -v mongodb_data:/data/db mongo:latest
+`
+
+This will create a Docker volume named 'mongodb_data' that will persist even if the container is removed.
+
+## Summary
+
+You're all set to run the TransCelerate DDF Commercial Adaptation POC on your Windows laptop! Here's a summary of your setup:
+
+1. **Prerequisites Status**:
+   -  .NET 6 SDK (version 6.0.136) - INSTALLED
+   -  Node.js (version 18.17.0) - INSTALLED
+   -  Docker (version 27.0.3) - INSTALLED
+   -  MongoDB - NOT INSTALLED (but will use Docker instead)
+
+2. **Recommended Approach**:
+   - Use Docker Compose to run the entire POC, which will automatically set up MongoDB and all other components.
+   - The docker-compose.yml file in the POC directory is already configured to use volume mounting for MongoDB data persistence.
+
+3. **Next Steps**:
+   - Navigate to the POC directory: cd transcelerate/POC
+   - Run Docker Compose: docker-compose up -d
+   - Access the SDR Core API at http://localhost:5000/swagger
+   - Access the UI at http://localhost:4200
+
+This approach leverages your existing Docker installation and provides the simplest path to getting the POC up and running on your Windows laptop.
