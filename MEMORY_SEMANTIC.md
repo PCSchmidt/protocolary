@@ -1,0 +1,94 @@
+# MEMORY_SEMANTIC.md — Transcelerate | Persistent Domain Knowledge
+# Updated at gate close when a pattern is validated or invalidated.
+# Read at session start to restore domain context without re-researching.
+
+## USDM DOMAIN KNOWLEDGE
+
+### USDM Object Hierarchy (v4.x)
+```
+StudyDefinition
+  └─ Study
+       └─ StudyVersion
+            └─ StudyDesign
+                 ├─ StudyArm (treatment groups)
+                 ├─ StudyEpoch (trial phases: screening, treatment, follow-up)
+                 ├─ ScheduleTimeline
+                 │    └─ ScheduledActivityInstance
+                 │         └─ Activity → BiomedicalConcept reference
+                 └─ BiomedicalConcept
+                      ├─ code (CDISC NCI code, e.g., C49677 = systolic blood pressure)
+                      ├─ name
+                      └─ BiomedicalConceptProperty
+                           ├─ name (e.g., "result", "unit", "laterality")
+                           ├─ datatype (integer, float, string, coded)
+                           └─ responseCodes (for coded properties)
+```
+
+### BiomedicalConcept CDISC Codes (Vital Signs POC Set)
+Sourced from `POC_archive/src/SDR.Core.API/biomedical-concepts.json` and CDISC CT.
+
+| Concept | CDISC Code | REDCap Field Type | Notes |
+|---|---|---|---|
+| Systolic Blood Pressure | C49677 | text / integer | mmHg; range 60-250 |
+| Diastolic Blood Pressure | C25299 | text / integer | mmHg; range 40-150 |
+| Heart Rate | C49673 | text / integer | bpm; range 30-250 |
+| Respiratory Rate | C49678 | text / integer | breaths/min; range 8-60 |
+| Body Temperature | C25206 | text / decimal | °C or °F; specify units |
+| Height | C25347 | text / decimal | cm; range 50-250 |
+| Weight | C29463 | text / decimal | kg; range 1-300 |
+| BMI | C16358 | text / decimal | kg/m²; calculated field |
+| Pain Assessment (NRS) | C38109 | text / integer | 0-10 scale |
+
+### USDM Python Package Notes (`usdm` v0.67.0)
+- Import root: `from usdm_model.study import Study`
+- Requires `CDISC_API_KEY` env var for terminology lookups
+- Excel import: `from usdm_excel import USDMExcel`
+- JSON serialization: models use Pydantic v2 `.model_dump()` / `.model_validate()`
+- Maintainer caveat: "originally not intended for public use; only informal testing performed"
+- Pin version: `usdm==0.67.0` — do not upgrade without testing full pipeline
+
+### REDCap Data Dictionary Format
+REDCap instruments are configured via a CSV import called the Data Dictionary.
+Key columns:
+```
+Variable / Field Name    — unique identifier (no spaces, max 26 chars)
+Form Name               — instrument/form the field belongs to
+Field Type              — text, notes, dropdown, radio, checkbox, calc, file
+Field Label             — human-readable label shown to site staff
+Choices (if dropdown)   — pipe-separated: 1, Option A | 2, Option B
+Field Note              — instructional text below the field
+Text Validation Type    — integer, number, date_mdy, etc.
+Text Validation Min     — minimum valid value
+Text Validation Max     — maximum valid value
+Required Field          — y or blank
+```
+
+### REDCap API
+- Base URL: `{redcap_url}/api/`
+- Auth: token in POST body (`token=...`)
+- Import instruments: `content=instrument`, `action=import`, `format=csv`
+- Import records: `content=record`, `action=import`, `format=json`
+- All requests are HTTP POST (even reads use POST with `action=export`)
+
+## COMPETITIVE LANDSCAPE (key facts to avoid re-researching)
+
+- ~25 organizations have publicly demonstrated DDF-compatible solutions (April 2026)
+- USDM v4.0 released early 2025; stable; no major revision planned for 2026
+- **Closest competitor:** CRScube (cubeCDMS) — USDM ingestion + EDC automation, but requires
+  their own EDC system
+- **Biggest free threat:** OpenStudyBuilder (Novo Nordisk, MIT/GPLv3) — upstream-focused
+- **Market gap this project targets:** EDC-agnostic downstream adapter (USDM → any EDC)
+- TransCelerate Solution Showcases: quarterly (September, December, March, July)
+- DDF directory: https://transcelerate.github.io/ddf-directory/directory/directory.html
+
+## VALIDATED PATTERNS
+# Added at gate close when a pattern is confirmed by working code.
+# Format: PAT-NNN: title | Confidence: LOW/MEDIUM/HIGH | Gate validated
+
+[Empty — populated at first gate close]
+
+## INVALIDATED ASSUMPTIONS
+# Record things that seemed true but turned out to be wrong.
+# Prevents re-learning the same lesson.
+
+[Empty — populated as discovered]

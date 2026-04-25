@@ -1,0 +1,37 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "powershell -File .claude/hooks/session-start.ps1"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "type": "command",
+        "matcher": "Bash",
+        "command": "powershell -File .claude/hooks/block-dangerous.ps1 \"${input.command}\""
+      }
+    ],
+    "PreCompact": [
+      {
+        "type": "command",
+        "command": "powershell -File .claude/hooks/pre-compact.ps1"
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git *)",
+      "Bash(docker *)",
+      "Bash(pytest *)",
+      "Bash(pip *)",
+      "Bash(python *)",
+      "Bash(ruff *)",
+      "Bash(black *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)"
+    ]
+  }
+}
