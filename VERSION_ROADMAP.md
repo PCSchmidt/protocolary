@@ -15,7 +15,7 @@
 
 | Version | Gate Name | Approval Word | Objective | Est Hrs | Act Hrs | Status |
 |---|---|---|---|---|---|---|
-| v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; domain expert session done; BiomedicalConcept mapping table drafted; REDCap sandbox provisioned | 4 | — | IN PROGRESS |
+| v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; domain expert session done; BiomedicalConcept mapping table drafted; REDCap sandbox provisioned | 4 | 4 | DONE |
 | v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; real USDM fixture validated; MongoDB schema decided; test fixture committed | 4 | — | PLANNED |
 | v0.2 | **API** | `API APPROVED` | FastAPI service running in Docker; POST /studies, GET /studies/{id}, /arms, /concepts all tested; `pytest` green | 8 | — | PLANNED |
 | v0.3 | **Adapter** | `ADAPTER APPROVED` | USDM → REDCap Data Dictionary CSV transformation tested; push to live REDCap sandbox working; concept_mappings.json complete for vital signs set | 10 | — | PLANNED |
@@ -25,8 +25,8 @@
 
 ## CALIBRATION MULTIPLIER
 
-No completed gates yet. Default multiplier: 1.0x.
-Updated after Gate 0 close based on actual vs. estimated variance.
+Gate 0 actual = 4 hrs, estimate = 4 hrs, variance = 0%. Multiplier: 1.0x.
+Note: Gate 0 is planning-only (no code) — carry-forward value for coding gates is limited.
 
 ## POST-POC BACKLOG (out of scope for v0.x)
 

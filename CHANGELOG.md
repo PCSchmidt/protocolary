@@ -2,7 +2,7 @@
 # Append entries at every gate close and significant milestone.
 # Format: ## [version] — [date] | [Gate Name]
 
-## [Unreleased] — In Progress | Gate 0: Foundations
+## [v0.0.0] — 2026-04-25 | Gate 0: Foundations — CLOSED
 
 ### Added
 - Cloned repository from GitHub (dev branch)
@@ -35,4 +35,10 @@
 
 ---
 
-*Previous entries will appear below as gates close.*
+## [Unreleased] — Gate 1: Schema — IN PROGRESS
+
+*Entries added as Gate 1 work completes.*
+
+---
+
+*Previous entries appear above.*

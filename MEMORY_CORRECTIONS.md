@@ -12,7 +12,14 @@
 # CORRECTION FOR FUTURE: [what to do differently next gate]
 # MEMORY_SEMANTIC.md UPDATE: [pattern added/updated, or none]
 
-[Empty — populated at first gate close]
+## REFLEXION: Gate 0 — Foundations
+
+Date: 2026-04-25
+ESTIMATE: Predicted 4 hrs, Actual 4 hrs, Variance 0%
+WHAT WENT WRONG: Domain expert session not completed before gate close (deferred to pre-Gate 3 — acceptable given she is not needed for schema/API work). REDCap sandbox not provisioned (waiting on JHU ICTR response — not blocking Gate 1).
+WHAT WENT RIGHT: Harness setup faster than expected once Research/ documents were drafted. `usdm` package discovery eliminated hand-rolling models (saved estimated 8+ hrs). BiomedicalConcept mapping table drafted in MEMORY_SEMANTIC.md from POC_archive biomedical-concepts.json.
+CORRECTION FOR FUTURE: Gate 0 criteria were slightly aspirational (REDCap sandbox + domain expert session). For planning-only gates with external dependencies, mark external blockers explicitly as "not blocking gate close" in SPEC.md upfront.
+MEMORY_SEMANTIC.md UPDATE: None — Gate 0 is pre-code; no validated implementation patterns yet.
 
 ## HISTORICAL LESSONS (pre-project)
 # Key lessons from the original .NET POC attempt (April 2025) that inform this reboot.

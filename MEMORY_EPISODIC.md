@@ -5,9 +5,9 @@ Read at session start to reconstruct recent history.
 
 ## Gate Log
 
-| Date | Gate | Approval Word | Outcome | Tests | Hours (Est → Act) | Notes |
-|---|---|---|---|---|---|---|
-| — | — | — | — | — | — | Awaiting Gate 0 |
+| Date       | Gate                 | Approval Word     | Outcome | Tests | Hours (Est → Act) | Notes                                                 |
+|------------|----------------------|-------------------|---------|-------|-------------------|-------------------------------------------------------|
+| 2026-04-25 | Gate 0 — Foundations | `SCOPE CONFIRMED` | CLOSED  | 0     | 4 → 4 hrs         | REDCap + domain expert session deferred; not blocking |
 
 ## Session Log
 

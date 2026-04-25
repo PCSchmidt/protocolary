@@ -6,7 +6,7 @@
 
 | Gate | Unit | Integration | E2E | Total | Target | Status |
 |---|---|---|---|---|---|---|
-| Gate 0 — Foundations | 0 | 0 | 0 | 0 | 0 | Pre-code |
+| Gate 0 — Foundations | 0 | 0 | 0 | 0 | 0 | DONE |
 | Gate 1 — Schema | — | — | — | — | ≥ 5 | PLANNED |
 | Gate 2 — API | — | — | — | — | ≥ 20 | PLANNED |
 | Gate 3 — Adapter | — | — | — | — | ≥ 35 | PLANNED |
