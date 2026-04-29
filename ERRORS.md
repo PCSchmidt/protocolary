@@ -4,7 +4,26 @@
 
 ## KNOWN ERRORS
 
-[Empty — populated during builds]
+### ERR-001: UUID encoding failure when inserting usdm_model fields into MongoDB
+**Symptom:** `ValueError: cannot encode native uuid.UUID with UuidRepresentation.UNSPECIFIED`
+**Root cause:** Fields accessed directly from a usdm_model Pydantic object (e.g. `wrapper.study.id`)
+are Python `uuid.UUID` objects. The default bson/Motor codec cannot encode them without an explicit
+`UuidRepresentation` codec option. This affects any top-level document field set from a direct
+model attribute reference.
+**Fix:** Wrap with `str()` at the call site:
+```python
+# WRONG — crashes at insert_one
+doc = {"study_id": wrapper.study.id, ...}
+
+# CORRECT
+doc = {"study_id": str(wrapper.study.id), ...}
+```
+`model_dump(mode="json")` handles this automatically inside the nested `wrapper` dict, but
+**direct field access does not** — always use `str()` when writing uuid fields to MongoDB.
+Also apply `str()` to the query predicate: `find_one({"study_id": str(wrapper.study.id)})`.
+**Prevention:** All MongoDB insert/query code must use `str(obj.id)` for uuid fields.
+Gate 2 API layer must follow this pattern in every route that handles study identifiers.
+**First seen:** Gate 1 — 2026-04-29 | Fixed in `tests/test_usdm_fixture.py`
 
 ## STACK-SPECIFIC GOTCHAS
 # Common failure modes for this stack, pre-seeded from experience.

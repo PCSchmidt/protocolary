@@ -121,9 +121,12 @@ async def test_study_stores_and_retrieves_from_mongodb(
     wrapper = Wrapper.model_validate(sample_study_json)
     sv = wrapper.study.versions[0]
 
-    # Build the document as defined in Decision 007
+    # Build the document as defined in Decision 007.
+    # NOTE: wrapper.study.id is a uuid.UUID object from the Pydantic model — always
+    # wrap with str() before storing in MongoDB. model_dump(mode="json") handles this
+    # automatically for the nested wrapper dict, but direct field access does not.
     doc = {
-        "study_id": wrapper.study.id,
+        "study_id": str(wrapper.study.id),
         "study_name": wrapper.study.name,
         "version_identifier": sv.versionIdentifier,
         "usdm_version": wrapper.usdmVersion,
@@ -135,7 +138,7 @@ async def test_study_stores_and_retrieves_from_mongodb(
     assert result.inserted_id is not None
 
     # Retrieve and validate
-    stored = await test_db["studies"].find_one({"study_id": wrapper.study.id})
+    stored = await test_db["studies"].find_one({"study_id": str(wrapper.study.id)})
     assert stored is not None
     assert stored["study_name"] == "POC Vital Signs Adapter Study"
     assert stored["usdm_version"] == "4.0.0"
@@ -155,7 +158,7 @@ async def test_bc_query_from_stored_document(
     wrapper = Wrapper.model_validate(sample_study_json)
     sv = wrapper.study.versions[0]
     doc = {
-        "study_id": wrapper.study.id,
+        "study_id": str(wrapper.study.id),
         "study_name": wrapper.study.name,
         "version_identifier": sv.versionIdentifier,
         "usdm_version": wrapper.usdmVersion,
@@ -166,7 +169,7 @@ async def test_bc_query_from_stored_document(
 
     # Retrieve only the BC list via a projection
     stored = await test_db["studies"].find_one(
-        {"study_id": wrapper.study.id},
+        {"study_id": str(wrapper.study.id)},
         {"wrapper.study.versions": 1},
     )
     assert stored is not None
