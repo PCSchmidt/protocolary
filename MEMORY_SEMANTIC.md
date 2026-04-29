@@ -5,23 +5,36 @@
 ## USDM DOMAIN KNOWLEDGE
 
 ### USDM Object Hierarchy (v4.x)
+*Validated against usdm_model package v0.66.0 / v0.67.0 — Gate 1, 2026-04-29*
+*Top-level container in usdm_model is `Wrapper`, not `StudyDefinition`.*
+*⚠️ CORRECTION: BiomedicalConcepts live on StudyVersion, NOT StudyDesign (pre-Gate-1 diagram was wrong).*
 ```
-StudyDefinition
-  └─ Study
-       └─ StudyVersion
-            └─ StudyDesign
-                 ├─ StudyArm (treatment groups)
-                 ├─ StudyEpoch (trial phases: screening, treatment, follow-up)
-                 ├─ ScheduleTimeline
-                 │    └─ ScheduledActivityInstance
-                 │         └─ Activity → BiomedicalConcept reference
-                 └─ BiomedicalConcept
-                      ├─ code (CDISC NCI code, e.g., C49677 = systolic blood pressure)
-                      ├─ name
-                      └─ BiomedicalConceptProperty
-                           ├─ name (e.g., "result", "unit", "laterality")
-                           ├─ datatype (integer, float, string, coded)
-                           └─ responseCodes (for coded properties)
+Wrapper
+  ├─ usdmVersion: str              (e.g. "4.0.0")
+  ├─ systemName: Optional[str]
+  └─ study: Study
+        └─ versions: List[StudyVersion]
+               ├─ versionIdentifier: str
+               ├─ biomedicalConcepts: List[BiomedicalConcept]   ← HERE, not on StudyDesign
+               │    ├─ name: str
+               │    ├─ reference: str                           (NCI code string, e.g. "C49677")
+               │    ├─ code: AliasCode
+               │    │    └─ standardCode: Code
+               │    │         ├─ code: str                      (e.g. "C49677")
+               │    │         ├─ codeSystem: str                (e.g. "NCI")
+               │    │         └─ decode: str                    (human label)
+               │    └─ properties: List[BiomedicalConceptProperty]
+               │         ├─ name: str                           (e.g. "result", "unit")
+               │         ├─ datatype: str                       (integer, decimal, string, coded)
+               │         ├─ isRequired: bool
+               │         ├─ isEnabled: bool
+               │         └─ responseCodes: List[ResponseCode]   (for coded properties)
+               └─ studyDesigns: List[InterventionalStudyDesign | ObservationalStudyDesign]
+                    ├─ arms: List[StudyArm]
+                    ├─ epochs: List[StudyEpoch]
+                    ├─ studyCells: List[StudyCell]              (arm × epoch grid)
+                    ├─ activities: List[Activity]
+                    └─ scheduleTimelines: List[ScheduleTimeline]
 ```
 
 ### BiomedicalConcept CDISC Codes (Vital Signs POC Set)
@@ -68,27 +81,4 @@ Required Field          — y or blank
 - Auth: token in POST body (`token=...`)
 - Import instruments: `content=instrument`, `action=import`, `format=csv`
 - Import records: `content=record`, `action=import`, `format=json`
-- All requests are HTTP POST (even reads use POST with `action=export`)
-
-## COMPETITIVE LANDSCAPE (key facts to avoid re-researching)
-
-- ~25 organizations have publicly demonstrated DDF-compatible solutions (April 2026)
-- USDM v4.0 released early 2025; stable; no major revision planned for 2026
-- **Closest competitor:** CRScube (cubeCDMS) — USDM ingestion + EDC automation, but requires
-  their own EDC system
-- **Biggest free threat:** OpenStudyBuilder (Novo Nordisk, MIT/GPLv3) — upstream-focused
-- **Market gap this project targets:** EDC-agnostic downstream adapter (USDM → any EDC)
-- TransCelerate Solution Showcases: quarterly (September, December, March, July)
-- DDF directory: https://transcelerate.github.io/ddf-directory/directory/directory.html
-
-## VALIDATED PATTERNS
-# Added at gate close when a pattern is confirmed by working code.
-# Format: PAT-NNN: title | Confidence: LOW/MEDIUM/HIGH | Gate validated
-
-[Empty — populated at first gate close]
-
-## INVALIDATED ASSUMPTIONS
-# Record things that seemed true but turned out to be wrong.
-# Prevents re-learning the same lesson.
-
-[Empty — populated as discovered]
+- All requests are HTTP POST (even reads

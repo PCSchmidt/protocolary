@@ -35,10 +35,7 @@
 
 ---
 
-## [Unreleased] — Gate 1: Schema — IN PROGRESS
+## [v0.1.0] — 2026-04-29 | Gate 1: Schema — CLOSED
 
-*Entries added as Gate 1 work completes.*
-
----
-
-*Previous entries appear above.*
+### Added
+- `python/pyproject.toml` — Python 3.12+, pinned deps (fastapi, m

@@ -8,6 +8,7 @@ Read at session start to reconstruct recent history.
 | Date       | Gate                 | Approval Word     | Outcome | Tests | Hours (Est → Act) | Notes                                                 |
 |------------|----------------------|-------------------|---------|-------|-------------------|-------------------------------------------------------|
 | 2026-04-25 | Gate 0 — Foundations | `SCOPE CONFIRMED` | CLOSED  | 0     | 4 → 4 hrs         | REDCap + domain expert session deferred; not blocking |
+| 2026-04-29 | Gate 1 — Schema      | `SCHEMA APPROVED` | CLOSED  | 10    | 4 → 4 hrs         | Key finding: BiomedicalConcepts on StudyVersion not StudyDesign; MEMORY_SEMANTIC.md corrected |
 
 ## Session Log
 
@@ -29,11 +30,4 @@ Format: `[Date] | Focus | Key decisions | Blockers | Next session start point`
   CDISC API not required until Gate 3 (usdm package works without it for model ops)
 - Domain expert session (wife/medical writer): deferred — not blocking Gate 0;
   5 key questions identified; needed before Gate 3 adapter work
-- Next: CDISC API account request submission → SCOPE CONFIRMED → Gate 1 scaffold
-
-## Stop Events
-
-Appended by hooks when session ends or `/clear` is called.
-Format: `[timestamp] | reason | gate | tests passing | context %`
-
-[Empty — populated automatically]
+- Next: CDISC API account request submission → SCOPE CONFIRMED →

@@ -19,51 +19,39 @@ At session start:
 ## Latest Context Save
 
 ```text
-CONTEXT SAVE: 2026-04-25T11:00:00
-Gate: Gate 0 — SCOPE CONFIRMED (not yet approved)
-Current phase: Harness complete; external access applications in flight
+CONTEXT SAVE: 2026-04-29T18:00:00
+Gate: Gate 2 — API (PLANNED; ready to start)
+Current phase: Holding — waiting on external API access; repo cleaned up and ready
 
-Completed this session:
-  - Cloned repo from GitHub (dev branch)
-  - Archived original .NET POC → POC_archive/
-  - Created Research/ with 5 documents
-  - Created SPEC.md and DECISIONS.md
-  - Created full harness: CLAUDE.md, all MEMORY files, VERSION_ROADMAP.md,
-    CONTEXT_BUDGET.md, ERRORS.md, TESTS.md, PLANS.md, DEPLOYMENT_CONFIG.md,
-    API_REGISTRY.md, DEMO_CHECKS.md, CHANGELOG.md
-  - Created .claude/hooks: block-dangerous, session-start, pre-compact
-  - Researched REDCap and CDISC API access paths
-  - Submitted REDCap membership application (email sent to redcap@jhu.edu)
+Gate status:
+  - Gate 0 (Foundations): CLOSED — 2026-04-25, 4 hrs actual, 0% variance
+  - Gate 1 (Schema): CLOSED — 2026-04-29, 4 hrs actual, 0% variance
+  - Gate 2 (API): PLANNED — ready to start; no external dependencies
+  - Gates 3–4: PLANNED — see VERSION_ROADMAP.md for estimates
 
-Tests passing: 0 (no Python project yet)
+Completed since last save (2026-04-29 Gate 1 session):
+  - Repo cleanup: deleted 4 stale .NET-era root files
+  - Explored usdm_model package object graph (key finding below)
+  - Built USDM v4.0.0 fixture: python/tests/fixtures/sample_study.json
+  - Created full Python scaffold: pyproject.toml, Dockerfile, docker-compose.yml,
+    FastAPI skeleton, config.py, database.py, study models, conftest.py, 10 tests
+  - Decision 007 (MongoDB schema) logged in DECISIONS.md
+  - MEMORY_SEMANTIC.md corrected and expanded
+  - Gate 1 close protocol complete
 
-Waiting on (external — not blocking Gate 1 scaffold):
-  - REDCap: awaiting response from JHU ICTR (redcap@jhu.edu)
-  - CDISC API key: submit account request at cdisc.org/cdisc-library/api-account-request
-    (not needed until Gate 3; usdm package works without it for model parsing)
+Tests: 10 total (8 non-DB validated; 2 async MongoDB require Docker to run)
+Run DB tests: docker compose --profile test up -d mongo_test && cd python && pytest
 
-Pending before SCOPE CONFIRMED:
-  1. Review SPEC.md — confirm scope is accurate (can do now)
-  2. Type SCOPE CONFIRMED to advance to Gate 1
+KEY FINDING (Gate 1 — do not forget):
+  BiomedicalConcepts are on StudyVersion.biomedicalConcepts — NOT on StudyDesign.
+  usdm_model top-level container is Wrapper (not StudyDefinition).
+  See MEMORY_SEMANTIC.md for corrected full hierarchy.
 
-Deferred (not blocking):
-  - Domain expert session (wife/medical writer): 5 questions to ask informally;
-    needed before Gate 3 adapter work, not before Gate 0
-  - CDISC API key: needed at Gate 3, not before
+External blockers (not blocking Gate 1 or Gate 2; blocking Gate 3):
+  - REDCap sandbox: awaiting JHU ICTR response (email sent to redcap@jhu.edu)
+  - CDISC API key: pending request at cdisc.org/cdisc-library/api-account-request
+    Note: usdm PyPI package works without CDISC key for model parsing (Gates 1–2 unaffected)
 
-Decisions made (logged in DECISIONS.md):
-  - Python over .NET (Decision 001)
-  - FastAPI over Flask/Django (Decision 002)
-  - MongoDB over PostgreSQL (Decision 003)
-  - usdm PyPI package over hand-rolled models (Decision 004)
-  - REDCap as first target EDC (Decision 005)
-  - Streamlit for demo UI (Decision 006)
-
-Errors encountered: None yet
-
-Next task: Review SPEC.md → SCOPE CONFIRMED → Gate 1 Python scaffold
-```
-
-## Previous Saves
-
-None yet.
+Deferred (not blocking Gates 1–2):
+  - Domain expert session (wife/medical writer): 5 questions identified;
+    needed before Gate 3 

@@ -1,0 +1,809 @@
+{
+  "study": {
+    "id": "42ced1d7-7e04-43f8-832c-e2759cb7c026",
+    "name": "POC Vital Signs Adapter Study",
+    "description": null,
+    "label": null,
+    "versions": [
+      {
+        "id": "972c2595-0e82-4ba5-940c-8fdaae6272de",
+        "extensionAttributes": [],
+        "versionIdentifier": "1",
+        "rationale": "Initial POC version",
+        "documentVersionIds": [],
+        "dateValues": [],
+        "amendments": [],
+        "businessTherapeuticAreas": [],
+        "studyIdentifiers": [
+          {
+            "id": "66f5ec60-0b3d-42df-be42-e52b0f8b866c",
+            "extensionAttributes": [],
+            "text": "POC-2026-001",
+            "scopeId": "8e4364dd-aee1-4476-9683-483c68685e3c",
+            "instanceType": "StudyIdentifier"
+          }
+        ],
+        "referenceIdentifiers": [],
+        "studyDesigns": [
+          {
+            "id": "90bf4a38-9057-4b50-9160-a4f2d831fcde",
+            "extensionAttributes": [],
+            "name": "POC Vital Signs Design",
+            "label": null,
+            "description": null,
+            "studyType": null,
+            "studyPhase": null,
+            "therapeuticAreas": [],
+            "characteristics": [],
+            "encounters": [],
+            "activities": [],
+            "arms": [
+              {
+                "id": "12c0312a-dfc9-4209-99bc-9b511e81be80",
+                "extensionAttributes": [],
+                "name": "Treatment Arm",
+                "label": null,
+                "description": null,
+                "type": {
+                  "id": "d89d0b8d-ca20-409a-bfdf-88223312187d",
+                  "extensionAttributes": [],
+                  "code": "C174266",
+                  "codeSystem": "NCI",
+                  "codeSystemVersion": "2024-09-27",
+                  "decode": "Experimental Arm",
+                  "instanceType": "Code"
+                },
+                "dataOriginDescription": "EDC",
+                "dataOriginType": {
+                  "id": "966af099-b64f-47b5-8635-b24019c94007",
+                  "extensionAttributes": [],
+                  "code": "C127786",
+                  "codeSystem": "NCI",
+                  "codeSystemVersion": "2024-09-27",
+                  "decode": "Collected",
+                  "instanceType": "Code"
+                },
+                "populationIds": [],
+                "notes": [],
+                "instanceType": "StudyArm"
+              }
+            ],
+            "studyCells": [
+              {
+                "id": "a46475ed-d41b-40c7-a324-370dfc39abfd",
+                "extensionAttributes": [],
+                "armId": "12c0312a-dfc9-4209-99bc-9b511e81be80",
+                "epochId": "f299175c-864d-473a-b379-ca182637b218",
+                "elementIds": [],
+                "instanceType": "StudyCell"
+              }
+            ],
+            "rationale": "Single-arm vital signs POC",
+            "epochs": [
+              {
+                "id": "f299175c-864d-473a-b379-ca182637b218",
+                "extensionAttributes": [],
+                "name": "Treatment",
+                "label": null,
+                "description": null,
+                "type": {
+                  "id": "a56aede7-cb16-46fd-bf07-43245c189041",
+                  "extensionAttributes": [],
+                  "code": "C101526",
+                  "codeSystem": "NCI",
+                  "codeSystemVersion": "2024-09-27",
+                  "decode": "Treatment Period",
+                  "instanceType": "Code"
+                },
+                "previousId": null,
+                "nextId": null,
+                "notes": [],
+                "instanceType": "StudyEpoch"
+              }
+            ],
+            "elements": [],
+            "estimands": [],
+            "indications": [],
+            "studyInterventionIds": [],
+            "objectives": [],
+            "population": {
+              "id": "515cbd0c-38c6-4f8f-bcce-9a59ea27bfc8",
+              "extensionAttributes": [],
+              "name": "Overall Population",
+              "label": null,
+              "description": null,
+              "includesHealthySubjects": false,
+              "plannedEnrollmentNumber": null,
+              "plannedCompletionNumber": null,
+              "plannedSex": [],
+              "criterionIds": [],
+              "plannedAge": null,
+              "notes": [],
+              "instanceType": "StudyDesignPopulation",
+              "cohorts": []
+            },
+            "scheduleTimelines": [],
+            "biospecimenRetentions": [],
+            "documentVersionIds": [],
+            "eligibilityCriteria": [],
+            "analysisPopulations": [],
+            "notes": [],
+            "instanceType": "InterventionalStudyDesign",
+            "subTypes": [],
+            "model": {
+              "id": "f1124ced-6872-469b-85a0-05b36e98c905",
+              "extensionAttributes": [],
+              "code": "C28273",
+              "codeSystem": "NCI",
+              "codeSystemVersion": "2024-09-27",
+              "decode": "Parallel",
+              "instanceType": "Code"
+            },
+            "intentTypes": [],
+            "blindingSchema": null
+          }
+        ],
+        "titles": [
+          {
+            "id": "9d014ca2-a341-451d-86e1-a868ce767a12",
+            "extensionAttributes": [],
+            "text": "POC Vital Signs Adapter Study",
+            "type": {
+              "id": "8e42e8f5-1157-4eb4-aaf1-37aed548cd90",
+              "extensionAttributes": [],
+              "code": "C99905",
+              "codeSystem": "NCI",
+              "codeSystemVersion": "2024-09-27",
+              "decode": "Official Study Title",
+              "instanceType": "Code"
+            },
+            "instanceType": "StudyTitle"
+          }
+        ],
+        "eligibilityCriterionItems": [],
+        "narrativeContentItems": [],
+        "abbreviations": [],
+        "roles": [],
+        "organizations": [],
+        "studyInterventions": [],
+        "administrableProducts": [],
+        "medicalDevices": [],
+        "productOrganizationRoles": [],
+        "biomedicalConcepts": [
+          {
+            "id": "74a1dad9-ddb6-4e37-9e71-8463682e774c",
+            "extensionAttributes": [],
+            "name": "Systolic Blood Pressure",
+            "label": null,
+            "synonyms": [],
+            "reference": "C49677",
+            "properties": [
+              {
+                "id": "8b62a510-53e4-4ab2-877a-5016b313899d",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "integer",
+                "responseCodes": [],
+                "code": {
+                  "id": "6a7dd094-a453-4e3d-8dd5-217c4d805a99",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "be9fd54c-12f5-4188-9cac-2a7b75e0187b",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "4e3dfe38-08d9-4b57-941d-227aa0b5339c",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "34cbdc41-2e47-4706-bc8c-1f1bafe25237",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "93f9a00d-77df-4e60-ac46-8f6747e9dded",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "9ad7307b-fb8c-4338-bb39-765931533f93",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "484e5116-92e6-48cd-bf15-70bad3f0bec0",
+                "extensionAttributes": [],
+                "code": "C49677",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Systolic Blood Pressure",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "34426e23-34ea-4d48-878e-897c4e29d60c",
+            "extensionAttributes": [],
+            "name": "Diastolic Blood Pressure",
+            "label": null,
+            "synonyms": [],
+            "reference": "C25299",
+            "properties": [
+              {
+                "id": "dc700aeb-5598-4198-b38a-166ffb265bf8",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "integer",
+                "responseCodes": [],
+                "code": {
+                  "id": "5ae3056a-fa84-4584-9eac-28bb381da4ad",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "0bad4430-5b24-459b-b109-5f293c83f487",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "14bafe62-0cc5-408f-982f-c2e9fbc51dbd",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "8688c2d0-44d3-47ac-8116-88446d685954",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "8b04f061-6c9d-4218-9d86-7c69654d2ade",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "5c024a76-235b-4d22-bb04-cb565cd9b91a",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "b96ca5d9-ccb9-4dd7-91c0-79deb9fd2af1",
+                "extensionAttributes": [],
+                "code": "C25299",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Diastolic Blood Pressure",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "81c5d2e1-c593-4ddd-bc8d-3f8c26ee8f2b",
+            "extensionAttributes": [],
+            "name": "Heart Rate",
+            "label": null,
+            "synonyms": [],
+            "reference": "C49673",
+            "properties": [
+              {
+                "id": "ce4b8d2e-1f1c-461d-8899-d8f2d25a5169",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "integer",
+                "responseCodes": [],
+                "code": {
+                  "id": "d835abd7-535f-4813-b694-32a761d2cb2e",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "adf8f25a-beff-48e6-bac3-936acbdc657c",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "06a477da-a843-4b33-b3ee-8b73f8ee1771",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "05f5b47b-b1e1-4f95-9c09-dd9e1ba5ec20",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "cf80ad54-b464-474c-9e25-ad83f274d23c",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "8e93e240-2b40-48c5-bbcb-891eaa297074",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "fe843952-e3c6-4630-a38e-39af75375eec",
+                "extensionAttributes": [],
+                "code": "C49673",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Heart Rate",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "1329295c-7d2e-46a8-a7b5-1e92cfd7b0af",
+            "extensionAttributes": [],
+            "name": "Respiratory Rate",
+            "label": null,
+            "synonyms": [],
+            "reference": "C49678",
+            "properties": [
+              {
+                "id": "087e48fe-26f8-40c0-81bb-5b9fc04e16ab",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "integer",
+                "responseCodes": [],
+                "code": {
+                  "id": "1a49432d-7bcd-4d57-aa86-5d431f9b576d",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "3ee07722-9947-4815-aa62-2bfae553f45d",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "27724d17-84b6-4369-a3e1-6b498755d6b8",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "e6277e70-cf3b-4404-b7f6-49a270fabfd7",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "7cd47ff9-a59f-4899-bdde-51682669de04",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "0e586ea9-be1a-43a9-9e5c-afa54c2512aa",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "f6a425f5-0f80-47cc-b02a-0b01e9a4d915",
+                "extensionAttributes": [],
+                "code": "C49678",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Respiratory Rate",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "0ab1bc7b-78e4-4451-ad09-7890ff47f96f",
+            "extensionAttributes": [],
+            "name": "Body Temperature",
+            "label": null,
+            "synonyms": [],
+            "reference": "C25206",
+            "properties": [
+              {
+                "id": "0cdb281b-3f97-4769-93b9-48ee7bc5f583",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "decimal",
+                "responseCodes": [],
+                "code": {
+                  "id": "31854be8-fa92-42e3-87b8-f5cf8648765e",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "8a392164-460c-42cd-ac5d-b5bd075eb102",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "08dae48c-a856-4c4f-83e3-353c53a37a70",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "ab616080-cf0c-4741-8b92-1ed1e3499ee8",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "7e5545bb-e671-42d3-9f88-da79e84c9fd6",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "66a7f174-875e-43e7-8476-13d66447db56",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "1c6293ac-a299-4a22-ae14-14db3c144468",
+                "extensionAttributes": [],
+                "code": "C25206",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Body Temperature",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "ba5af842-9977-4551-9d6d-a079beb870a9",
+            "extensionAttributes": [],
+            "name": "Height",
+            "label": null,
+            "synonyms": [],
+            "reference": "C25347",
+            "properties": [
+              {
+                "id": "b5c6d406-5732-4291-bf38-f820464d47ba",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "decimal",
+                "responseCodes": [],
+                "code": {
+                  "id": "7992012c-e239-458a-812f-6736724a0779",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "938646f3-9837-4241-9513-882ca27d4328",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "a835b7f5-a26f-4e52-99d9-bfb8e6b16624",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "7645bdd0-21c5-4d7b-a649-d03d1b12487a",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "9377f2db-2958-4437-9229-8d9d4d4dee47",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "f4187b69-55ee-4d80-8183-e16c0889415d",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "1a2af1c6-13e0-4eae-9af8-147325c1e99f",
+                "extensionAttributes": [],
+                "code": "C25347",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Height",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "bc78a9df-8f9b-4508-b2da-526eb7668e76",
+            "extensionAttributes": [],
+            "name": "Weight",
+            "label": null,
+            "synonyms": [],
+            "reference": "C29463",
+            "properties": [
+              {
+                "id": "739ea63d-0363-469a-bcfe-51bf7e95f1d8",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "decimal",
+                "responseCodes": [],
+                "code": {
+                  "id": "3807f19e-bd6d-454a-ad75-6a91d63c8465",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "40e66e30-fbf7-433e-8ba1-6ea2769f33f4",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              },
+              {
+                "id": "71a4bff6-8e3b-4dea-9721-be0db9ac17a9",
+                "extensionAttributes": [],
+                "name": "unit",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "string",
+                "responseCodes": [],
+                "code": {
+                  "id": "a28d97c9-3730-47e2-bc48-a206c0dd9d85",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "d1ead27a-dbdd-453e-9677-d5a162208180",
+                    "extensionAttributes": [],
+                    "code": "C42576",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "unit",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "516eb1f4-871d-404d-9947-4f51f3f30f01",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "95ec36fb-6575-4757-bddf-3f3d24c81dad",
+                "extensionAttributes": [],
+                "code": "C29463",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Weight",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          },
+          {
+            "id": "479a8e85-3029-4e10-8ebc-aa42d87f76bb",
+            "extensionAttributes": [],
+            "name": "Body Mass Index",
+            "label": null,
+            "synonyms": [],
+            "reference": "C16358",
+            "properties": [
+              {
+                "id": "f97dec7d-8132-4f00-813d-e03e0c580c5e",
+                "extensionAttributes": [],
+                "name": "result",
+                "label": null,
+                "isRequired": true,
+                "isEnabled": true,
+                "datatype": "decimal",
+                "responseCodes": [],
+                "code": {
+                  "id": "9a7fe276-9e73-45d7-adc3-0270508b63a3",
+                  "extensionAttributes": [],
+                  "standardCode": {
+                    "id": "361b474e-a628-48fa-8b6e-1914018c8c3b",
+                    "extensionAttributes": [],
+                    "code": "C25685",
+                    "codeSystem": "NCI",
+                    "codeSystemVersion": "2024-09-27",
+                    "decode": "result",
+                    "instanceType": "Code"
+                  },
+                  "standardCodeAliases": [],
+                  "instanceType": "AliasCode"
+                },
+                "notes": [],
+                "instanceType": "BiomedicalConceptProperty"
+              }
+            ],
+            "code": {
+              "id": "3852703d-cfba-462b-9687-9c54d3ef41bd",
+              "extensionAttributes": [],
+              "standardCode": {
+                "id": "c7deef75-064d-4e0e-b364-c91f228b0e60",
+                "extensionAttributes": [],
+                "code": "C16358",
+                "codeSystem": "NCI",
+                "codeSystemVersion": "2024-09-27",
+                "decode": "Body Mass Index",
+                "instanceType": "Code"
+              },
+              "standardCodeAliases": [],
+              "instanceType": "AliasCode"
+            },
+            "notes": [],
+            "instanceType": "BiomedicalConcept"
+          }
+        ],
+        "bcCategories": [],
+        "bcSurrogates": [],
+        "dictionaries": [],
+        "conditions": [],
+        "notes": [],
+        "instanceType": "StudyVersion"
+      }
+    ],
+    "documentedBy": [],
+    "instanceType": "Study"
+  },
+  "usdmVersion": "4.0.0",
+  "systemName": "TransCelerate DDF Adapter POC",
+  "systemVersion": "0.1.0"
+}

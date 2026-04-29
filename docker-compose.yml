@@ -1,0 +1,57 @@
+services:
+
+  # ── MongoDB (dev) ───────────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── MongoDB (test) — isolated; only starts with --profile test ───────────────
+  mongo_test:
+    image: mongo:7
+    profiles: ["test"]
+    ports:
+      - "27018:27017"
+    tmpfs:
+      - /data/db   # no persistence; wiped on container stop
+
+  # ── FastAPI service ─────────────────────────────────────────────────────────
+  api:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./python/.env
+    environment:
+      MONGO_URL: mongodb://mongo:27017
+      MONGO_DB_NAME: transcelerate
+    depends_on:
+      mongo:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./python/app
+          target: /app/app
+
+  # ── Streamlit dashboard (Gate 4+) ───────────────────────────────────────────
+  # streamlit:
+  #   build:
+  #     context: ./python
+  #     dockerfile: Dockerfile.streamlit
+  #   ports:
+  #     - "8501:8501"
+  #   depends_on:
+  #     - api
+
+volumes:
+  mongo_data:

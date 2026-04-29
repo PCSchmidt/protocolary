@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "transcelerate-ddf-adapter"
+version = "0.1.0"
+description = "USDM v4.x → REDCap EDC adapter proof of concept"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.0",
+    "motor>=3.6.0",
+    "pymongo>=4.10.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "usdm==0.67.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "httpx>=0.28.0",
+    "ruff>=0.8.0",
+    "black>=24.10.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+env = [
+    "MONGO_URL=mongodb://localhost:27018",
+    "MONGO_DB_NAME=transcelerate_test",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]

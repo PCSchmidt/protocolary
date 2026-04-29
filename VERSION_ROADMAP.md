@@ -16,25 +16,23 @@
 | Version | Gate Name | Approval Word | Objective | Est Hrs | Act Hrs | Status |
 |---|---|---|---|---|---|---|
 | v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; domain expert session done; BiomedicalConcept mapping table drafted; REDCap sandbox provisioned | 4 | 4 | DONE |
-| v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; real USDM fixture validated; MongoDB schema decided; test fixture committed | 4 | — | PLANNED |
+| v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; real USDM fixture validated; MongoDB schema decided; test fixture committed | 4 | 4 | DONE |
 | v0.2 | **API** | `API APPROVED` | FastAPI service running in Docker; POST /studies, GET /studies/{id}, /arms, /concepts all tested; `pytest` green | 8 | — | PLANNED |
-| v0.3 | **Adapter** | `ADAPTER APPROVED` | USDM → REDCap Data Dictionary CSV transformation tested; push to live REDCap sandbox working; concept_mappings.json complete for vital signs set | 10 | — | PLANNED |
+| v0.3 | **Adapter** | `ADAPTER APPROVED` | USDM → REDCap Data Dictionary CSV transformation tested; push to live REDCap sandbox working; concept_mappings.json complete for vital signs set | 10 | — | PLANNED ⚠️ BLOCKED pending REDCap sandbox (JHU ICTR) + CDISC API key |
 | v0.4 | **Demo** | `DEMO APPROVED` | Streamlit dashboard: Upload → Inspect → Map → Export; non-technical stakeholder completes workflow in <5 min | 6 | — | PLANNED |
 
 **Total estimated:** 32 hours (part-time, ~4 hrs/week → ~8 weeks)
 
+## EXTERNAL DEPENDENCIES
+
+| Dependency | Required By | Status | Action |
+|---|---|---|---|
+| REDCap sandbox (JHU ICTR) | Gate 3 | ⏳ Pending | Email sent to redcap@jhu.edu — awaiting response |
+| CDISC API key | Gate 3 | ⏳ Pending | Submit account request at cdisc.org/cdisc-library/api-account-request |
+| Domain expert session | Gate 3 pre-work | Deferred | 5 questions identified; schedule before Gate 3 starts |
+
+Gates 1 and 2 have no external dependencies and can proceed immediately.
+
 ## CALIBRATION MULTIPLIER
 
-Gate 0 actual = 4 hrs, estimate = 4 hrs, variance = 0%. Multiplier: 1.0x.
-Note: Gate 0 is planning-only (no code) — carry-forward value for coding gates is limited.
-
-## POST-POC BACKLOG (out of scope for v0.x)
-
-Items that are valid but explicitly deferred:
-- Second EDC adapter (Medidata Rave or Veeva Vault — pending domain expert input)
-- BiomedicalConcept library expansion (laboratory, safety assessments, PRO)
-- Edit check / validation logic generation
-- CRF Completion Guidelines document generation
-- OpenStudyBuilder upstream integration
-- Authentication / multi-tenancy
-- Production cloud deployment
+Gate 0 actual = 4 hrs, estimate = 4 hrs, variance = 0%. M
