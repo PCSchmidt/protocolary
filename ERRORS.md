@@ -39,6 +39,23 @@ class StudyResponse(BaseModel):
 ```
 **Prevention:** Always define Pydantic response models; never return raw Motor documents.
 
+### GOTCHA-007: CDISC Library API requires paid membership — developer portal key does not grant data access
+**Symptom:** `HTTP 401 {"message": "Members-only content. Visit https://www.cdisc.org/membership/rates-benefits for details."}`
+**Root cause:** The CDISC developer portal at `api.developer.library.cdisc.org` issues subscription
+keys that grant only documentation/portal access. The live COSMOS data at
+`api.library.cdisc.org/api/cosmos/...` requires a paid CDISC membership (individual ~$500/yr
+or institutional). Even the portal's own "Try it" feature returns 401 with the same key.
+**Confirmed details:**
+  - Correct URL base: `https://api.library.cdisc.org/api/cosmos/v2/`
+  - Correct auth header: `api-key: <subscription_key>`
+  - Auth works (no "missing key" error) but membership tier blocks data access
+**Fix (for POC):** Use CDISC COSMOS GitHub repo instead. See Decision 008.
+  All BC and Dataset Specialization YAML files are published publicly at:
+  `github.com/cdisc-org/COSMoS-Biomedical-Concepts-and-Dataset-Specializations`
+**Prevention:** Do not plan architecture around live CDISC API access without confirming
+membership tier first. For POC, GitHub seeding is simpler and more reliable.
+**First seen:** Gate 2 pre-work — 2026-04-30
+
 ### GOTCHA-002: `usdm` package requires CDISC_API_KEY even for local use
 **Symptom:** `KeyError: 'CDISC_API_KEY'` or silent terminology lookup failure
 **Root cause:** The `usdm` package calls the CDISC terminology API for code validation.

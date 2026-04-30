@@ -81,4 +81,27 @@ Required Field          — y or blank
 - Auth: token in POST body (`token=...`)
 - Import instruments: `content=instrument`, `action=import`, `format=csv`
 - Import records: `content=record`, `action=import`, `format=json`
-- All requests are HTTP POST (even reads
+- All requests are HTTP POST (even reads use POST with `action=export`)
+
+## COMPETITIVE LANDSCAPE (key facts to avoid re-researching)
+
+- ~25 organizations have publicly demonstrated DDF-compatible solutions (April 2026)
+- USDM v4.0 released early 2025; stable; no major revision planned for 2026
+- **Closest competitor:** CRScube (cubeCDMS) — USDM ingestion + EDC automation, but requires
+  their own EDC system
+- **Biggest free threat:** OpenStudyBuilder (Novo Nordisk, MIT/GPLv3) — upstream-focused
+- **Market gap this project targets:** EDC-agnostic downstream adapter (USDM → any EDC)
+- TransCelerate Solution Showcases: quarterly (September, December, March, July)
+- DDF directory: https://transcelerate.github.io/ddf-directory/directory/directory.html
+
+## VALIDATED PATTERNS
+# Added at gate close when a pattern is confirmed by working code.
+# Format: PAT-NNN: title | Confidence: LOW/MEDIUM/HIGH | Gate validated
+
+[Empty — populated at first gate close]
+
+## INVALIDATED ASSUMPTIONS
+# Record things that seemed true but turned out to be wrong.
+# Prevents re-learning the same lesson.
+
+[Empty — populated as discovered]

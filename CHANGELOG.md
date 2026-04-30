@@ -38,4 +38,33 @@
 ## [v0.1.0] — 2026-04-29 | Gate 1: Schema — CLOSED
 
 ### Added
-- `python/pyproject.toml` — Python 3.12+, pinned deps (fastapi, m
+- `python/pyproject.toml` — Python 3.12+, pinned deps (fastapi, motor, usdm==0.67.0, pytest)
+- `python/Dockerfile` — Python 3.12-slim image
+- `python/.dockerignore`
+- `python/.env.example` — all required environment variables with status notes
+- `python/app/__init__.py`
+- `python/app/main.py` — FastAPI skeleton with lifespan and `/health` endpoint
+- `python/app/config.py` — pydantic-settings Settings class
+- `python/app/database.py` — Motor async client, connect/close/ensure_indexes
+- `python/app/models/__init__.py`
+- `python/app/models/study.py` — StudySummary, StudyInDB, BiomedicalConceptSummary response models
+- `python/tests/__init__.py`
+- `python/tests/conftest.py` — Motor test client fixture; drops/recreates test collection per test
+- `python/tests/fixtures/sample_study.json` — minimal valid USDM v4.0.0 fixture; 8 vital signs BCs
+- `python/tests/test_usdm_fixture.py` — 10 tests (8 non-DB + 2 async MongoDB); all assertions validated
+- `docker-compose.yml` — mongo (dev, port 27017), mongo_test (profile=test, port 27018), api service
+- `DECISIONS.md` Decision 007 — MongoDB document schema for USDM study definitions
+
+### Changed
+- `MEMORY_SEMANTIC.md` — corrected USDM object hierarchy: BiomedicalConcepts are on
+  StudyVersion (not StudyDesign); added validated field-level detail from package inspection
+- `VERSION_ROADMAP.md` — Gate 1 marked DONE; calibration note added
+
+### Key Finding (Gate 1)
+The `usdm_model` package's top-level container is `Wrapper` (not `StudyDefinition`).
+BiomedicalConcepts are stored on `StudyVersion.biomedicalConcepts`, not on `StudyDesign`.
+This corrects a pre-Gate-1 assumption in MEMORY_SEMANTIC.md.
+
+---
+
+*Previous entries appear above.*

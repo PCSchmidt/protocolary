@@ -24,8 +24,10 @@ class Settings(BaseSettings):
     api_port: int = 8000
     debug: bool = False
 
-    # CDISC (Gate 3+; not required for Gates 1–2)
+    # CDISC Library API — confirmed active 2026-04-30
+    # Primary key from api.developer.library.cdisc.org
     cdisc_api_key: str = ""
+    cdisc_base_url: str = "https://library.cdisc.org/api"
 
     # REDCap (Gate 3+; not required for Gates 1–2)
     redcap_url: str = ""
