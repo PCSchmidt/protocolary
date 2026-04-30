@@ -19,59 +19,59 @@ At session start:
 ## Latest Context Save
 
 ```text
-CONTEXT SAVE: 2026-04-30T00:00:00
-Gate: Gate 2 — API (PLANNED; ready to start NOW)
+CONTEXT SAVE: 2026-04-30T12:00:00
+Gate: Gate 3 — Adapter (PLANNED; BLOCKED on REDCap sandbox only)
 Current phase: Active — Gate 1 CLOSED + CDISC API confirmed; only REDCap still pending
 
 Gate status:
-  - Gate 0 (Foundations): CLOSED — 2026-04-25, 4 hrs actual, 0% variance
-  - Gate 1 (Schema): CLOSED — 2026-04-29, 4 hrs actual, 0% variance; 10/10 tests green
-  - Gate 2 (API): PLANNED — begin immediately; no external dependencies
-  - Gate 3 (Adapter): BLOCKED on REDCap sandbox only (CDISC API NOW CONFIRMED)
+  - Gate 0 (Foundations): CLOSED — 2026-04-25, 4 hrs, 0% variance
+  - Gate 1 (Schema): CLOSED — 2026-04-29, 4 hrs, 0% variance; 10 tests
+  - Gate 2 (API): CLOSED — 2026-04-30, 4 hrs, -50% variance; 22 tests total
+  - Gate 3 (Adapter): BLOCKED on REDCap sandbox (JHU ICTR — email sent)
   - Gate 4 (Demo): PLANNED
 
 Completed since last save:
-  - Fixed UUID encoding bug: all mongodb insert/query sites use str(wrapper.study.id)
-  - 10/10 Gate 1 tests green (confirmed in Docker + venv on local machine)
-  - ERR-001 logged in ERRORS.md (uuid.UUID must be wrapped with str() for MongoDB)
-  - CDISC Library API access confirmed: api.developer.library.cdisc.org
-  - Decision 008 logged: use v2 BC Endpoints + v2 Dataset Specialization endpoints
-  - VERSION_ROADMAP, MEMORY_EPISODIC, DECISIONS.md all updated
+  - app/routes/studies.py: POST /studies, GET /studies, GET /studies/{id}, /arms, /concepts
+  - main.py updated: router wired, /health upgraded to ping MongoDB
+  - test_studies_api.py: 12 tests, all passing (22 total)
+  - CDISC API fully investigated: portal key = docs only; data = members-only wall
+  - Decision 008 revised: COSMOS data from GitHub, not live API
+  - GOTCHA-007 logged; Gate 2 close protocol complete
 
-Tests: 10/10 green
-Run: docker compose --profile test up -d mongo_test && cd python && python -m pytest
-Key: always use `python -m pytest` not bare `pytest` in this Git Bash + venv setup
+Tests: 22/22 green
+Run: docker compose --profile test up -d mongo_test && cd python && python -m pytest -v
+Key: always use `python -m pytest` not bare `pytest`
 
 KEY FINDINGS (do not forget):
-  BiomedicalConcepts are on StudyVersion.biomedicalConcepts — NOT on StudyDesign
-  usdm_model top-level container is Wrapper (not StudyDefinition)
-  uuid.UUID fields from usdm_model must be wrapped with str() before MongoDB insertion
-  CDISC API: v2 BC Endpoints are primary; v1 is deprecated
-  See MEMORY_SEMANTIC.md for full corrected USDM hierarchy
+  BiomedicalConcepts on StudyVersion.biomedicalConcepts — NOT StudyDesign
+  usdm_model top-level = Wrapper (not StudyDefinition)
+  uuid.UUID fields → str() before MongoDB; model_dump(mode='json') handles nested dict
+  CDISC COSMOS data: public GitHub repo, not live API (members-only wall)
+  API test pattern: monkeypatch connect/close/ensure_indexes as AsyncMock + override get_db
+  FastAPI: HTTP_422_UNPROCESSABLE_CONTENT (not ENTITY — deprecated)
 
 External blockers:
-  - REDCap sandbox: awaiting JHU ICTR response (email sent to redcap@jhu.edu)
-  - CDISC API key: CONFIRMED 2026-04-30 — active at api.developer.library.cdisc.org
+  - REDCap sandbox: awaiting JHU ICTR response (redcap@jhu.edu) — GATE 3 HARD DEPENDENCY
+  - CDISC API data: members-only; using GitHub COSMOS repo instead (see Decision 008)
 
-Decisions made (all logged in DECISIONS.md):
-  001 Python over .NET | 002 FastAPI | 003 MongoDB | 004 usdm package
-  005 REDCap as first EDC | 006 Streamlit UI | 007 MongoDB schema | 008 CDISC API v2
+Decisions (all in DECISIONS.md):
+  001 Python | 002 FastAPI | 003 MongoDB | 004 usdm pkg | 005 REDCap
+  006 Streamlit | 007 MongoDB schema | 008 COSMOS from GitHub
 
-Errors encountered: ERR-001 (UUID encoding) — see ERRORS.md
+Errors: ERR-001 UUID encoding | GOTCHA-007 CDISC members-only — see ERRORS.md
 
 Next task when resuming:
-  Begin Gate 2 (API).
-  Step 1: Add CDISC_API_KEY to python/.env and python/.env.example
-  Step 2: Add cdisc_base_url to config.py Settings
-  Step 3: Confirm key with smoke test — GET /mdr/bc/packages from CDISC Library API
-  Step 4: docker compose --profile test up -d mongo_test
-  Step 5: Implement POST /studies + tests
-  Step 6: Implement GET /studies/{id} + tests
-  Step 7: Implement GET /studies/{id}/arms + tests
-  Step 8: Implement GET /studies/{id}/concepts + tests
-  Step 9: All pytest green → type API APPROVED
-  See API_REGISTRY.md for full endpoint shapes.
-  Approval word to close Gate 2: API APPROVED
+  Gate 3 (Adapter) — BLOCKED on REDCap sandbox.
+  When REDCap access confirmed:
+    Step 1: Verify REDCap credentials (URL + API token) — note in DECISIONS.md
+    Step 2: Write services/cdisc_seeder.py — fetch COSMOS YAML from GitHub, seed cdisc_cache
+    Step 3: Write services/concept_mapper.py — USDM BC → REDCap field mapping table
+    Step 4: Write services/redcap_adapter.py — generate REDCap Data Dictionary CSV
+    Step 5: Implement GET /studies/{id}/redcap-export
+    Step 6: Implement POST /studies/{id}/redcap-push
+    Step 7: All tests green → type ADAPTER APPROVED
+  While waiting for REDCap: schedule domain expert session (wife/medical writer)
+  Approval word to close Gate 3: ADAPTER APPROVED
 ```
 
 ## Previous Saves

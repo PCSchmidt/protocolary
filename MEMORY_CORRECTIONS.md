@@ -12,6 +12,22 @@
 # CORRECTION FOR FUTURE: [what to do differently next gate]
 # MEMORY_SEMANTIC.md UPDATE: [pattern added/updated, or none]
 
+## REFLEXION: Gate 2 — API
+
+Date: 2026-04-30
+ESTIMATE: Predicted 8 hrs, Actual 4 hrs, Variance -50%
+WHAT WENT WRONG: ~2 hrs spent investigating CDISC Library API access, discovering the developer
+portal subscription key grants documentation access only — CDISC COSMOS data is members-only
+behind a paid membership wall. Decision 008 was completely revised as a result.
+WHAT WENT RIGHT: The actual API implementation was fast. Lifespan patching pattern
+(monkeypatching connect/close/ensure_indexes as AsyncMocks) is clean and reusable. All 12 tests
+passed on the first run. FastAPI dependency override, ASGITransport + AsyncClient, and MongoDB
+projection queries all worked immediately with no debugging needed.
+CORRECTION FOR FUTURE: Before building against any third-party API, run a single authenticated
+data call first to confirm access tier. A 5-minute smoke test would have saved 2 hrs. For Gate 3:
+confirm COSMOS GitHub data is accessible and inspect the YAML structure BEFORE writing the seeder.
+MEMORY_SEMANTIC.md UPDATE: Added lifespan patching test pattern. No USDM hierarchy changes.
+
 ## REFLEXION: Gate 1 — Schema
 
 Date: 2026-04-29

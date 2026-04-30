@@ -17,7 +17,7 @@
 |---|---|---|---|---|---|---|
 | v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; domain expert session done; BiomedicalConcept mapping table drafted; REDCap sandbox provisioned | 4 | 4 | DONE |
 | v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; real USDM fixture validated; MongoDB schema decided; test fixture committed | 4 | 4 | DONE |
-| v0.2 | **API** | `API APPROVED` | FastAPI service running in Docker; POST /studies, GET /studies/{id}, /arms, /concepts all tested; `pytest` green | 8 | — | PLANNED |
+| v0.2 | **API** | `API APPROVED` | FastAPI service running in Docker; POST /studies, GET /studies/{id}, /arms, /concepts all tested; `pytest` green | 8 | 4 | DONE |
 | v0.3 | **Adapter** | `ADAPTER APPROVED` | USDM → REDCap Data Dictionary CSV transformation tested; push to live REDCap sandbox working; concept_mappings.json complete for vital signs set | 10 | — | PLANNED ⚠️ BLOCKED pending REDCap sandbox (JHU ICTR) only |
 | v0.4 | **Demo** | `DEMO APPROVED` | Streamlit dashboard: Upload → Inspect → Map → Export; non-technical stakeholder completes workflow in <5 min | 6 | — | PLANNED |
 
@@ -40,6 +40,10 @@ Gate 0 actual = 4 hrs, estimate = 4 hrs, variance = 0%. Multiplier: 1.0x.
 Note: Gate 0 is planning-only (no code) — carry-forward value for coding gates is limited.
 
 Gate 1 actual = 4 hrs, estimate = 4 hrs, variance = 0%.
+
+Gate 2 actual = 4 hrs, estimate = 8 hrs, variance = -50% (faster than expected).
+Key: lifespan patching pattern for API tests; CDISC API confirmed members-only (no data access);
+GitHub seeding strategy adopted for Gate 3 COSMOS data.
 Key finding: usdm_model package API is clean and well-structured. BiomedicalConcepts are on
 StudyVersion (not StudyDesign as assumed pre-Gate-1) — MEMORY_SEMANTIC.md corrected.
 Fixture round-trips cleanly. 8/8 non-DB test assertions validated.

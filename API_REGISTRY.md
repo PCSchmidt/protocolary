@@ -13,11 +13,11 @@ API docs: `http://localhost:8000/docs` (FastAPI auto-generated OpenAPI)
 
 | Method | Path | Gate | Description | Tested |
 |---|---|---|---|---|
-| `POST` | `/studies` | 2 | Ingest a USDM JSON study definition | NO |
-| `GET` | `/studies/{id}` | 2 | Retrieve a stored study definition | NO |
-| `GET` | `/studies/{id}/arms` | 2 | List study arms (StudyArm objects) | NO |
-| `GET` | `/studies/{id}/concepts` | 2 | List BiomedicalConcepts with CDISC codes | NO |
-| `GET` | `/studies` | 2 | List all stored studies (id + name + version) | NO |
+| `POST` | `/studies` | 2 | Ingest a USDM JSON study definition | YES |
+| `GET` | `/studies/{id}` | 2 | Retrieve a stored study definition | YES |
+| `GET` | `/studies/{id}/arms` | 2 | List study arms (StudyArm objects) | YES |
+| `GET` | `/studies/{id}/concepts` | 2 | List BiomedicalConcepts with CDISC codes | YES |
+| `GET` | `/studies` | 2 | List all stored studies (id + name + version) | YES |
 
 ### Transformation — REDCap Adapter (Gate 3)
 
@@ -31,7 +31,7 @@ API docs: `http://localhost:8000/docs` (FastAPI auto-generated OpenAPI)
 
 | Method | Path | Gate | Description | Tested |
 |---|---|---|---|---|
-| `GET` | `/health` | 2 | Service health check (MongoDB connectivity) | NO |
+| `GET` | `/health` | 2 | Service health check (MongoDB connectivity) | YES |
 
 ## REQUEST / RESPONSE SHAPES
 # Filled in as endpoints are implemented.

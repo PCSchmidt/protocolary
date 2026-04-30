@@ -67,4 +67,35 @@ This corrects a pre-Gate-1 assumption in MEMORY_SEMANTIC.md.
 
 ---
 
+## [v0.2.0] — 2026-04-30 | Gate 2: API — CLOSED
+
+### Added
+- `python/app/routes/__init__.py`
+- `python/app/routes/studies.py` — 5 study endpoints: POST /studies, GET /studies,
+  GET /studies/{id}, GET /studies/{id}/arms, GET /studies/{id}/concepts
+- `python/tests/test_studies_api.py` — 12 API tests (happy path + error paths)
+  using httpx AsyncClient + FastAPI ASGITransport + lifespan patching
+
+### Changed
+- `python/app/main.py` — wired studies router; upgraded /health to ping MongoDB
+  and return `{"status": "ok", "db": "connected"}` or 503 if unreachable
+- `python/app/config.py` — added `cdisc_base_url` setting
+- `python/app/.env.example` — CDISC key status updated to confirmed/members-only
+- `.gitignore` — added plain `.env` and `python/.env` entries
+- `DECISIONS.md` — Decision 008 rewritten: GitHub static seeding over live CDISC API
+- `ERRORS.md` — GOTCHA-007: CDISC developer portal key does not grant data access
+- `VERSION_ROADMAP.md` — CDISC API confirmed; Gate 3 blocker now REDCap only
+
+### Test counts: 22 total (10 Gate 1 + 12 Gate 2) — all passing
+
+### Key Findings (Gate 2)
+- CDISC developer portal subscription key grants documentation access only.
+  Live COSMOS data at api.library.cdisc.org requires paid CDISC membership.
+  Decision: seed COSMOS BC data from public GitHub repo at Gate 3.
+- FastAPI `HTTP_422_UNPROCESSABLE_ENTITY` deprecated → use `HTTP_422_UNPROCESSABLE_CONTENT`.
+- Lifespan patching pattern for API tests: monkeypatch connect/close/ensure_indexes
+  as AsyncMocks, then override get_db with lambda returning test_db.
+
+---
+
 *Previous entries appear above.*

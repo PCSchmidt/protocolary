@@ -1,14 +1,13 @@
-"""FastAPI application entry point.
-
-Gate 1 scope: health endpoint only — confirms the app starts and MongoDB is reachable.
-Study CRUD endpoints are added in Gate 2.
-"""
+"""FastAPI application entry point."""
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
+from fastapi.responses import JSONResponse
+from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from app.database import close, connect, ensure_indexes
+from app.database import close, connect, ensure_indexes, get_db
+from app.routes import studies
 
 
 @asynccontextmanager
@@ -26,9 +25,11 @@ app = FastAPI(
         "Proof of concept: USDM v4.x study definition → REDCap EDC configuration. "
         "See SPEC.md for scope boundaries."
     ),
-    version="0.1.0",
+    version="0.2.0",
     lifespan=lifespan,
 )
+
+app.include_router(studies.router, prefix="/studies", tags=["studies"])
 
 
 @app.get(
@@ -37,11 +38,13 @@ app = FastAPI(
     description="Returns 200 when the API is running and MongoDB is reachable.",
     tags=["health"],
 )
-async def health() -> dict[str, str]:
+async def health(db: AsyncIOMotorDatabase = Depends(get_db)) -> dict[str, str]:
     """Confirm service is alive and database connectivity is OK."""
-    return {"status": "ok"}
-
-
-# ── Gate 2: study endpoints added here ────────────────────────────────────────
-# from app.routes import studies
-# app.include_router(studies.router, prefix="/studies", tags=["studies"])
+    try:
+        await db.command("ping")
+        return {"status": "ok", "db": "connected"}
+    except Exception:
+        return JSONResponse(
+            status_code=503,
+            content={"status": "error", "db": "unreachable"},
+        )

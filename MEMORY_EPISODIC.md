@@ -9,6 +9,7 @@ Read at session start to reconstruct recent history.
 |------------|----------------------|-------------------|---------|-------|-------------------|-------------------------------------------------------|
 | 2026-04-25 | Gate 0 — Foundations | `SCOPE CONFIRMED` | CLOSED  | 0     | 4 → 4 hrs         | REDCap + domain expert session deferred; not blocking |
 | 2026-04-29 | Gate 1 — Schema      | `SCHEMA APPROVED` | CLOSED  | 10    | 4 → 4 hrs         | Key finding: BiomedicalConcepts on StudyVersion not StudyDesign; MEMORY_SEMANTIC.md corrected |
+| 2026-04-30 | Gate 2 — API         | `API APPROVED`    | CLOSED  | 22    | 8 → 4 hrs (-50%)  | 5 endpoints + health; lifespan patch pattern; CDISC members-only → GitHub seeding |
 
 ## Session Log
 
@@ -46,6 +47,16 @@ Format: `[Date] | Focus | Key decisions | Blockers | Next session start point`
 - Blockers: REDCap sandbox (Gate 3), CDISC API key (Gate 3) — both pending external orgs
 - Gate 1 (Schema) has no external dependencies and can begin as soon as SCOPE CONFIRMED is typed
 - Next session start point: type SCOPE CONFIRMED → Gate 1 Python scaffold
+
+### 2026-04-30 | Gate 2 — API work
+
+- Wrote app/routes/studies.py: POST /studies, GET /studies, GET /studies/{id}, /arms, /concepts
+- Updated main.py: wired router, upgraded /health to ping MongoDB
+- Wrote 12 API tests in test_studies_api.py using httpx AsyncClient + ASGITransport
+- Key pattern: monkeypatch connect/close/ensure_indexes as AsyncMock; override get_db with test_db
+- 22/22 tests passing; fixed HTTP_422_UNPROCESSABLE_ENTITY → HTTP_422_UNPROCESSABLE_CONTENT deprecation
+- Gate 2 closed in 4 hrs (estimate was 8 hrs — CDISC investigation took time but API work was fast)
+- Gate 3 still blocked on REDCap; COSMOS data will be seeded from GitHub
 
 ### 2026-04-30 | CDISC API access confirmed + Gate 1 final fix
 

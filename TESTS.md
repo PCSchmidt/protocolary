@@ -8,7 +8,7 @@
 |---|---|---|---|---|---|---|
 | Gate 0 — Foundations | 0 | 0 | 0 | 0 | 0 | DONE |
 | Gate 1 — Schema | 8 | 2 | 0 | 10 | ≥ 5 | DONE |
-| Gate 2 — API | — | — | — | — | ≥ 20 | PLANNED |
+| Gate 2 — API | 0 | 12 | 0 | 12 | ≥ 20 | DONE |
 | Gate 3 — Adapter | — | — | — | — | ≥ 35 | PLANNED |
 | Gate 4 — Demo | — | — | — | — | ≥ 40 | PLANNED |
 
