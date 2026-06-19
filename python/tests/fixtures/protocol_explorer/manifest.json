@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "retrieved_at": "2026-06-18",
+  "terms_url": "https://protocolexplorer.io/Home/Terms",
+  "notes": [
+    "Fixtures are public Protocol Explorer downloads used for standards-development testing.",
+    "Protocol content may be partial, contributed by third parties, and is not independently verified.",
+    "Normal tests use these checked-in files and never fetch Protocol Explorer at runtime."
+  ],
+  "fixtures": [
+    {
+      "file": "cdisc_pilot.json",
+      "original_file": "ddf-sdr-api-study-cdisc-pilot-sample-usdm-v4.json",
+      "protocol_explorer_url": "https://protocolexplorer.io/Home/Details/ddf-sdr-api-study-cdisc-pilot-sample-usdm-v4.json",
+      "download_url": "https://protocolexplorer.io/Home/Download/ddf-sdr-api-study-cdisc-pilot-sample-usdm-v4.json",
+      "upstream_source_url": "https://github.com/transcelerate/ddf-sdr-api/tree/develop/data-model/sdr-release-v5.0/sample-studies",
+      "sha256": "68489a9d1b65e45a3a634d16828f219c1e72241e04ab240bc945b6d9226df101",
+      "declared_usdm_version": "4.0",
+      "parser": "usdm==0.67.0",
+      "expected_result": "compatible",
+      "purpose": "Primary complex interventional fixture with schedule timelines, activities, and Dataset Specialization references."
+    },
+    {
+      "file": "observational.json",
+      "original_file": "ddf-sdr-api-study-observational-sample-usdm-v4.json",
+      "protocol_explorer_url": "https://protocolexplorer.io/Home/Details/ddf-sdr-api-study-observational-sample-usdm-v4.json",
+      "download_url": "https://protocolexplorer.io/Home/Download/ddf-sdr-api-study-observational-sample-usdm-v4.json",
+      "upstream_source_url": "https://github.com/transcelerate/ddf-sdr-api/tree/develop/data-model/sdr-release-v5.0/sample-studies",
+      "sha256": "0c82699e5eeb5437168a71e36b3b36100d50b595705abc77815f032905673e51",
+      "declared_usdm_version": "4.0",
+      "parser": "usdm==0.67.0",
+      "expected_result": "compatible",
+      "purpose": "Provenance mismatch fixture: the source is named observational, but usdm 0.67.0 parses its design payload as InterventionalStudyDesign."
+    },
+    {
+      "file": "incompatible_allergan_3111_302_001.json",
+      "original_file": "ddf-sdr-api-study-3111-302-001-sample-usdm_4.json",
+      "protocol_explorer_url": "https://protocolexplorer.io/Home/Details/ddf-sdr-api-study-3111-302-001-sample-usdm_4.json",
+      "download_url": "https://protocolexplorer.io/Home/Download/ddf-sdr-api-study-3111-302-001-sample-usdm_4.json",
+      "upstream_source_url": "https://github.com/transcelerate/ddf-sdr-api/tree/develop/data-model/sdr-release-v5.0/sample-studies",
+      "sha256": "5b2f184796ba4cccbb3d6884b62d52e99fbb1196e0aca7e9988292a1151cbc16",
+      "declared_usdm_version": "4.0.0",
+      "parser": "usdm==0.67.0",
+      "expected_result": "validation_error",
+      "expected_error_contains": "populationSummary",
+      "purpose": "Negative compatibility fixture proving that a declared USDM 4.0 version does not guarantee parser compatibility."
+    }
+  ]
+}

@@ -52,11 +52,53 @@ class StudyInDB(StudySummary):
     model_config = {"populate_by_name": True}
 
 
+class BiomedicalConceptPropertySummary(BaseModel):
+    """Normalized property metadata needed by downstream EDC mappings."""
+
+    name: str
+    label: str | None
+    datatype: str
+    is_required: bool
+    is_enabled: bool
+    standard_code: str
+    response_code_count: int
+
+
+class ScheduledInstanceContext(BaseModel):
+    """One schedule instance in which an activity is performed."""
+
+    timeline_id: str
+    timeline_name: str
+    instance_id: str
+    instance_name: str
+    instance_label: str | None
+
+
+class SourceActivityContext(BaseModel):
+    """Activity that links a Biomedical Concept into a study design."""
+
+    study_version: str
+    study_design_id: str
+    study_design_name: str
+    activity_id: str
+    activity_name: str
+    activity_label: str | None
+    scheduled_instances: list[ScheduledInstanceContext]
+
+
 class BiomedicalConceptSummary(BaseModel):
     """Single BiomedicalConcept as returned by GET /studies/{id}/concepts."""
 
+    concept_id: str
     name: str
-    reference: str           # CDISC NCI code string (e.g. "C49677")
-    standard_code: str       # AliasCode.standardCode.code
+    label: str | None
+    reference: str
+    reference_type: str
+    specialization: str | None
+    package: str | None
+    standard_code: str
     standard_code_system: str
+    standard_code_version: str
     property_count: int
+    properties: list[BiomedicalConceptPropertySummary]
+    source_activities: list[SourceActivityContext]

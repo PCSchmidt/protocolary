@@ -13,7 +13,7 @@ Run with:
     cd python && pytest tests/test_usdm_fixture.py -v
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import pytest
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -130,7 +130,7 @@ async def test_study_stores_and_retrieves_from_mongodb(
         "study_name": wrapper.study.name,
         "version_identifier": sv.versionIdentifier,
         "usdm_version": wrapper.usdmVersion,
-        "created_at": datetime.now(timezone.utc),
+        "created_at": datetime.now(UTC),
         "wrapper": wrapper.model_dump(mode="json"),  # nested dict, NOT a string
     }
 
@@ -162,7 +162,7 @@ async def test_bc_query_from_stored_document(
         "study_name": wrapper.study.name,
         "version_identifier": sv.versionIdentifier,
         "usdm_version": wrapper.usdmVersion,
-        "created_at": datetime.now(timezone.utc),
+        "created_at": datetime.now(UTC),
         "wrapper": wrapper.model_dump(mode="json"),
     }
     await test_db["studies"].insert_one(doc)

@@ -197,6 +197,12 @@ correct — only the membership tier needs to change.
 **CDISC_API_KEY in .env:** Keep as optional future configuration; it is not required by the Gate 3
 build or test path.
 
+**Gate 3A.2 pinned implementation:** Commit
+`fc11c9dbdc12aae709653b45c4c9db7f58824cf5` is the immutable source for the POC snapshot. The
+checked-in derived files contain only scoped vital-sign rows from the BC and SDTM Dataset
+Specialization CSV exports. Their manifest records source URLs, Git blob hashes, SHA-256 hashes,
+row counts, derivation, license, and attribution.
+
 ---
 
 ## Decision 009 — Protocol Explorer Fixture Corpus and Split Gate 3 Execution

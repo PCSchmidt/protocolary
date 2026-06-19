@@ -31,10 +31,6 @@ dev = [
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
-env = [
-    "MONGO_URL=mongodb://localhost:27018",
-    "MONGO_DB_NAME=transcelerate_test",
-]
 
 [tool.ruff]
 target-version = "py312"
@@ -42,7 +38,10 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
-ignore = ["E501"]
+ignore = [
+    "B008",  # FastAPI dependency injection intentionally calls Depends in defaults
+    "E501",
+]
 
 [tool.black]
 line-length = 100

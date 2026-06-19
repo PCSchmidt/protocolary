@@ -18,7 +18,7 @@
 | v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; initial mapping drafted; external access and domain review explicitly deferred | 4 | 4 | DONE |
 | v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; synthetic fixture validated; MongoDB schema decided; test fixture committed | 4 | 4 | DONE |
 | v0.2 | **API** | `API APPROVED` | FastAPI service running in Docker; POST /studies, GET /studies/{id}, /arms, /concepts all tested; `pytest` green | 8 | 4 | DONE |
-| v0.3A | **Offline Adapter** | — | Protocol Explorer fixtures; normalized concept identity; pinned COSMoS provider; reviewed vital-sign mappings; REDCap preview + deterministic CSV export | 12 | — | READY — no REDCap dependency |
+| v0.3A | **Offline Adapter** | — | Protocol Explorer fixtures; normalized concept identity; pinned COSMoS provider; reviewed vital-sign mappings; REDCap preview + deterministic CSV export | 12 | — | IN PROGRESS — 3A.1–3A.2 DONE |
 | v0.3B | **Live REDCap Verification** | `ADAPTER APPROVED` | Import generated dictionary into an API-enabled REDCap project; re-export and visually verify the resulting CRF | 3 | — | BLOCKED pending REDCap access |
 | v0.4 | **Demo** | `DEMO APPROVED` | Streamlit dashboard: Upload → Inspect → Map → Export; non-technical stakeholder completes workflow in <5 min | 6 | — | PLANNED |
 
@@ -38,12 +38,12 @@ building the transformation, preview, export, and automated test layers.
 
 ## GATE 3A SUB-GATES
 
-| Sub-gate | Objective | Est Hrs | Exit Condition |
-|---|---|---:|---|
-| 3A.1 | Fixture and compatibility hardening | 3 | Protocol Explorer corpus pinned; compatible and incompatible cases tested |
-| 3A.2 | COSMoS metadata provider | 3 | Offline, versioned lookups by URI, code, and specialization |
-| 3A.3 | Domain mapping layer | 3 | Eight vital-sign mappings reviewed; unmapped concepts explicit |
-| 3A.4 | REDCap generator and API | 3 | Deterministic CSV plus preview/export endpoints and golden-file tests |
+| Sub-gate | Objective | Est Hrs | Status | Exit Condition |
+|---|---|---:|---|---|
+| 3A.1 | Fixture and compatibility hardening | 3 | DONE — 2026-06-19 | Three fixtures pinned; checksums, positive/negative compatibility, and normalized concept context tested |
+| 3A.2 | COSMoS metadata provider | 3 | DONE — 2026-06-19 | Immutable commit and minimal snapshot pinned; URI/code/specialization resolution tested offline |
+| 3A.3 | Domain mapping layer | 3 | NEXT | Eight vital-sign mappings reviewed; unmapped concepts explicit |
+| 3A.4 | REDCap generator and API | 3 | PLANNED | Deterministic CSV plus preview/export endpoints and golden-file tests |
 
 ## CALIBRATION MULTIPLIER
 

@@ -4,6 +4,27 @@
 
 ## [Unreleased] — 2026-06-18 | Gate 3 Planning Alignment
 
+### Gate 3A.1 implementation — 2026-06-19
+
+- Added three pinned Protocol Explorer JSON fixtures and a SHA-256 provenance manifest
+- Added compatibility coverage for two parser-compatible files and one expected failure
+- Added normalized Biomedical Concept identity and source activity/schedule context
+- Enhanced `GET /studies/{id}/concepts` for real COSMoS references and Dataset Specializations
+- Preserved support for the original direct-NCI synthetic fixture
+- Removed the unused pytest `env` configuration and its warning
+- Increased the test suite from 22 to 31 passing tests
+
+### Gate 3A.2 implementation — 2026-06-19
+
+- Pinned CDISC COSMoS commit `fc11c9dbdc12aae709653b45c4c9db7f58824cf5`
+- Added a minimal offline snapshot for nine BC identifiers and eight SDTM specializations
+- Recorded upstream URLs, Git blob hashes, SHA-256 hashes, derived hashes, and CC BY 4.0 attribution
+- Added typed COSMoS metadata and explicit lookup result models
+- Implemented offline resolution by reference URI, NCI code, and Dataset Specialization
+- Added exact/fallback package reporting plus explicit ambiguity and not-found behavior
+- Confirmed all eight current vital-sign specializations resolve without network access
+- Increased the test suite from 31 to 50 passing tests
+
 ### Changed
 - Split Gate 3 into Gate 3A offline adapter construction and Gate 3B live REDCap verification
 - Removed REDCap access as a blocker for fixture, mapping, COSMoS, preview, and CSV work

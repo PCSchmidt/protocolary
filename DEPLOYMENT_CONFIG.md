@@ -32,7 +32,7 @@ CDISC_API_KEY=your_key_here
 
 # Pinned local COSMoS snapshot/export used by Gate 3A
 COSMOS_DATA_PATH=app/data/cosmos
-COSMOS_SOURCE_COMMIT=record_the_pinned_commit_here
+COSMOS_SOURCE_COMMIT=fc11c9dbdc12aae709653b45c4c9db7f58824cf5
 
 # REDCap (Gate 3+)
 # Obtain from your REDCap sandbox instance

@@ -9,15 +9,9 @@ Usage:
 The client is created once at startup and closed at shutdown via the FastAPI lifespan.
 """
 
-from collections.abc import AsyncGenerator
-from typing import TYPE_CHECKING
-
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
 from app.config import settings
-
-if TYPE_CHECKING:
-    pass
 
 # Module-level client — initialised in lifespan, closed on shutdown
 _client: AsyncIOMotorClient | None = None

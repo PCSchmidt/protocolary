@@ -37,20 +37,23 @@ Wrapper
                     └─ scheduleTimelines: List[ScheduleTimeline]
 ```
 
-### BiomedicalConcept CDISC Codes (Vital Signs POC Set)
-Sourced from `POC_archive/src/SDR.Core.API/biomedical-concepts.json` and CDISC CT.
+### BiomedicalConcept and Dataset Specialization Codes (Vital Signs POC Set)
+Current identifiers validated against pinned COSMoS commit
+`fc11c9dbdc12aae709653b45c4c9db7f58824cf5` — Gate 3A.2.
 
-| Concept | CDISC Code | REDCap Field Type | Notes |
-|---|---|---|---|
-| Systolic Blood Pressure | C49677 | text / integer | mmHg; range 60-250 |
-| Diastolic Blood Pressure | C25299 | text / integer | mmHg; range 40-150 |
-| Heart Rate | C49673 | text / integer | bpm; range 30-250 |
-| Respiratory Rate | C49678 | text / integer | breaths/min; range 8-60 |
-| Body Temperature | C25206 | text / decimal | °C or °F; specify units |
-| Height | C25347 | text / decimal | cm; range 50-250 |
-| Weight | C29463 | text / decimal | kg; range 1-300 |
-| BMI | C16358 | text / decimal | kg/m²; calculated field |
-| Pain Assessment (NRS) | C38109 | text / integer | 0-10 scale |
+| Concept | Dataset Specialization | Current BC ID | Legacy synthetic reference | Notes |
+|---|---|---|---|---|
+| Systolic Blood Pressure | SYSBP | C25298 | C49677 | Legacy value collides with current Heart Rate |
+| Diastolic Blood Pressure | DIABP | C25299 | C25299 | Current |
+| Heart Rate | HR | C49677 | C49673 | Legacy value absent from pinned COSMoS |
+| Respiratory Rate | RESP | C49678 | C49678 | Current |
+| Body Temperature | TEMP | C174446 | C25206 | Legacy value absent from pinned COSMoS |
+| Height | HEIGHT | C164634 | C25347 | C25347 remains a separate `Height` BC |
+| Weight | WEIGHT | C81328 | C29463 | Legacy value absent from pinned COSMoS |
+| BMI | BMI | C16358 | C16358 | Current |
+
+Clinical ranges and REDCap field decisions remain Gate 3A.3 review items; COSMoS identifies
+standard concepts and variables but does not authorize project-specific clinical validation limits.
 
 ### Biomedical Concept Identity in Real USDM Files
 *Validated against Protocol Explorer public fixtures — 2026-06-18*
@@ -155,6 +158,19 @@ compatibility/integration tests | Confidence: HIGH | Validated during Gate 3 pla
 PAT-002: Separate USDM reference URI, specialization identity, standard code, and activity context
 before mapping to an EDC field | Confidence: HIGH | Validated against Protocol Explorer fixtures
 
+PAT-003: Reconstruct concept usage through
+`BiomedicalConcept.id → Activity.biomedicalConceptIds → ScheduleTimeline.instances.activityIds`;
+keep the grouped activity and scheduled-instance context in API output | Confidence: HIGH |
+Validated in Gate 3A.1
+
+PAT-004: Resolve real USDM concepts by Dataset Specialization URI first; treat NCI-only lookups as
+potentially ambiguous because the same BC ID can identify both a BC and a specialization |
+Confidence: HIGH | Validated in Gate 3A.2
+
+PAT-005: When a fixture references an older COSMoS package, return current pinned metadata with an
+explicit `fallback` version result; never claim an exact match | Confidence: HIGH |
+Validated in Gate 3A.2
+
 ## INVALIDATED ASSUMPTIONS
 # Record things that seemed true but turned out to be wrong.
 # Prevents re-learning the same lesson.
@@ -164,3 +180,8 @@ before mapping to an EDC field | Confidence: HIGH | Validated against Protocol E
 - The synthetic eight-vital-sign fixture is a real TransCelerate example — it is hand-authored and
   intentionally minimal.
 - All USDM 4.0 JSON parses with `usdm==0.67.0` — three of nine assessed public files failed.
+- A fixture named or presented as observational necessarily contains an
+  `ObservationalStudyDesign` payload — the selected example currently parses as
+  `InterventionalStudyDesign`.
+- The original POC vital-sign code table is authoritative — several values are absent or identify
+  different current COSMoS concepts.

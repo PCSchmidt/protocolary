@@ -9,7 +9,9 @@
 | Gate 0 — Foundations | 0 | 0 | 0 | 0 | 0 | DONE |
 | Gate 1 — Schema | 8 | 2 | 0 | 10 | ≥ 5 | DONE |
 | Gate 2 — API | 0 | 12 | 0 | 12 | ≥ 20 | DONE |
-| Gate 3A — Offline Adapter | — | — | — | — | 45–55 total | READY |
+| Gate 3A.1 — Fixture/Identity | 7 | 2 | 0 | 9 | 31 cumulative | DONE |
+| Gate 3A.2 — COSMoS Provider | 19 | 0 | 0 | 19 | 50 cumulative | DONE |
+| Gate 3A.3–3A.4 — Remaining | — | — | — | — | ≥ 60 cumulative | PLANNED |
 | Gate 3B — Live Verification | — | — | — | — | ≥ 2 optional live tests | BLOCKED |
 | Gate 4 — Demo | — | — | — | — | ≥ 40 | PLANNED |
 
@@ -77,6 +79,25 @@ Primary Gate 3A candidates:
 - Observational example — alternate `StudyDesign` subtype
 - One currently incompatible USDM 4.0 example — negative compatibility test
 - Existing synthetic vital-sign fixture — precise eight-concept unit tests
+
+Gate 3A.1 checked-in corpus:
+
+- `fixtures/protocol_explorer/cdisc_pilot.json` — compatible primary interventional fixture
+- `fixtures/protocol_explorer/observational.json` — compatible source-classification mismatch case
+- `fixtures/protocol_explorer/incompatible_allergan_3111_302_001.json` — expected validation error
+- `fixtures/protocol_explorer/manifest.json` — URLs, checksums, parser expectations, and usage notes
+
+Gate 3A.1 result: **31/31 tests passing**.
+
+Gate 3A.2 result: **50/50 tests passing**. Provider tests cover:
+
+- Manifest hashes and row counts
+- Immutable source/license provenance
+- All eight scoped Dataset Specializations
+- Exact and fallback package-version resolution
+- URI, specialization, and NCI-code lookup paths
+- Explicit ambiguous and not-found results
+- Integration with Gate 3A.1 normalized concept identity
 
 ## COVERAGE TARGETS
 

@@ -23,7 +23,6 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.database import get_db
 from app.main import app
 
-
 # ── Test client fixture ───────────────────────────────────────────────────────
 
 
@@ -70,9 +69,7 @@ async def test_health_ok(client: AsyncClient) -> None:
 # ── POST /studies ─────────────────────────────────────────────────────────────
 
 
-async def test_create_study_returns_201(
-    client: AsyncClient, sample_study_json: dict
-) -> None:
+async def test_create_study_returns_201(client: AsyncClient, sample_study_json: dict) -> None:
     """POST /studies with a valid USDM fixture returns 201 and study identifiers."""
     r = await client.post("/studies", json=sample_study_json)
     assert r.status_code == 201
@@ -101,9 +98,7 @@ async def test_list_studies_empty(client: AsyncClient) -> None:
     assert r.json() == []
 
 
-async def test_list_studies_after_create(
-    client: AsyncClient, sample_study_json: dict
-) -> None:
+async def test_list_studies_after_create(client: AsyncClient, sample_study_json: dict) -> None:
     """GET /studies after ingesting one study returns a list with one entry."""
     await _ingest(client, sample_study_json)
     r = await client.get("/studies")
@@ -118,9 +113,7 @@ async def test_list_studies_after_create(
 # ── GET /studies/{study_id} ───────────────────────────────────────────────────
 
 
-async def test_get_study_returns_full_wrapper(
-    client: AsyncClient, sample_study_json: dict
-) -> None:
+async def test_get_study_returns_full_wrapper(client: AsyncClient, sample_study_json: dict) -> None:
     """GET /studies/{id} returns the full stored study including wrapper."""
     study_id = await _ingest(client, sample_study_json)
     r = await client.get(f"/studies/{study_id}")
@@ -142,9 +135,7 @@ async def test_get_study_not_found(client: AsyncClient) -> None:
 # ── GET /studies/{study_id}/arms ──────────────────────────────────────────────
 
 
-async def test_get_arms_returns_one_arm(
-    client: AsyncClient, sample_study_json: dict
-) -> None:
+async def test_get_arms_returns_one_arm(client: AsyncClient, sample_study_json: dict) -> None:
     """GET /studies/{id}/arms returns the single treatment arm from the fixture."""
     study_id = await _ingest(client, sample_study_json)
     r = await client.get(f"/studies/{study_id}/arms")
@@ -163,9 +154,7 @@ async def test_get_arms_not_found(client: AsyncClient) -> None:
 # ── GET /studies/{study_id}/concepts ─────────────────────────────────────────
 
 
-async def test_get_concepts_returns_8_bcs(
-    client: AsyncClient, sample_study_json: dict
-) -> None:
+async def test_get_concepts_returns_8_bcs(client: AsyncClient, sample_study_json: dict) -> None:
     """GET /studies/{id}/concepts returns all 8 vital signs BiomedicalConcepts."""
     study_id = await _ingest(client, sample_study_json)
     r = await client.get(f"/studies/{study_id}/concepts")
@@ -174,9 +163,7 @@ async def test_get_concepts_returns_8_bcs(
     assert len(concepts) == 8
 
 
-async def test_get_concepts_nci_codes(
-    client: AsyncClient, sample_study_json: dict
-) -> None:
+async def test_get_concepts_nci_codes(client: AsyncClient, sample_study_json: dict) -> None:
     """GET /studies/{id}/concepts — all BCs have NCI reference codes."""
     study_id = await _ingest(client, sample_study_json)
     r = await client.get(f"/studies/{study_id}/concepts")
@@ -190,6 +177,37 @@ async def test_get_concepts_nci_codes(
         assert c["reference"], f"{c['name']} has empty reference"
         assert c["standard_code"], f"{c['name']} has empty standard_code"
         assert c["property_count"] >= 1, f"{c['name']} has no properties"
+        assert c["reference_type"] == "nci_code"
+        assert "properties" in c
+        assert "source_activities" in c
+
+
+async def test_get_concepts_normalizes_real_dataset_specializations(
+    client: AsyncClient, cdisc_pilot_json: dict
+) -> None:
+    """The concepts endpoint preserves real COSMoS URI and activity identity."""
+    study_id = await _ingest(client, cdisc_pilot_json)
+    r = await client.get(f"/studies/{study_id}/concepts")
+
+    assert r.status_code == 200
+    concepts = r.json()
+    systolic = next(concept for concept in concepts if concept["name"] == "SBP2")
+    assert systolic["reference_type"] == "dataset_specialization"
+    assert systolic["specialization"] == "SYSBP"
+    assert systolic["package"] == "2025-04-01"
+    assert systolic["standard_code"] == "C25298"
+    assert systolic["source_activities"][0]["activity_label"] == "Vital signs while supine"
+
+
+async def test_create_incompatible_real_study_returns_422(
+    client: AsyncClient, incompatible_study_json: dict
+) -> None:
+    """A realistic but parser-incompatible USDM file fails clearly at ingestion."""
+    r = await client.post("/studies", json=incompatible_study_json)
+
+    assert r.status_code == 422
+    assert "Invalid USDM" in r.json()["detail"]
+    assert "populationSummary" in r.json()["detail"]
 
 
 async def test_get_concepts_not_found(client: AsyncClient) -> None:

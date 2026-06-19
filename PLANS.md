@@ -19,19 +19,41 @@ At session start:
 ## Latest Context Save
 
 ```text
-CONTEXT SAVE: 2026-06-18T19:54:17-04:00
-Gate: Gate 3 — Adapter (Gate 3A READY; Gate 3B blocked on REDCap)
-Current phase: Documentation aligned; ready to build Gate 3A.1
+CONTEXT SAVE: 2026-06-19
+Gate: Gate 3 — Adapter (Gate 3A IN PROGRESS; Gate 3B blocked on REDCap)
+Current phase: Gate 3A.1–3A.2 complete; ready to build Gate 3A.3
 
 Gate status:
   - Gate 0 (Foundations): CLOSED — 2026-04-25, 4 hrs, 0% variance
   - Gate 1 (Schema): CLOSED — 2026-04-29, 4 hrs, 0% variance; 10 tests
   - Gate 2 (API): CLOSED — 2026-04-30, 4 hrs, -50% variance; 22 tests total
-  - Gate 3A (Offline Adapter): READY — no REDCap dependency
+  - Gate 3A.1 (Fixture/Identity): COMPLETE — 31 tests total
+  - Gate 3A.2 (COSMoS provider): COMPLETE — 50 tests total
+  - Gate 3A.3 (Domain mapping): NEXT
   - Gate 3B (Live Verification): BLOCKED on API-enabled REDCap project
   - Gate 4 (Demo): PLANNED
 
 Completed since last save:
+  - Pinned COSMoS commit fc11c9dbdc12aae709653b45c4c9db7f58824cf5
+  - Derived minimal CC BY 4.0 vital-sign snapshots from immutable BC and SDTM exports
+  - Added source/blob/SHA-256 provenance and derived-file checksums
+  - Implemented offline COSMoS provider with typed BC properties and SDTM variables
+  - Added lookups by COSMoS URI, Dataset Specialization, and NCI code
+  - Added explicit found/not_found/ambiguous and exact/fallback package results
+  - Resolved all eight current vital-sign Dataset Specializations without network access
+  - Identified stale synthetic mappings: current COSMoS uses C25298 SYSBP, C49677 HR,
+    C174446 TEMP, C164634 HEIGHT, and C81328 WEIGHT
+  - Full suite: 50/50 passing
+  - Pinned three Protocol Explorer fixtures plus a provenance/checksum manifest
+  - Added positive parser tests for CDISC Pilot and observational-named examples
+  - Added expected validation-failure coverage for Allergan 3111-302-001
+  - Added normalized concept identity service preserving reference type, specialization,
+    package, standard code/version, properties, activity, timeline, and scheduled instances
+  - Upgraded GET /studies/{id}/concepts without breaking direct-NCI synthetic fixtures
+  - Confirmed the observational-named fixture currently parses as InterventionalStudyDesign;
+    recorded rather than hiding the source/classification mismatch
+  - Removed stale pytest `env` configuration; suite now runs without warnings
+  - Full suite: 31/31 passing
   - Full repository and roadmap review completed 2026-06-18
   - Current suite re-run against isolated MongoDB: 22/22 passing
   - Protocol Explorer assessed: public USDM repository with JSON/PDF/CORE report downloads
@@ -43,7 +65,7 @@ Completed since last save:
   - Gate 3 split into 3A offline build and 3B live REDCap verification
   - Decision 009 added; roadmap, spec, tests, deployment, API registry, memories, and README aligned
 
-Tests: 22/22 green
+Tests: 50/50 green
 Run: docker compose --profile test up -d mongo_test && cd python && python -m pytest -v
 Key: always use `python -m pytest` not bare `pytest`
 
@@ -72,15 +94,12 @@ Decisions (all in DECISIONS.md):
 Errors: ERR-001 UUID encoding | GOTCHA-007 CDISC members-only — see ERRORS.md
 
 Next task when resuming:
-  Gate 3A.1 — Fixture and compatibility hardening:
-    Step 1: Select and pin Protocol Explorer fixtures with provenance manifest
-    Step 2: Keep synthetic fixture for fast unit tests; stop describing it as a real example
-    Step 3: Add compatible-file and expected-validation-failure tests
-    Step 4: Introduce normalized concept identity fields for reference URI/type,
-            standard code, package version, properties, and source activity
-    Step 5: Update GET /studies/{id}/concepts response without silently breaking identity
-  Then Gate 3A.2:
-    Build an offline COSMoS provider from a pinned cdisc-org/COSMoS export/package.
+  Gate 3A.3 — Domain mapping layer:
+    Step 1: Define mapping schema with source identity, REDCap field metadata, and provenance
+    Step 2: Reconcile the original synthetic codes with current COSMoS identifiers
+    Step 3: Draft mappings for SYSBP, DIABP, HR, RESP, TEMP, HEIGHT, WEIGHT, and BMI
+    Step 4: Encode explicit unmapped/ambiguous/needs-review outcomes
+    Step 5: Review units, ranges, requiredness, BMI calculation, and repeated assessments
   REDCap credentials are not needed until Gate 3B.
   Approval word to close Gate 3: ADAPTER APPROVED
 ```

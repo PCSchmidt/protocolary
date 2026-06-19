@@ -11,7 +11,7 @@ Path parameter {study_id} is the USDM wrapper.study.id (UUID string),
 NOT the MongoDB ObjectId. Stored as str per Decision 007 / ERR-001.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -19,6 +19,7 @@ from usdm_model.wrapper import Wrapper
 
 from app.database import get_db
 from app.models.study import BiomedicalConceptSummary, StudySummary
+from app.services.concept_identity import normalize_biomedical_concepts
 
 router = APIRouter()
 
@@ -50,7 +51,7 @@ async def create_study(
         "study_name": wrapper.study.name,
         "version_identifier": sv.versionIdentifier,
         "usdm_version": wrapper.usdmVersion,
-        "created_at": datetime.now(timezone.utc),
+        "created_at": datetime.now(UTC),
         "wrapper": wrapper.model_dump(mode="json"),
     }
     result = await db["studies"].insert_one(doc)
@@ -129,29 +130,25 @@ async def get_study_concepts(
     study_id: str,
     db: AsyncIOMotorDatabase = Depends(get_db),
 ) -> list[BiomedicalConceptSummary]:
-    """Return BiomedicalConcepts with NCI codes for a stored study.
+    """Return normalized Biomedical Concepts and their activity context.
 
     BiomedicalConcepts live on StudyVersion (not StudyDesign) — Gate 1 finding.
-    Each BC's NCI code is at bc['code']['standardCode']['code'].
+    The reference URI, standard code, Dataset Specialization, properties, and source
+    activities remain separate so downstream mappings do not collapse distinct meanings.
     """
     doc = await db["studies"].find_one(
         {"study_id": study_id},
-        {"wrapper.study.versions": 1, "_id": 0},
+        {"wrapper": 1, "_id": 0},
     )
     if not doc:
         raise HTTPException(status_code=404, detail="Study not found")
 
-    results: list[BiomedicalConceptSummary] = []
-    for sv in doc["wrapper"]["study"]["versions"]:
-        for bc in sv.get("biomedicalConcepts", []):
-            std_code = (bc.get("code") or {}).get("standardCode") or {}
-            results.append(
-                BiomedicalConceptSummary(
-                    name=bc.get("name", ""),
-                    reference=bc.get("reference", ""),
-                    standard_code=std_code.get("code", ""),
-                    standard_code_system=std_code.get("codeSystem", ""),
-                    property_count=len(bc.get("properties", [])),
-                )
-            )
-    return results
+    try:
+        wrapper = Wrapper.model_validate(doc["wrapper"])
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail=f"Stored USDM is incompatible with the current parser: {exc}",
+        ) from exc
+
+    return normalize_biomedical_concepts(wrapper)

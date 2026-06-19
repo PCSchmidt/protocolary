@@ -16,7 +16,7 @@ API docs: `http://localhost:8000/docs` (FastAPI auto-generated OpenAPI)
 | `POST` | `/studies` | 2 | Ingest a USDM JSON study definition | YES |
 | `GET` | `/studies/{id}` | 2 | Retrieve a stored study definition | YES |
 | `GET` | `/studies/{id}/arms` | 2 | List study arms (StudyArm objects) | YES |
-| `GET` | `/studies/{id}/concepts` | 2 | List BiomedicalConcepts with CDISC codes | YES |
+| `GET` | `/studies/{id}/concepts` | 2 + 3A.1 | List normalized Biomedical Concepts with reference URI/type, standard code, package, properties, and activity/schedule context | YES |
 | `GET` | `/studies` | 2 | List all stored studies (id + name + version) | YES |
 
 ### Transformation — REDCap Adapter (Gate 3)

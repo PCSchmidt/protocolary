@@ -15,6 +15,36 @@ Read at session start to reconstruct recent history.
 
 Format: `[Date] | Focus | Key decisions | Blockers | Next session start point`
 
+### 2026-06-19 | Gate 3A.1 — Fixture and concept identity hardening
+
+- Pinned CDISC Pilot, observational-named, and expected-incompatible Allergan fixtures from
+  Protocol Explorer with source URLs and SHA-256 checksums
+- Added offline compatibility tests using `usdm==0.67.0`
+- Confirmed the observational-named payload parses as `InterventionalStudyDesign`; retained this
+  as a source/classification mismatch test rather than trusting the filename
+- Implemented normalized concept identity: reference type, Dataset Specialization, package,
+  standard code/system/version, properties, source activity, timeline, and schedule instances
+- Updated `/studies/{id}/concepts` to return normalized identity while preserving synthetic fixture
+  behavior
+- Removed stale pytest configuration warning
+- Test count increased from 22 to 31; all passing
+- Next session start point: Gate 3A.2 pinned offline COSMoS metadata provider
+
+### 2026-06-19 | Gate 3A.2 — Pinned offline COSMoS provider
+
+- Pinned official `cdisc-org/COSMoS` commit
+  `fc11c9dbdc12aae709653b45c4c9db7f58824cf5`
+- Derived a 38-row BC snapshot and 74-row SDTM Dataset Specialization snapshot for vital signs
+- Preserved CC BY 4.0 attribution and immutable source/blob/content hashes
+- Implemented typed offline lookups by URI, specialization, and NCI code
+- Package mismatches are reported as fallback rather than silently treated as exact
+- Codes shared by a BC and Dataset Specialization return an explicit ambiguous result unless
+  constrained by source type
+- All eight current vital-sign specializations resolve offline
+- Current COSMoS identifiers exposed multiple stale assumptions in the synthetic fixture
+- Test count increased from 31 to 50; all passing
+- Next session start point: Gate 3A.3 domain mapping schema and clinical review
+
 ### 2026-04-25 | Project reboot + harness setup + Gate 0 pre-work
 
 - Reviewed original .NET POC (essentially documentation + 936-byte skeleton)

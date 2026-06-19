@@ -27,7 +27,9 @@ class Settings(BaseSettings):
     # CDISC Library API — confirmed active 2026-04-30
     # Primary key from api.developer.library.cdisc.org
     cdisc_api_key: str = ""
-    cdisc_base_url: str = "https://library.cdisc.org/api"
+    cdisc_base_url: str = "https://api.library.cdisc.org/api"
+    cosmos_data_path: str = "app/data/cosmos"
+    cosmos_source_commit: str = "fc11c9dbdc12aae709653b45c4c9db7f58824cf5"
 
     # REDCap (Gate 3+; not required for Gates 1–2)
     redcap_url: str = ""

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "source_repository": "https://github.com/cdisc-org/COSMoS",
+  "source_commit": "fc11c9dbdc12aae709653b45c4c9db7f58824cf5",
+  "source_commit_date": "2026-05-29T15:52:00Z",
+  "retrieved_at": "2026-06-19",
+  "content_license": "CC BY 4.0",
+  "attribution": "Content based on COSMoS (GitHub) used under the CC-BY-4.0 license.",
+  "derivation": "Rows for the scoped vital-sign Biomedical Concepts and base SDTM Dataset Specializations were selected from the immutable upstream CSV exports. No source values were changed.",
+  "sources": [
+    {
+      "path": "export/cdisc_biomedical_concepts_latest.csv",
+      "url": "https://raw.githubusercontent.com/cdisc-org/COSMoS/fc11c9dbdc12aae709653b45c4c9db7f58824cf5/export/cdisc_biomedical_concepts_latest.csv",
+      "git_blob_sha": "e05ebddb7850dd713adbbfda9c663731584242c9",
+      "sha256": "41423bf0a970d5f3818528748daa7263bc1fe8583434a9d76c9baf94055110ba"
+    },
+    {
+      "path": "export/cdisc_sdtm_dataset_specializations_latest.csv",
+      "url": "https://raw.githubusercontent.com/cdisc-org/COSMoS/fc11c9dbdc12aae709653b45c4c9db7f58824cf5/export/cdisc_sdtm_dataset_specializations_latest.csv",
+      "git_blob_sha": "6547bf5b69eaed3c9020a3fd12b4efad609686e8",
+      "sha256": "f6c7bc852425350c99c65e934bccb9043ec6100fdb2da9e1acbb6012004afa98"
+    }
+  ],
+  "derived_files": [
+    {
+      "file": "biomedical_concepts_vital_signs.csv",
+      "sha256": "867678f24f87a235a1b1b1ca488d22151507f34eadecd7d570c5bb93e87e8ff0",
+      "row_count": 38,
+      "identifiers": [
+        "C16358",
+        "C164634",
+        "C174446",
+        "C25298",
+        "C25299",
+        "C25347",
+        "C49677",
+        "C49678",
+        "C81328"
+      ]
+    },
+    {
+      "file": "dataset_specializations_vital_signs.csv",
+      "sha256": "eec82bebc2cbaed3787f9eb1ab97b23307768061400addf161609adfeecdc885",
+      "row_count": 74,
+      "identifiers": [
+        "BMI",
+        "DIABP",
+        "HEIGHT",
+        "HR",
+        "RESP",
+        "SYSBP",
+        "TEMP",
+        "WEIGHT"
+      ]
+    }
+  ]
+}
