@@ -22,50 +22,44 @@
 - [x] Regenerate the competitive strategy PDF
 - [x] Run the complete automated test suite
 
-## Complete Before the Repository Rename
+## Repository Preparation
 
-- [ ] Review the rename diff
-- [ ] Commit the Markdown, PDF, Word, brand, code, and configuration changes
-- [ ] Push the current `dev` branch
-- [ ] Confirm GitHub Actions and external links do not depend on the old repository URL
+- [x] Review the rename diff
+- [x] Commit the Markdown, PDF, Word, brand, code, and configuration changes
+- [x] Push the current `dev` branch
+- [x] Confirm the repository does not depend on the old URL for active GitHub Actions
 
-## GitHub Repository Rename
+## GitHub Repository Rename — Completed
 
-1. Rename `PCSchmidt/transcelerate` to `PCSchmidt/protocolary` in GitHub repository settings.
-2. Update the local remote:
+Completed June 19, 2026:
 
-   ```bash
-   git remote set-url origin https://github.com/PCSchmidt/protocolary.git
-   git remote -v
-   git fetch origin
-   git push
-   ```
+- [x] Renamed `PCSchmidt/transcelerate` to `PCSchmidt/protocolary`
+- [x] Updated `origin` to `https://github.com/PCSchmidt/protocolary.git`
+- [x] Verified the `dev` branch at the new URL
+- [x] Verified GitHub's redirect from the former URL
+- [x] Updated the repository description and homepage
 
-3. Update the repository description and website:
-
-   ```text
-   Protocolary Build: governed USDM-to-EDC clinical study automation
-   https://protocolary.com
-   ```
-
-4. Do not create a new repository at the old name; preserve GitHub's redirect.
+Do not create a new repository at the old name; preserve GitHub's redirect.
 
 ## Local Folder Rename
 
-After the GitHub rename and a clean working tree, optionally rename:
+The repository folder has been renamed:
 
 ```text
-C:\Users\pchri\Documents\Transcelerate\transcelerate
+C:\Users\pchri\Documents\Transcelerate\protocolary
 ```
 
-to:
+The outer workspace folder remains open by the current Codex session. After closing this
+workspace, rename:
 
 ```text
-C:\Users\pchri\Documents\Protocolary\protocolary
+C:\Users\pchri\Documents\Transcelerate
+→ C:\Users\pchri\Documents\Protocolary
 ```
 
-Then reopen the workspace from the new path. The Docker Compose project already uses the explicit
-name `protocolary`, so container naming no longer depends on the folder name.
+Then reopen the workspace at `C:\Users\pchri\Documents\Protocolary\protocolary`. The Docker
+Compose project already uses the explicit name `protocolary`, so container naming no longer
+depends on the folder name.
 
 ## Commercial Follow-up
 
