@@ -156,8 +156,9 @@ progresses beyond Gate 4.
 
 **Date:** 2026-04-30 (updated after full API investigation)
 **Decision:** Source CDISC COSMOS Biomedical Concept and Dataset Specialization data from the
-**public GitHub repository** (`github.com/cdisc-org/COSMoS-Biomedical-Concepts-and-Dataset-Specializations`),
-not the live CDISC Library API. Cache in MongoDB (`cdisc_cache` collection) at startup.
+**public GitHub repository** (`github.com/cdisc-org/COSMoS`), not the live CDISC Library API.
+Select and pin an export/package for the POC; normal application startup and tests must use the
+local snapshot rather than fetching the network.
 
 **Why not the live API:** The CDISC Library API (`api.library.cdisc.org/api/cosmos/...`) requires
 a paid CDISC organizational or individual membership to access COSMOS data. The developer portal
@@ -168,34 +169,78 @@ only — all actual data calls return `HTTP 401 "Members-only content"`. This wa
 - Gateway URL confirmed: `https://api.library.cdisc.org/api/cosmos/v2/...`
 - Auth header confirmed: `api-key: <subscription_key>`
 
-**Why GitHub is sufficient for the POC:** The COSMOS GitHub repo publishes the identical data
-as YAML files. The `2022-10-26` package contains all 8 vital signs BCs needed. Data is versioned
-by package date, reproducible, and requires no API credentials.
+**Why GitHub is sufficient for the POC:** The COSMoS repository publishes current Biomedical
+Concept and Dataset Specialization exports, YAML, schemas, and supporting models. Content can be
+versioned by commit/package, is reproducible, and requires no API credentials.
 
-**COSMOS GitHub repo structure:**
+**Relevant COSMoS repository structure:**
 ```
+export/                  # Current BC and Dataset Specialization CSV/Excel exports
 yaml/
-  biomedical_concepts/
-    packages/2022-10-26/
-      C49677.yaml   # Systolic Blood Pressure
-      C25299.yaml   # Diastolic Blood Pressure
-      C49673.yaml   # Heart Rate
-      ... (all 8 vital signs BCs)
-  dataset_specializations/
-    sdtm/packages/2022-10-26/
-      SYSBP.yaml    # SDTM specialization for SBP
-      ...
+model/                   # LinkML and generated schemas/models
+openapi/                 # COSMoS API definition
 ```
 
 **How to apply at Gate 3:**
-- Write `services/cdisc_seeder.py`: fetch YAML from GitHub raw URLs, parse, store in
-  `cdisc_cache` collection keyed by `(package_date, nci_code)`.
-- Run seeder once at startup (idempotent — skip if already cached).
-- Gate 3 adapter reads from `cdisc_cache`, never from live API.
+- Record the selected COSMoS commit and content license.
+- Check in or explicitly refresh the minimal approved snapshot needed for the POC.
+- Write `services/cosmos_provider.py` to resolve BC and Dataset Specialization identities by URI,
+  NCI code, and specialization name.
+- Tests read only the pinned local snapshot.
+- A MongoDB cache is optional; it must not be populated through an implicit startup download.
 
 **Future path to live API:** If the project scales beyond POC, a CDISC Individual Contributor
 membership (~$500/yr) or institutional membership (via JHU) would unlock the live API.
 The `api-key` header and `https://api.library.cdisc.org/api/cosmos/v2/` base URL are confirmed
 correct — only the membership tier needs to change.
 
-**CDISC_API_KEY in .env:** Keep in config for future use; not used at Gates 1–3.
+**CDISC_API_KEY in .env:** Keep as optional future configuration; it is not required by the Gate 3
+build or test path.
+
+---
+
+## Decision 009 — Protocol Explorer Fixture Corpus and Split Gate 3 Execution
+
+**Date:** 2026-06-18
+
+**Decision:** Use [Protocol Explorer](https://protocolexplorer.io/) as the discovery and download
+source for realistic USDM integration fixtures, while retaining a small synthetic fixture for fast
+unit tests. Execute Gate 3 in two phases: an offline adapter phase that begins immediately and a
+live REDCap verification phase that begins when an API-enabled project is available.
+
+**Why Protocol Explorer:** The public repository exposes structured USDM protocols together with
+source metadata, original PDFs where available, and downloadable CDISC CORE conformance reports.
+The examples include realistic schedule timelines, activities, repeated assessments, Biomedical
+Concepts, and Dataset Specialization references that the current synthetic fixture does not model.
+
+**Compatibility finding:** On 2026-06-18, nine public JSON files were inspected. Six parsed with
+the project's pinned `usdm==0.67.0`; three failed model validation. The failing files are valuable
+negative fixtures and demonstrate that a declared USDM 4.0 version is not sufficient evidence of
+compatibility with one Python package release.
+
+**Provenance caveat:** Many Protocol Explorer records currently point back to TransCelerate's
+`ddf-sdr-api` sample-study repository. Protocol Explorer is therefore primarily an improved
+discovery, visualization, validation, and download surface—not an independent canonical standard
+source. Fixtures must retain source URL, download date, original filename, and attribution.
+
+**Why split Gate 3:** REDCap credentials are not needed to implement or test concept resolution,
+mapping decisions, REDCap row validation, preview output, or deterministic CSV generation.
+Waiting for REDCap would unnecessarily block most of the valuable engineering work. Live REDCap
+access remains mandatory before `ADAPTER APPROVED`.
+
+**How to apply:**
+
+- Gate 3A builds fixtures, concept identity normalization, an offline COSMoS provider, mapping
+  tables, CSV generation, and preview/export endpoints.
+- Gate 3B verifies the output through a live REDCap metadata import and visual CRF review.
+- Use `https://github.com/cdisc-org/COSMoS`, not the obsolete
+  `COSMoS-Biomedical-Concepts-and-Dataset-Specializations` repository name.
+- Pin fixture files and COSMoS content by commit, package, or checked-in snapshot.
+- Never make normal tests depend on Protocol Explorer, GitHub, or the CDISC API being online.
+- Treat `BiomedicalConcept.reference`, `code.standardCode.code`, Dataset Specialization identity,
+  and source activity as separate fields.
+
+**Terms:** Protocol Explorer content is public and may be viewable or downloadable, but is supplied
+by third parties for informational and standards-development purposes and is not independently
+verified. Preserve provenance and do not treat the platform's technical conformance results as
+clinical, regulatory, or scientific approval.

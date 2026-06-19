@@ -18,14 +18,24 @@ automatically transformed into a working REDCap EDC configuration.
 | Gate | Name | Status |
 |---|---|---|
 | 0 | Foundations | ✅ CLOSED — 2026-04-25 |
-| 1 | Schema | ⏳ PLANNED — ready to start |
-| 2 | API | ⏳ PLANNED |
-| 3 | Adapter | ⏳ PLANNED — blocked on REDCap sandbox + CDISC API key |
+| 1 | Schema | ✅ CLOSED — 2026-04-29 |
+| 2 | API | ✅ CLOSED — 2026-04-30; 22 tests passing |
+| 3A | Offline Adapter | ▶ READY — realistic fixtures, COSMoS metadata, mapping, CSV export |
+| 3B | Live REDCap Verification | ⏳ BLOCKED — awaiting API-enabled REDCap project |
 | 4 | Demo | ⏳ PLANNED |
 
-**External blockers (Gates 1–2 unaffected):**
-- REDCap sandbox: awaiting JHU ICTR response (`redcap@jhu.edu`)
-- CDISC API key: request pending at cdisc.org
+Gate 3 is no longer treated as wholly blocked. Protocol Explorer and the public CDISC COSMoS
+repository provide enough realistic USDM and standards metadata to build and test the offline
+adapter now. REDCap access is required only for the final live import verification.
+
+**Current external dependency:**
+- API-enabled REDCap project: awaiting JHU ICTR response (`redcap@jhu.edu`)
+
+**Current public data sources:**
+- [Protocol Explorer](https://protocolexplorer.io/) — downloadable real-world USDM protocols,
+  source documents, and CDISC CORE conformance reports
+- [CDISC COSMoS](https://github.com/cdisc-org/COSMoS) — Biomedical Concepts and Dataset
+  Specializations; use version-pinned exports/YAML rather than the paid live API
 
 ---
 
@@ -57,14 +67,17 @@ Full scope lock is in `SPEC.md`.
 
 ---
 
-## Getting Started (Gate 1 onward)
+## Getting Started
 
 Prerequisites: Python 3.12+, Docker Desktop, `usdm` PyPI package.
 
 ```bash
-# Gate 1 scaffold (not yet created — pending SCOPE CONFIRMED)
-docker compose up
-pytest
+# Start the isolated test database
+docker compose --profile test up -d mongo_test
+
+# Run the current 22-test suite
+cd python
+python -m pytest -v
 ```
 
 See `DEPLOYMENT_CONFIG.md` for full environment setup and `API_REGISTRY.md` for planned endpoints.

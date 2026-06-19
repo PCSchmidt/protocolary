@@ -56,6 +56,46 @@ or institutional). Even the portal's own "Try it" feature returns 401 with the s
 membership tier first. For POC, GitHub seeding is simpler and more reliable.
 **First seen:** Gate 2 pre-work — 2026-04-30
 
+### GOTCHA-008: Obsolete COSMoS GitHub repository URL
+**Symptom:** GitHub returns HTTP 404 for
+`cdisc-org/COSMoS-Biomedical-Concepts-and-Dataset-Specializations`.
+**Root cause:** The project was renamed or consolidated. The current public repository is
+`https://github.com/cdisc-org/COSMoS`.
+**Fix:** Use the current repository and pin the selected commit/export/package.
+**Prevention:** Store both source URL and immutable revision in the fixture/data manifest. Avoid
+depending on a repository's `main` branch at runtime.
+**First seen:** Gate 3 planning review — 2026-06-18
+
+### GOTCHA-009: `BiomedicalConcept.reference` is not always an NCI code
+**Symptom:** Mapping by values such as `C49677` fails on realistic USDM files, or concepts are
+silently reported as unmapped.
+**Root cause:** Real USDM examples may store COSMoS Biomedical Concept or Dataset Specialization
+URIs in `reference`; the NCI code is separately available under `code.standardCode.code`.
+**Fix:** Normalize reference URI/type, standard code/system, package version, specialization, and
+activity context before mapping.
+**Prevention:** Do not name the API response field `reference` as though it were an NCI code.
+Include realistic Protocol Explorer fixtures in integration tests.
+**First seen:** Gate 3 planning review — 2026-06-18
+
+### GOTCHA-010: Declared USDM 4.0 does not guarantee parser compatibility
+**Symptom:** `Wrapper.model_validate()` raises many validation errors for a publicly described
+USDM 4.0 file.
+**Root cause:** Example files and the pinned `usdm` package may reflect different model revisions,
+required fields, or conformance interpretations.
+**Fix:** Record parser compatibility per fixture. Keep representative failures as negative tests
+and return a concise client-facing validation error.
+**Prevention:** Pin both package and fixtures; run compatibility tests before adopting new files.
+**First seen:** Protocol Explorer assessment — 2026-06-18
+
+### GOTCHA-011: Generic `DEBUG` environment variable collides with host tooling
+**Symptom:** Test collection fails because Settings receives a value such as `DEBUG=release`,
+which cannot be parsed as a boolean.
+**Root cause:** `DEBUG` is a generic environment-variable name and may already exist on the host.
+**Fix:** Set `DEBUG=false` for the current environment.
+**Prevention:** Rename to a project-specific variable such as `TRANSCELERATE_DEBUG` in a future
+configuration cleanup.
+**First seen:** Repository reorientation — 2026-06-18
+
 ### GOTCHA-002: `usdm` package requires CDISC_API_KEY even for local use
 **Symptom:** `KeyError: 'CDISC_API_KEY'` or silent terminology lookup failure
 **Root cause:** The `usdm` package calls the CDISC terminology API for code validation.

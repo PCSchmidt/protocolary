@@ -52,6 +52,57 @@ Sourced from `POC_archive/src/SDR.Core.API/biomedical-concepts.json` and CDISC C
 | BMI | C16358 | text / decimal | kg/m²; calculated field |
 | Pain Assessment (NRS) | C38109 | text / integer | 0-10 scale |
 
+### Biomedical Concept Identity in Real USDM Files
+*Validated against Protocol Explorer public fixtures — 2026-06-18*
+
+Do not treat `BiomedicalConcept.reference` as synonymous with an NCI code. Real USDM files may
+use references such as:
+
+```
+/mdr/bc/packages/2025-04-01/biomedicalconcepts/C28421
+/mdr/specializations/sdtm/packages/2025-04-01/datasetspecializations/SYSBP
+```
+
+The adapter must preserve these identity dimensions separately:
+
+- `reference`: source URI or identifier from the USDM object
+- `reference_type`: Biomedical Concept, Dataset Specialization, or unknown
+- `standard_code`: `BiomedicalConcept.code.standardCode.code`
+- `standard_code_system`: usually NCI, but never assume without reading the field
+- `package_date` or source revision extracted from the URI/manifest
+- concept properties
+- source activity and schedule context
+
+Repeated Dataset Specializations such as `SYSBP` may appear multiple times for different
+activities, positions, or timepoints. Deduplicating only by NCI code would lose protocol meaning.
+
+### Protocol Explorer
+*Assessed 2026-06-18*
+
+- Public repository: `https://protocolexplorer.io/`
+- Operated by PA Consulting
+- Browsing and per-protocol downloads are public
+- Available artifacts can include USDM JSON, source PDF, and CDISC CORE reports in JSON/Excel
+- Nine protocols were visible during assessment; six parsed with `usdm==0.67.0`, three did not
+- Many records cite TransCelerate `ddf-sdr-api` sample studies as their source
+- Content may be partial, third-party supplied, and unverified
+- No documented public bulk API or OpenAPI endpoint was found during assessment
+
+Use Protocol Explorer for realistic, provenance-recorded fixtures and compatibility tests. Do not
+use it as a runtime dependency or as a substitute for REDCap validation.
+
+### Current COSMoS Repository
+
+The current official public repository is:
+
+`https://github.com/cdisc-org/COSMoS`
+
+The older recorded repository name,
+`COSMoS-Biomedical-Concepts-and-Dataset-Specializations`, returns 404 and must not be used.
+The current repository provides exports, YAML, schemas, models, and an OpenAPI definition. For
+consumption, prefer the repository's `export` content or a deliberately selected YAML package.
+Pin the revision/package and retain the CC BY 4.0 attribution for content.
+
 ### USDM Python Package Notes (`usdm` v0.67.0)
 - Import root: `from usdm_model.study import Study`
 - Requires `CDISC_API_KEY` env var for terminology lookups
@@ -98,10 +149,18 @@ Required Field          — y or blank
 # Added at gate close when a pattern is confirmed by working code.
 # Format: PAT-NNN: title | Confidence: LOW/MEDIUM/HIGH | Gate validated
 
-[Empty — populated at first gate close]
+PAT-001: Use synthetic fixtures for precise unit tests and pinned real-world fixtures for
+compatibility/integration tests | Confidence: HIGH | Validated during Gate 3 planning
+
+PAT-002: Separate USDM reference URI, specialization identity, standard code, and activity context
+before mapping to an EDC field | Confidence: HIGH | Validated against Protocol Explorer fixtures
 
 ## INVALIDATED ASSUMPTIONS
 # Record things that seemed true but turned out to be wrong.
 # Prevents re-learning the same lesson.
 
-[Empty — populated as discovered]
+- `BiomedicalConcept.reference` is always an NCI code — invalidated by real Protocol Explorer
+  fixtures containing BC and Dataset Specialization URIs.
+- The synthetic eight-vital-sign fixture is a real TransCelerate example — it is hand-authored and
+  intentionally minimal.
+- All USDM 4.0 JSON parses with `usdm==0.67.0` — three of nine assessed public files failed.

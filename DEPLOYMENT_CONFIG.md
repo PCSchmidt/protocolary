@@ -7,9 +7,11 @@
 |---|---|---|---|
 | MongoDB | `mongo:7` | 27017 | Primary datastore for USDM study definitions |
 | MongoDB (test) | `mongo:7` | 27018 | Isolated test database (test Docker profile) |
-| Redis | `redis:7-alpine` | 6379 | Celery broker (Gate 3+, async transform jobs) |
 | FastAPI | local build | 8000 | REST API |
 | Streamlit | local build | 8501 | Demo dashboard (Gate 4) |
+
+Redis/Celery are not currently required. Add them only if measured transformation time justifies
+background jobs; deterministic Gate 3A transformations should remain synchronous for the POC.
 
 ## Environment Variables
 
@@ -25,12 +27,12 @@ MONGO_DB_NAME=transcelerate
 MONGO_TEST_URL=mongodb://localhost:27018
 MONGO_TEST_DB_NAME=transcelerate_test
 
-# Redis (Gate 3+)
-REDIS_URL=redis://localhost:6379
-
-# CDISC Terminology API (required by usdm package)
-# Request a key at: https://www.cdisc.org/cdisc-api
+# CDISC Library API (optional for this POC; COSMoS data is sourced from GitHub)
 CDISC_API_KEY=your_key_here
+
+# Pinned local COSMoS snapshot/export used by Gate 3A
+COSMOS_DATA_PATH=app/data/cosmos
+COSMOS_SOURCE_COMMIT=record_the_pinned_commit_here
 
 # REDCap (Gate 3+)
 # Obtain from your REDCap sandbox instance
@@ -47,14 +49,15 @@ DEBUG=true
 ## Docker Compose Quick Start
 
 ```bash
-# Start dev environment (MongoDB + Redis + API)
+# Start dev environment (MongoDB + API)
 docker compose up -d
 
 # Start with test database included
 docker compose --profile test up -d
 
-# Run tests
-pytest python/tests/
+# Run tests from python/
+cd python
+python -m pytest -v
 
 # View API docs
 open http://localhost:8000/docs
@@ -68,10 +71,11 @@ streamlit run python/streamlit_app.py
 | Symptom | Cause | Fix |
 |---|---|---|
 | `motor.errors.ServerSelectionTimeoutError` | MongoDB not running | `docker compose up -d mongo` |
-| `KeyError: CDISC_API_KEY` | Missing env var | Add to `.env`; restart API container |
+| COSMoS lookup unavailable | Snapshot missing or path incorrect | Refresh/pin the approved snapshot; tests must not fetch live data |
 | REDCap 403 | Invalid API token | Verify token in REDCap sandbox settings |
 | `usdm` ImportError | Wrong Python version | Requires Python >= 3.12 |
 | Port 8000 in use | Another process on port | `lsof -i :8000` → kill or change `API_PORT` |
+| Settings validation fails for `DEBUG` | Host environment contains a non-boolean `DEBUG` value | Run with `DEBUG=false` or use a project-specific environment variable |
 
 ## REDCap Sandbox Setup
 
@@ -82,7 +86,8 @@ streamlit run python/streamlit_app.py
 5. Copy token to `.env` as `REDCAP_API_TOKEN`
 6. Note project ID from the URL (`?pid=XXXXX`) → `REDCAP_PROJECT_ID`
 
-Sandbox provisioning typically takes 1–2 business days.
+REDCap availability and API-token provisioning are institution-specific. The project is currently
+awaiting JHU ICTR access. This blocks Gate 3B only.
 
 ## CDISC API Key Setup
 
@@ -90,4 +95,19 @@ Sandbox provisioning typically takes 1–2 business days.
 2. Request API key from the CDISC Library API section
 3. Copy key to `.env` as `CDISC_API_KEY`
 
-This key is needed by the `usdm` package for terminology code validation.
+The free developer-portal key does not grant access to members-only COSMoS data. Gate 3A uses a
+version-pinned snapshot from [cdisc-org/COSMoS](https://github.com/cdisc-org/COSMoS), so the key is
+optional for the POC's normal build and test path.
+
+## Protocol Explorer Fixture Refresh
+
+Protocol Explorer currently provides public per-protocol JSON downloads rather than a documented
+bulk API. Fixture refresh must therefore be an explicit, reviewable operation:
+
+1. Select the protocol in the browser.
+2. Download its JSON and associated CORE report.
+3. Record provenance and checksum in the fixture manifest.
+4. Validate with the pinned `usdm` package.
+5. Commit only the deliberately selected fixture or a minimized derivative with attribution.
+
+Do not download fixtures dynamically during application startup or test execution.

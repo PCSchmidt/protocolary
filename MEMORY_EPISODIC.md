@@ -68,6 +68,24 @@ Format: `[Date] | Focus | Key decisions | Blockers | Next session start point`
 - All 10 Gate 1 tests green; ERR-001 logged in ERRORS.md
 - Next: begin Gate 2 — add CDISC_API_KEY to .env, smoke-test key, then build study CRUD endpoints
 
+### 2026-06-18 | Repository reorientation + Protocol Explorer assessment
+
+- Confirmed repository clean at commit `1c2d314` on `dev`, synchronized with `origin/dev`
+- Re-ran the full suite against the isolated MongoDB container: 22/22 tests passed
+- Identified documentation drift: README still described Gates 1–2 as planned and Gate 3 as wholly
+  blocked
+- Assessed Protocol Explorer as a public source of downloadable USDM JSON, source PDFs, and CDISC
+  CORE conformance reports
+- Inspected nine public JSON files: six parsed with pinned `usdm==0.67.0`; three failed validation
+- Confirmed realistic fixtures contain schedule timelines, activities, repeated assessments, and
+  Dataset Specialization references absent from the synthetic fixture
+- Invalidated the assumption that `BiomedicalConcept.reference` is always an NCI code
+- Located the current official COSMoS repository at `github.com/cdisc-org/COSMoS`; the repository
+  URL recorded in Decision 008 had become obsolete
+- Split Gate 3 execution into Gate 3A offline adapter work and Gate 3B live REDCap verification
+- REDCap access remains required for `ADAPTER APPROVED`, but no longer blocks adapter construction
+- Next session start point: Gate 3A.1 fixture and compatibility hardening
+
 ### 2026-04-29 | Gate 1 — Schema work
 
 - Explored usdm_model package API via sandbox (Python 3.10 / usdm 0.66.0 — close enough to 0.67.0)

@@ -43,7 +43,7 @@ SCOPE CONFIRMED  →  SCHEMA APPROVED  →  API APPROVED  →  ADAPTER APPROVED 
 | 0 | `SCOPE CONFIRMED` | SPEC.md accepted, decisions logged, domain expert session complete |
 | 1 | `SCHEMA APPROVED` | USDM object graph understood, sample fixture validated, MongoDB schema decided |
 | 2 | `API APPROVED` | FastAPI ingestion layer passing all tests; POST/GET /studies /arms /concepts working |
-| 3 | `ADAPTER APPROVED` | USDM → REDCap CSV transformation tested end-to-end against live REDCap sandbox |
+| 3 | `ADAPTER APPROVED` | Offline adapter complete and tested, then imported successfully into a live REDCap project |
 | 4 | `DEMO APPROVED` | Streamlit dashboard working; non-technical stakeholder completes workflow in <5 min |
 
 ## Gate Close Protocol (run at every gate close, in order)
@@ -98,7 +98,10 @@ SCOPE CONFIRMED  →  SCHEMA APPROVED  →  API APPROVED  →  ADAPTER APPROVED 
 - Integration tests hit a real MongoDB instance (use Docker Compose test profile)
 - No mocking of the database — lessons learned from the original POC failure mode
 - Every new endpoint gets at least one happy-path and one error-path test
-- Test fixtures use real USDM example JSON from TransCelerate GitHub
+- Use a fixture corpus: the small synthetic fixture for fast unit tests plus version-pinned,
+  provenance-recorded Protocol Explorer/TransCelerate examples for realistic integration tests
+- Never assume `BiomedicalConcept.reference` is an NCI code; support COSMoS BC and Dataset
+  Specialization URIs and use `code.standardCode.code` as a separate identity field
 
 **Streamlit:**
 - Streamlit app calls FastAPI via HTTP only — no direct DB access
@@ -123,3 +126,15 @@ expand scope. The original POC failed primarily because scope was never locked.
 Curious, honest about tradeoffs, willing to name bad ideas. Not a checklist bot. If an approach
 is going to cause problems, say so before implementing it, not after. The goal is a working
 REDCap adapter, not completed tasks.
+
+## Gate 3 Execution Rule
+
+Gate 3 is one formal gate with two execution phases:
+
+- **Gate 3A — Offline Adapter:** realistic fixtures, concept identity normalization, pinned COSMoS
+  metadata, domain-reviewed mappings, REDCap preview, and deterministic CSV export
+- **Gate 3B — Live Verification:** REDCap client, metadata import, re-export comparison, and visual
+  CRF review
+
+Gate 3A may proceed without REDCap credentials. Gate 3B requires an API-enabled REDCap project.
+The formal approval word remains `ADAPTER APPROVED` and is not given until both phases pass.

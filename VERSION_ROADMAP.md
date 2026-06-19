@@ -15,24 +15,35 @@
 
 | Version | Gate Name | Approval Word | Objective | Est Hrs | Act Hrs | Status |
 |---|---|---|---|---|---|---|
-| v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; domain expert session done; BiomedicalConcept mapping table drafted; REDCap sandbox provisioned | 4 | 4 | DONE |
-| v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; real USDM fixture validated; MongoDB schema decided; test fixture committed | 4 | 4 | DONE |
+| v0.0 | **Foundations** | `SCOPE CONFIRMED` | Spec locked; decisions logged; initial mapping drafted; external access and domain review explicitly deferred | 4 | 4 | DONE |
+| v0.1 | **Schema** | `SCHEMA APPROVED` | USDM object graph explored via `usdm` package; synthetic fixture validated; MongoDB schema decided; test fixture committed | 4 | 4 | DONE |
 | v0.2 | **API** | `API APPROVED` | FastAPI service running in Docker; POST /studies, GET /studies/{id}, /arms, /concepts all tested; `pytest` green | 8 | 4 | DONE |
-| v0.3 | **Adapter** | `ADAPTER APPROVED` | USDM → REDCap Data Dictionary CSV transformation tested; push to live REDCap sandbox working; concept_mappings.json complete for vital signs set | 10 | — | PLANNED ⚠️ BLOCKED pending REDCap sandbox (JHU ICTR) only |
+| v0.3A | **Offline Adapter** | — | Protocol Explorer fixtures; normalized concept identity; pinned COSMoS provider; reviewed vital-sign mappings; REDCap preview + deterministic CSV export | 12 | — | READY — no REDCap dependency |
+| v0.3B | **Live REDCap Verification** | `ADAPTER APPROVED` | Import generated dictionary into an API-enabled REDCap project; re-export and visually verify the resulting CRF | 3 | — | BLOCKED pending REDCap access |
 | v0.4 | **Demo** | `DEMO APPROVED` | Streamlit dashboard: Upload → Inspect → Map → Export; non-technical stakeholder completes workflow in <5 min | 6 | — | PLANNED |
 
-**Total estimated:** 32 hours (part-time, ~4 hrs/week → ~8 weeks)
+**Revised total estimated:** 37 hours. Completed: 12 hours. Remaining estimate: 25 hours.
 
 ## EXTERNAL DEPENDENCIES
 
 | Dependency | Required By | Status | Action |
 |---|---|---|---|
-| REDCap sandbox (JHU ICTR) | Gate 3 | ⏳ Pending | Email sent to redcap@jhu.edu — awaiting response |
-| CDISC API key | Gate 2+ | ✅ **CONFIRMED 2026-04-30** | Account active at api.developer.library.cdisc.org; 5 endpoints available (see Decision 008) |
-| Domain expert session | Gate 3 pre-work | Deferred | 5 questions identified; schedule before Gate 3 starts |
+| Protocol Explorer | Gate 3A | ✅ Public | Nine downloadable protocols observed 2026-06-18; pin selected files and retain provenance |
+| CDISC COSMoS GitHub | Gate 3A | ✅ Public | Current repository is `cdisc-org/COSMoS`; use pinned exports/YAML |
+| Domain expert session | Gate 3A mapping review | Deferred | Review units, ranges, requiredness, BMI calculation, repeating visits, and instrument grouping |
+| REDCap project + API token | Gate 3B only | ⏳ Pending | Continue JHU ICTR request; evaluate a temporary demonstration project if it permits API metadata import |
 
-Gates 1 and 2 have no external dependencies and can proceed immediately.
-Gate 3 is still BLOCKED on REDCap sandbox only — CDISC API is now unblocked.
+Gate 3A can proceed immediately. REDCap access blocks only Gate 3B and therefore does not prevent
+building the transformation, preview, export, and automated test layers.
+
+## GATE 3A SUB-GATES
+
+| Sub-gate | Objective | Est Hrs | Exit Condition |
+|---|---|---:|---|
+| 3A.1 | Fixture and compatibility hardening | 3 | Protocol Explorer corpus pinned; compatible and incompatible cases tested |
+| 3A.2 | COSMoS metadata provider | 3 | Offline, versioned lookups by URI, code, and specialization |
+| 3A.3 | Domain mapping layer | 3 | Eight vital-sign mappings reviewed; unmapped concepts explicit |
+| 3A.4 | REDCap generator and API | 3 | Deterministic CSV plus preview/export endpoints and golden-file tests |
 
 ## CALIBRATION MULTIPLIER
 
@@ -43,7 +54,7 @@ Gate 1 actual = 4 hrs, estimate = 4 hrs, variance = 0%.
 
 Gate 2 actual = 4 hrs, estimate = 8 hrs, variance = -50% (faster than expected).
 Key: lifespan patching pattern for API tests; CDISC API confirmed members-only (no data access);
-GitHub seeding strategy adopted for Gate 3 COSMOS data.
+Pinned GitHub data strategy adopted for Gate 3 COSMoS metadata.
 Key finding: usdm_model package API is clean and well-structured. BiomedicalConcepts are on
 StudyVersion (not StudyDesign as assumed pre-Gate-1) — MEMORY_SEMANTIC.md corrected.
 Fixture round-trips cleanly. 8/8 non-DB test assertions validated.

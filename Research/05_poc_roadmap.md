@@ -80,10 +80,26 @@ retrievable.
 **Goal:** Given a stored USDM study definition, emit a REDCap-importable instrument
 configuration. This is the hard, valuable part of the POC.
 
-### Setup First
-1. Sign up for a REDCap sandbox at https://projectredcap.org (or institutional instance)
-2. Get a REDCap API token (1–2 days to provision)
-3. Read the REDCap Data Dictionary import format (simple CSV structure)
+### Execution Split
+
+REDCap access is not a prerequisite for building the adapter.
+
+**Phase 2A — Offline adapter**
+
+1. Pin realistic USDM fixtures from Protocol Explorer with provenance
+2. Normalize BC and Dataset Specialization identity
+3. Pin metadata from `https://github.com/cdisc-org/COSMoS`
+4. Build and review the vital-sign mapping table
+5. Generate and validate deterministic REDCap Data Dictionary CSV
+6. Implement preview and export endpoints
+
+**Phase 2B — Live verification**
+
+1. Obtain an API-enabled REDCap project
+2. Export its current Data Dictionary as a target-format reference
+3. Import the generated CSV
+4. Re-export and compare metadata
+5. Complete visual and domain-expert CRF review
 
 ### The Transformation
 
@@ -130,6 +146,14 @@ with the domain expert's input.
 A USDM study definition flows end-to-end to a live REDCap project with correct instrument
 structure. The transformation is visible in REDCap's API playground. A non-technical stakeholder
 can read the REDCap form and recognize the protocol's assessment structure.
+
+### Realistic Fixture Source
+
+[Protocol Explorer](https://protocolexplorer.io/) provides public USDM protocol downloads,
+associated source PDFs, and CDISC CORE conformance reports. Use it as the fixture discovery and
+download surface, not as a runtime dependency. Many current records originate from TransCelerate
+sample studies and may be partial representations. Preserve provenance, pin selected files, and
+test compatibility with the exact `usdm` package version.
 
 ## Phase 3 — Demo Dashboard (Week 6)
 

@@ -9,7 +9,8 @@
 | Gate 0 — Foundations | 0 | 0 | 0 | 0 | 0 | DONE |
 | Gate 1 — Schema | 8 | 2 | 0 | 10 | ≥ 5 | DONE |
 | Gate 2 — API | 0 | 12 | 0 | 12 | ≥ 20 | DONE |
-| Gate 3 — Adapter | — | — | — | — | ≥ 35 | PLANNED |
+| Gate 3A — Offline Adapter | — | — | — | — | 45–55 total | READY |
+| Gate 3B — Live Verification | — | — | — | — | ≥ 2 optional live tests | BLOCKED |
 | Gate 4 — Demo | — | — | — | — | ≥ 40 | PLANNED |
 
 **Rule:** Test count must never decrease between gates.
@@ -55,11 +56,31 @@ Run tests with: `docker compose --profile test up -d && pytest`
 
 ### Test Fixtures
 
-All test fixtures use real USDM JSON from TransCelerate GitHub examples, not hand-authored
-synthetic data. Fixture files live in `python/tests/fixtures/`.
+Use a layered fixture corpus:
+
+1. `sample_study.json` — the existing small, hand-authored synthetic fixture. Keep it for fast
+   schema, storage, and endpoint tests. It contains eight scoped vital-sign concepts but no
+   realistic activities or schedule timelines.
+2. Protocol Explorer/TransCelerate examples — version-pinned realistic integration fixtures with
+   a provenance manifest containing source URL, original filename, download date, checksum,
+   declared USDM version, parser result, and usage notes.
+3. Expected-incompatible examples — selected public files that currently fail
+   `usdm==0.67.0` validation. Assert a controlled validation failure; do not silently mutate them
+   into passing fixtures.
+
+Normal tests must run offline. Network retrieval belongs in an explicit fixture-refresh command,
+not in pytest setup.
+
+Primary Gate 3A candidates:
+
+- CDISC Pilot — complex interventional schedule and repeated vital-sign activities
+- Observational example — alternate `StudyDesign` subtype
+- One currently incompatible USDM 4.0 example — negative compatibility test
+- Existing synthetic vital-sign fixture — precise eight-concept unit tests
 
 ## COVERAGE TARGETS
 
 - Integration tests: 100% of API endpoints
 - Unit tests: 100% of transformation logic in `redcap_adapter.py` and `concept_mapper.py`
 - No coverage target for `streamlit_app.py` (UI — covered by DEMO_CHECKS.md manual checklist)
+- Live REDCap tests use an explicit marker and credentials; they are excluded from routine CI

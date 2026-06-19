@@ -2,6 +2,30 @@
 # Append entries at every gate close and significant milestone.
 # Format: ## [version] — [date] | [Gate Name]
 
+## [Unreleased] — 2026-06-18 | Gate 3 Planning Alignment
+
+### Changed
+- Split Gate 3 into Gate 3A offline adapter construction and Gate 3B live REDCap verification
+- Removed REDCap access as a blocker for fixture, mapping, COSMoS, preview, and CSV work
+- Updated current status, roadmap, context save, test strategy, deployment notes, and API sequence
+- Corrected SPEC status from draft to approved
+- Reclassified the existing eight-vital-sign fixture as synthetic rather than a real
+  TransCelerate example
+- Updated COSMoS source from the obsolete repository name to `cdisc-org/COSMoS`
+
+### Added
+- Decision 009: Protocol Explorer fixture corpus and split Gate 3 execution
+- Protocol Explorer assessment and provenance rules
+- Realistic fixture compatibility strategy, including expected-incompatible public examples
+- Normalized Biomedical Concept identity requirements
+- GOTCHA-008 through GOTCHA-011
+
+### Verified
+- Repository remained clean before documentation edits
+- Current application test suite: 22/22 passing against isolated MongoDB
+- Nine Protocol Explorer JSON files inspected; six compatible with `usdm==0.67.0`, three retained
+  as candidate negative compatibility cases
+
 ## [v0.0.0] — 2026-04-25 | Gate 0: Foundations — CLOSED
 
 ### Added

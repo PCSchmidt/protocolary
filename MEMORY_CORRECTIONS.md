@@ -12,6 +12,25 @@
 # CORRECTION FOR FUTURE: [what to do differently next gate]
 # MEMORY_SEMANTIC.md UPDATE: [pattern added/updated, or none]
 
+## REFLEXION: Gate 3 Planning Reorientation
+
+Date: 2026-06-18
+ESTIMATE: Original Gate 3 predicted 10 hrs; revised to 15 hrs after realistic fixture assessment.
+WHAT WENT WRONG: Gate 3 was modeled as completely dependent on REDCap access, even though most
+transformation work is offline. The test strategy claimed the fixture was a real TransCelerate
+example, but it is synthetic and contains no activities or timelines. The code and documentation
+also assumed `BiomedicalConcept.reference` was always an NCI code. Finally, Decision 008 recorded
+a COSMoS repository URL that is now obsolete.
+WHAT WENT RIGHT: Protocol Explorer now provides realistic, public fixtures with source documents
+and CORE reports. Testing all nine visible files exposed compatibility boundaries before adapter
+code was written. The current COSMoS repository provides public versionable exports, so paid API
+access is unnecessary for the POC.
+CORRECTION FOR FUTURE: Separate build-time dependencies from final integration-verification
+dependencies. Use layered fixtures, pin external data revisions, test third-party compatibility
+before implementation, and preserve distinct standards identifiers rather than collapsing them.
+MEMORY_SEMANTIC.md UPDATE: Added Protocol Explorer facts, current COSMoS location, realistic
+Biomedical Concept identity model, validated fixture patterns, and invalidated assumptions.
+
 ## REFLEXION: Gate 2 — API
 
 Date: 2026-04-30

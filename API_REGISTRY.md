@@ -27,6 +27,16 @@ API docs: `http://localhost:8000/docs` (FastAPI auto-generated OpenAPI)
 | `POST` | `/studies/{id}/redcap-push` | 3 | Push generated instruments to REDCap API | NO |
 | `GET` | `/studies/{id}/redcap-preview` | 3 | Preview mapping (USDM concept → REDCap field) as JSON | NO |
 
+Gate 3 implementation order:
+
+1. `/redcap-preview` — Gate 3A; includes mapped, unmapped, warnings, source identity, and COSMoS
+   provenance.
+2. `/redcap-export` — Gate 3A; deterministic CSV generated entirely offline.
+3. `/redcap-push` — Gate 3B; requires configured REDCap URL/token/project and live verification.
+
+`/redcap-push` must return a clear configuration error when REDCap credentials are absent. It must
+not prevent preview or export from functioning.
+
 ### Health (Gate 2)
 
 | Method | Path | Gate | Description | Tested |
@@ -49,6 +59,23 @@ Response 200: Content-Type: text/csv
               Body: REDCap Data Dictionary CSV
 Response 404: { "detail": "Study not found" }
 Response 422: { "detail": "No BiomedicalConcepts in study match known mappings" }
+```
+
+### GET /studies/{id}/redcap-preview
+```
+Response 200:
+{
+  "study_id": "...",
+  "instrument_count": 1,
+  "field_count": 8,
+  "mapped": [],
+  "unmapped": [],
+  "warnings": [],
+  "cosmos_source": {
+    "repository": "https://github.com/cdisc-org/COSMoS",
+    "revision": "..."
+  }
+}
 ```
 
 ## NOTES

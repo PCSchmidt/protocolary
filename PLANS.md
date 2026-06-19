@@ -19,24 +19,29 @@ At session start:
 ## Latest Context Save
 
 ```text
-CONTEXT SAVE: 2026-04-30T12:00:00
-Gate: Gate 3 — Adapter (PLANNED; BLOCKED on REDCap sandbox only)
-Current phase: Active — Gate 1 CLOSED + CDISC API confirmed; only REDCap still pending
+CONTEXT SAVE: 2026-06-18T19:54:17-04:00
+Gate: Gate 3 — Adapter (Gate 3A READY; Gate 3B blocked on REDCap)
+Current phase: Documentation aligned; ready to build Gate 3A.1
 
 Gate status:
   - Gate 0 (Foundations): CLOSED — 2026-04-25, 4 hrs, 0% variance
   - Gate 1 (Schema): CLOSED — 2026-04-29, 4 hrs, 0% variance; 10 tests
   - Gate 2 (API): CLOSED — 2026-04-30, 4 hrs, -50% variance; 22 tests total
-  - Gate 3 (Adapter): BLOCKED on REDCap sandbox (JHU ICTR — email sent)
+  - Gate 3A (Offline Adapter): READY — no REDCap dependency
+  - Gate 3B (Live Verification): BLOCKED on API-enabled REDCap project
   - Gate 4 (Demo): PLANNED
 
 Completed since last save:
-  - app/routes/studies.py: POST /studies, GET /studies, GET /studies/{id}, /arms, /concepts
-  - main.py updated: router wired, /health upgraded to ping MongoDB
-  - test_studies_api.py: 12 tests, all passing (22 total)
-  - CDISC API fully investigated: portal key = docs only; data = members-only wall
-  - Decision 008 revised: COSMOS data from GitHub, not live API
-  - GOTCHA-007 logged; Gate 2 close protocol complete
+  - Full repository and roadmap review completed 2026-06-18
+  - Current suite re-run against isolated MongoDB: 22/22 passing
+  - Protocol Explorer assessed: public USDM repository with JSON/PDF/CORE report downloads
+  - Nine public files inspected; six parse with pinned usdm==0.67.0 and three expose
+    compatibility failures useful for negative tests
+  - Real examples use BC and Dataset Specialization URIs in BiomedicalConcept.reference;
+    current code's "reference = NCI code" assumption must be corrected
+  - Current official COSMoS repository located at github.com/cdisc-org/COSMoS
+  - Gate 3 split into 3A offline build and 3B live REDCap verification
+  - Decision 009 added; roadmap, spec, tests, deployment, API registry, memories, and README aligned
 
 Tests: 22/22 green
 Run: docker compose --profile test up -d mongo_test && cd python && python -m pytest -v
@@ -49,28 +54,34 @@ KEY FINDINGS (do not forget):
   CDISC COSMOS data: public GitHub repo, not live API (members-only wall)
   API test pattern: monkeypatch connect/close/ensure_indexes as AsyncMock + override get_db
   FastAPI: HTTP_422_UNPROCESSABLE_CONTENT (not ENTITY — deprecated)
+  Protocol Explorer is a realistic fixture/discovery source, not a REDCap substitute
+  Protocol Explorer currently exposes per-protocol downloads; no documented public API found
+  Many Protocol Explorer records originate in TransCelerate ddf-sdr-api sample-studies
+  Real BC reference values may be COSMoS URIs; standardCode is a separate field
+  COSMoS current repo = https://github.com/cdisc-org/COSMoS
 
 External blockers:
-  - REDCap sandbox: awaiting JHU ICTR response (redcap@jhu.edu) — GATE 3 HARD DEPENDENCY
-  - CDISC API data: members-only; using GitHub COSMOS repo instead (see Decision 008)
+  - REDCap sandbox/project: awaiting JHU ICTR response — blocks Gate 3B only
+  - Domain expert review: needed before finalizing the eight vital-sign mappings
 
 Decisions (all in DECISIONS.md):
   001 Python | 002 FastAPI | 003 MongoDB | 004 usdm pkg | 005 REDCap
-  006 Streamlit | 007 MongoDB schema | 008 COSMOS from GitHub
+  006 Streamlit | 007 MongoDB schema | 008 COSMoS from GitHub
+  009 Protocol Explorer fixtures + split Gate 3 execution
 
 Errors: ERR-001 UUID encoding | GOTCHA-007 CDISC members-only — see ERRORS.md
 
 Next task when resuming:
-  Gate 3 (Adapter) — BLOCKED on REDCap sandbox.
-  When REDCap access confirmed:
-    Step 1: Verify REDCap credentials (URL + API token) — note in DECISIONS.md
-    Step 2: Write services/cdisc_seeder.py — fetch COSMOS YAML from GitHub, seed cdisc_cache
-    Step 3: Write services/concept_mapper.py — USDM BC → REDCap field mapping table
-    Step 4: Write services/redcap_adapter.py — generate REDCap Data Dictionary CSV
-    Step 5: Implement GET /studies/{id}/redcap-export
-    Step 6: Implement POST /studies/{id}/redcap-push
-    Step 7: All tests green → type ADAPTER APPROVED
-  While waiting for REDCap: schedule domain expert session (wife/medical writer)
+  Gate 3A.1 — Fixture and compatibility hardening:
+    Step 1: Select and pin Protocol Explorer fixtures with provenance manifest
+    Step 2: Keep synthetic fixture for fast unit tests; stop describing it as a real example
+    Step 3: Add compatible-file and expected-validation-failure tests
+    Step 4: Introduce normalized concept identity fields for reference URI/type,
+            standard code, package version, properties, and source activity
+    Step 5: Update GET /studies/{id}/concepts response without silently breaking identity
+  Then Gate 3A.2:
+    Build an offline COSMoS provider from a pinned cdisc-org/COSMoS export/package.
+  REDCap credentials are not needed until Gate 3B.
   Approval word to close Gate 3: ADAPTER APPROVED
 ```
 
