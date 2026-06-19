@@ -1,4 +1,4 @@
-# MEMORY_CORRECTIONS.md — Transcelerate | Reflexion Log
+# MEMORY_CORRECTIONS.md — Protocolary | Reflexion Log
 # New entries added ABOVE previous (newest first).
 # Written at every gate close. Used to calibrate future estimates.
 

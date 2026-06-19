@@ -1,4 +1,4 @@
-# DEMO_CHECKS.md — Transcelerate | Demo Verification Checklist
+# DEMO_CHECKS.md — Protocolary | Demo Verification Checklist
 # Run this checklist before DEMO APPROVED.
 # Adapted from Blueprint's VISUAL_CHECKS.md for a backend API + Streamlit POC.
 

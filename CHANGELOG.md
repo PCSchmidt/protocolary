@@ -1,8 +1,18 @@
-# CHANGELOG.md — Transcelerate
+# CHANGELOG.md — Protocolary
 # Append entries at every gate close and significant milestone.
 # Format: ## [version] — [date] | [Gate Name]
 
 ## [Unreleased] — 2026-06-18 | Gate 3 Planning Alignment
+
+### Protocolary product rename — 2026-06-19
+
+- Adopted Protocolary as the independent product identity and secured `protocolary.com`
+- Named the initial product Protocolary Build
+- Added the canonical brand and product naming specification
+- Renamed active documentation, API metadata, Python distribution, database defaults, fixtures,
+  and session hooks
+- Preserved TransCelerate BioPharma, DDF, licensing, source URL, and provenance references
+- Added Decision 011 documenting the rename and migration boundaries
 
 ### Gate 3A.1 implementation — 2026-06-19
 

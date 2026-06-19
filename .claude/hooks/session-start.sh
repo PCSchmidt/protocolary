@@ -5,7 +5,7 @@
 TIMESTAMP=$(date '+%Y-%m-%d %H:%M')
 
 cat <<EOF
-=== TRANSCELERATE SESSION START [$TIMESTAMP] ===
+=== PROTOCOLARY SESSION START [$TIMESTAMP] ===
 
 Load these files before doing any work:
   1. CLAUDE.md          — behavioral rules and gates

@@ -1,9 +1,9 @@
-# CLAUDE.md — Transcelerate Project Rules
+# CLAUDE.md — Protocolary Project Rules
 # Load this file at every session start. It is the behavioral contract.
 
 ## Project Identity
 
-**Name:** Transcelerate DDF Adapter POC
+**Name:** Protocolary Build POC
 **Goal:** Prove that a USDM v4.x study definition can be automatically transformed into
 a working REDCap EDC configuration.
 **Stack:** FastAPI · Motor · MongoDB · `usdm` PyPI package · Docker Compose · Streamlit

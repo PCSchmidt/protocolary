@@ -1,4 +1,4 @@
-# ERRORS.md — Transcelerate | Living Failure Log
+# ERRORS.md — Protocolary | Living Failure Log
 # CHECK THIS FIRST before diagnosing any error.
 # Format: ERR-NNN: title | root cause | fix | prevention
 
@@ -92,7 +92,7 @@ and return a concise client-facing validation error.
 which cannot be parsed as a boolean.
 **Root cause:** `DEBUG` is a generic environment-variable name and may already exist on the host.
 **Fix:** Set `DEBUG=false` for the current environment.
-**Prevention:** Rename to a project-specific variable such as `TRANSCELERATE_DEBUG` in a future
+**Prevention:** Rename to a project-specific variable such as `PROTOCOLARY_DEBUG` in a future
 configuration cleanup.
 **First seen:** Repository reorientation — 2026-06-18
 

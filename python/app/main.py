@@ -20,7 +20,7 @@ async def lifespan(app: FastAPI):  # noqa: ARG001
 
 
 app = FastAPI(
-    title="Transcelerate DDF Adapter",
+    title="Protocolary Clinical Study Compiler",
     description=(
         "Proof of concept: USDM v4.x study definition → REDCap EDC configuration. "
         "See SPEC.md for scope boundaries."

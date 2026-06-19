@@ -1,4 +1,4 @@
-# MEMORY_SEMANTIC.md — Transcelerate | Persistent Domain Knowledge
+# MEMORY_SEMANTIC.md — Protocolary | Persistent Domain Knowledge
 # Updated at gate close when a pattern is validated or invalidated.
 # Read at session start to restore domain context without re-researching.
 

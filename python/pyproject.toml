@@ -6,9 +6,9 @@ build-backend = "hatchling.build"
 packages = ["app"]
 
 [project]
-name = "transcelerate-ddf-adapter"
+name = "protocolary-core"
 version = "0.1.0"
-description = "USDM v4.x → REDCap EDC adapter proof of concept"
+description = "Protocolary clinical study compiler and EDC adapter proof of concept"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi[standard]>=0.115.0",
@@ -18,6 +18,9 @@ dependencies = [
     "pydantic-settings>=2.7.0",
     "usdm==0.67.0",
 ]
+
+[project.urls]
+Homepage = "https://protocolary.com"
 
 [project.optional-dependencies]
 dev = [

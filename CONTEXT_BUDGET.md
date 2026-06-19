@@ -1,4 +1,4 @@
-# CONTEXT_BUDGET.md — Transcelerate | Context Management Rules
+# CONTEXT_BUDGET.md — Protocolary | Context Management Rules
 
 ## The Problem
 

@@ -276,3 +276,40 @@ COSMoS commit. Each mapping records status, rationale, and review items. Current
 - Duplicate mapping IDs, neutral field keys, and target variable names are rejected.
 - Unmapped, ambiguous, standards-version fallback, and clinical-review states remain explicit.
 - Mapping status becomes `mapped` only when governance status is `approved`.
+
+---
+
+## Decision 011 — Adopt Protocolary as the Independent Product Identity
+
+**Date:** 2026-06-19
+
+**Decision:** Rename the active project and product from the exploratory working name
+“Transcelerate” to **Protocolary**. Use **Protocolary Build** for the initial protocol-to-EDC
+product and POC. The domain `protocolary.com` has been secured.
+
+**Why:** The former working name was confusingly close to TransCelerate BioPharma Inc., whose DDF
+initiative and source materials are referenced by this project. A distinct identity reduces
+customer confusion, search ambiguity, attribution risk, and potential trademark complications.
+Protocolary is broad enough to support EDC build automation, review workflows, medical writing,
+amendment impact, and future study intelligence without claiming those capabilities prematurely.
+
+**Canonical technical names:**
+
+- Brand: `Protocolary`
+- Initial product: `Protocolary Build`
+- Repository slug: `protocolary`
+- Python distribution: `protocolary-core`
+- API title: `Protocolary Clinical Study Compiler`
+- Development database: `protocolary`
+- Test database: `protocolary_test`
+
+**How to apply:**
+
+- Keep internal modules and domain types functional and brand-neutral.
+- Rename active user-facing product references, package metadata, configuration defaults, and
+  generated fixture metadata.
+- Preserve TransCelerate BioPharma, DDF, repository URLs, licensing, and provenance references
+  when they identify the independent organization or its materials.
+- Preserve Git history and historical archive context; do not rewrite old commits.
+- Rename the GitHub repository only after local changes pass tests and are committed.
+- Treat domain ownership as distinct from formal trademark clearance.

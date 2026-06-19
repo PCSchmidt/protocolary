@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Transcelerate is intended to become an API-first clinical-development automation platform that
+Protocolary is intended to become an API-first clinical-development automation platform that
 reduces the manual re-entry, reconciliation, and document maintenance required to move a study
 from protocol design into operational systems.
 
@@ -48,7 +48,7 @@ REDCap proves the adapter pattern. It is not the intended limit of the product.
 ## Positioning
 
 Directionally, platforms such as Faro Health validate demand for structured study design,
-connected authoring, and workflow automation. Transcelerate should differentiate through:
+connected authoring, and workflow automation. Protocolary should differentiate through:
 
 - Open standards and transparent transformations
 - EDC-neutral architecture

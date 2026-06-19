@@ -1,3 +1,5 @@
+name: protocolary
+
 services:
 
   # ── MongoDB (dev) ───────────────────────────────────────────────────────────
@@ -33,7 +35,7 @@ services:
       - ./python/.env
     environment:
       MONGO_URL: mongodb://mongo:27017
-      MONGO_DB_NAME: transcelerate
+      MONGO_DB_NAME: protocolary
     depends_on:
       mongo:
         condition: service_healthy

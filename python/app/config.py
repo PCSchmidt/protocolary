@@ -17,7 +17,7 @@ class Settings(BaseSettings):
 
     # MongoDB
     mongo_url: str = "mongodb://localhost:27017"
-    mongo_db_name: str = "transcelerate"
+    mongo_db_name: str = "protocolary"
 
     # FastAPI
     api_host: str = "0.0.0.0"

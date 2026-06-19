@@ -1,4 +1,4 @@
-# TESTS.md — Transcelerate | Test Registry
+# TESTS.md — Protocolary | Test Registry
 # Updated at every gate close with final counts and coverage targets.
 # Tests use real MongoDB via Docker Compose test profile — no mocking.
 

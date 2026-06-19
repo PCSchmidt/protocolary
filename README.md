@@ -1,9 +1,12 @@
-# Transcelerate DDF Adapter POC
+# Protocolary Build POC
 
 An independent proof-of-concept demonstrating that a USDM v4.x study definition can be
 automatically transformed into a working REDCap EDC configuration.
 
-> **Not an official TransCelerate project.** Independent adaptation under Apache 2.0.
+**Protocolary:** [protocolary.com](https://protocolary.com)
+
+> **Independent project.** Protocolary is not affiliated with, sponsored by, or endorsed by
+> TransCelerate BioPharma Inc.
 
 ---
 
@@ -51,6 +54,10 @@ adapter now. REDCap access is required only for the final live import verificati
 
 The original .NET 6 skeleton is preserved in `POC_archive/` for reference.
 All new development is in Python. See `DECISIONS.md` for rationale.
+
+The project used “Transcelerate” as an exploratory working name before adopting Protocolary on
+June 19, 2026. Historical documents and source provenance may retain that term where it refers to
+TransCelerate BioPharma Inc. or accurately records earlier project history.
 
 ---
 

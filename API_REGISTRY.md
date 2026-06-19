@@ -1,4 +1,4 @@
-# API_REGISTRY.md — Transcelerate | Endpoint Registry
+# API_REGISTRY.md — Protocolary | Endpoint Registry
 # Source of truth for what API endpoints exist, their gate, and test status.
 # Update immediately when adding or modifying an endpoint.
 

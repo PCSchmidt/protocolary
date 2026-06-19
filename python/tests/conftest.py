@@ -21,7 +21,7 @@ PROTOCOL_EXPLORER_DIR = FIXTURES_DIR / "protocol_explorer"
 
 # Test database coordinates — must match MONGO_TEST_URL / MONGO_TEST_DB_NAME
 TEST_MONGO_URL = "mongodb://localhost:27018"
-TEST_DB_NAME = "transcelerate_test"
+TEST_DB_NAME = "protocolary_test"
 
 
 @pytest.fixture(scope="session")

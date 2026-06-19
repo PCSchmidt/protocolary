@@ -1,6 +1,6 @@
 # PLANS.md
 
-Context save state for the Transcelerate project. Written before `/clear` to preserve progress across context resets. Read at session resume to reconstruct state without re-reading the full conversation.
+Context save state for the Protocolary project. Written before `/clear` to preserve progress across context resets. Read at session resume to reconstruct state without re-reading the full conversation.
 
 ## How to Use
 

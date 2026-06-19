@@ -1,4 +1,4 @@
-# MEMORY_EPISODIC.md — Transcelerate | Session and Gate Log
+# MEMORY_EPISODIC.md — Protocolary | Session and Gate Log
 
 Gate rows added at gate close. Stop events appended automatically.
 Read at session start to reconstruct recent history.

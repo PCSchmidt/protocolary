@@ -4,7 +4,7 @@
 $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
 
 Write-Output @"
-=== TRANSCELERATE SESSION START [$timestamp] ===
+=== PROTOCOLARY SESSION START [$timestamp] ===
 
 Load these files before doing any work:
   1. CLAUDE.md       — behavioral rules and gates

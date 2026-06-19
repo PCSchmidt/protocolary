@@ -1,4 +1,4 @@
-# DEPLOYMENT_CONFIG.md — Transcelerate | Environment Configuration
+# DEPLOYMENT_CONFIG.md — Protocolary | Environment Configuration
 # POC scope: local Docker Compose only. Cloud deployment is post-POC.
 
 ## Services
@@ -21,11 +21,11 @@ Copy `.env.example` and fill in values.
 ```bash
 # MongoDB
 MONGO_URL=mongodb://localhost:27017
-MONGO_DB_NAME=transcelerate
+MONGO_DB_NAME=protocolary
 
 # MongoDB (test)
 MONGO_TEST_URL=mongodb://localhost:27018
-MONGO_TEST_DB_NAME=transcelerate_test
+MONGO_TEST_DB_NAME=protocolary_test
 
 # CDISC Library API (optional for this POC; COSMoS data is sourced from GitHub)
 CDISC_API_KEY=your_key_here

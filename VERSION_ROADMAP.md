@@ -1,4 +1,4 @@
-# VERSION_ROADMAP.md — Transcelerate | Gate Tracking
+# VERSION_ROADMAP.md — Protocolary | Gate Tracking
 # Updated at every gate close. Actual hours logged at close.
 # Build type: Exploratory/Prototype — target endpoint: Gate 4 DEMO APPROVED
 
