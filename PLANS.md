@@ -21,7 +21,7 @@ At session start:
 ```text
 CONTEXT SAVE: 2026-06-19
 Gate: Gate 3 — Adapter (Gate 3A IN PROGRESS; Gate 3B blocked on REDCap)
-Current phase: Gate 3A.1–3A.2 complete; ready to build Gate 3A.3
+Current phase: Gate 3A.3 technical implementation complete; domain review pending
 
 Gate status:
   - Gate 0 (Foundations): CLOSED — 2026-04-25, 4 hrs, 0% variance
@@ -29,11 +29,22 @@ Gate status:
   - Gate 2 (API): CLOSED — 2026-04-30, 4 hrs, -50% variance; 22 tests total
   - Gate 3A.1 (Fixture/Identity): COMPLETE — 31 tests total
   - Gate 3A.2 (COSMoS provider): COMPLETE — 50 tests total
-  - Gate 3A.3 (Domain mapping): NEXT
+  - Gate 3A.3 (Domain mapping): TECHNICAL COMPLETE — domain approval pending
+  - Gate 3A.4 (Generator/API): PLANNED
   - Gate 3B (Live Verification): BLOCKED on API-enabled REDCap project
   - Gate 4 (Demo): PLANNED
 
 Completed since last save:
+  - Added PRODUCT_VISION, PRODUCT_ROADMAP, VALUE_METRICS, and TARGET_ARCHITECTURE
+  - Added Decision 010: EDC-neutral intermediate field model
+  - Added versioned poc-vital-signs mapping library tied to pinned COSMoS
+  - Implemented neutral validation, calculation, target-hint, governance, and decision models
+  - Implemented mapping by specialization, normalized name, current BC ID, and legacy code
+  - Added explicit needs_review, mapped, unmapped, and ambiguous outcomes
+  - Added fail-fast checks for COSMoS drift, duplicates, and target variable collisions
+  - Drafted all eight scoped mappings without falsely approving clinical assumptions
+  - Added VITAL_SIGNS_MAPPING_REVIEW.md for domain expert review
+  - Full suite: 65/65 passing
   - Pinned COSMoS commit fc11c9dbdc12aae709653b45c4c9db7f58824cf5
   - Derived minimal CC BY 4.0 vital-sign snapshots from immutable BC and SDTM exports
   - Added source/blob/SHA-256 provenance and derived-file checksums
@@ -65,7 +76,7 @@ Completed since last save:
   - Gate 3 split into 3A offline build and 3B live REDCap verification
   - Decision 009 added; roadmap, spec, tests, deployment, API registry, memories, and README aligned
 
-Tests: 50/50 green
+Tests: 65/65 green
 Run: docker compose --profile test up -d mongo_test && cd python && python -m pytest -v
 Key: always use `python -m pytest` not bare `pytest`
 
@@ -90,16 +101,18 @@ Decisions (all in DECISIONS.md):
   001 Python | 002 FastAPI | 003 MongoDB | 004 usdm pkg | 005 REDCap
   006 Streamlit | 007 MongoDB schema | 008 COSMoS from GitHub
   009 Protocol Explorer fixtures + split Gate 3 execution
+  010 EDC-neutral intermediate field model
 
 Errors: ERR-001 UUID encoding | GOTCHA-007 CDISC members-only — see ERRORS.md
 
 Next task when resuming:
-  Gate 3A.3 — Domain mapping layer:
-    Step 1: Define mapping schema with source identity, REDCap field metadata, and provenance
-    Step 2: Reconcile the original synthetic codes with current COSMoS identifiers
-    Step 3: Draft mappings for SYSBP, DIABP, HR, RESP, TEMP, HEIGHT, WEIGHT, and BMI
-    Step 4: Encode explicit unmapped/ambiguous/needs-review outcomes
-    Step 5: Review units, ranges, requiredness, BMI calculation, and repeated assessments
+  Gate 3A.3 domain review:
+    Step 1: Review docs/product/VITAL_SIGNS_MAPPING_REVIEW.md with a qualified domain expert
+    Step 2: Revise ranges, requiredness, units, BMI behavior, and repetition policy
+    Step 3: Record reviewer/date/outcome and increment mapping library version
+    Step 4: Promote only approved mappings from needs_review to approved
+  Gate 3A.4 may begin in parallel only as a renderer of review-aware neutral fields; it must
+  preserve needs_review warnings and cannot imply clinical approval.
   REDCap credentials are not needed until Gate 3B.
   Approval word to close Gate 3: ADAPTER APPROVED
 ```

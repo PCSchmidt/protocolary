@@ -20,7 +20,7 @@ automatically transformed into a working REDCap EDC configuration.
 | 0 | Foundations | ✅ CLOSED — 2026-04-25 |
 | 1 | Schema | ✅ CLOSED — 2026-04-29 |
 | 2 | API | ✅ CLOSED — 2026-04-30; 22 tests passing |
-| 3A | Offline Adapter | 🚧 IN PROGRESS — 3A.1 and 3A.2 complete; mapping layer next |
+| 3A | Offline Adapter | 🚧 IN PROGRESS — mapping layer implemented; domain review pending |
 | 3B | Live REDCap Verification | ⏳ BLOCKED — awaiting API-enabled REDCap project |
 | 4 | Demo | ⏳ PLANNED |
 
@@ -75,7 +75,7 @@ Prerequisites: Python 3.12+, Docker Desktop, `usdm` PyPI package.
 # Start the isolated test database
 docker compose --profile test up -d mongo_test
 
-# Run the current 50-test suite
+# Run the current 65-test suite
 cd python
 python -m pytest -v
 ```
@@ -104,6 +104,8 @@ See `DEPLOYMENT_CONFIG.md` for full environment setup and `API_REGISTRY.md` for 
 | `DEMO_CHECKS.md` | Streamlit demo verification checklist |
 | `CONTEXT_BUDGET.md` | Context management rules |
 | `Research/` | 5 background documents: feasibility, stack, business value, landscape, roadmap |
+| `docs/product/` | Product vision, commercial roadmap, value metrics, and mapping review |
+| `docs/architecture/` | Target architecture and SaaS evolution guardrails |
 | `POC_archive/` | Original .NET 6 skeleton — preserved for reference, not active |
 
 ---

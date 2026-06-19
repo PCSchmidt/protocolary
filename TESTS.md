@@ -11,7 +11,8 @@
 | Gate 2 — API | 0 | 12 | 0 | 12 | ≥ 20 | DONE |
 | Gate 3A.1 — Fixture/Identity | 7 | 2 | 0 | 9 | 31 cumulative | DONE |
 | Gate 3A.2 — COSMoS Provider | 19 | 0 | 0 | 19 | 50 cumulative | DONE |
-| Gate 3A.3–3A.4 — Remaining | — | — | — | — | ≥ 60 cumulative | PLANNED |
+| Gate 3A.3 — Mapping Layer | 15 | 0 | 0 | 15 | 65 cumulative | TECHNICAL DONE |
+| Gate 3A.4 — Generator/API | — | — | — | — | ≥ 75 cumulative | PLANNED |
 | Gate 3B — Live Verification | — | — | — | — | ≥ 2 optional live tests | BLOCKED |
 | Gate 4 — Demo | — | — | — | — | ≥ 40 | PLANNED |
 
@@ -98,6 +99,16 @@ Gate 3A.2 result: **50/50 tests passing**. Provider tests cover:
 - URI, specialization, and NCI-code lookup paths
 - Explicit ambiguous and not-found results
 - Integration with Gate 3A.1 normalized concept identity
+
+Gate 3A.3 technical result: **65/65 tests passing**. Mapping tests cover:
+
+- Eight governed vital-sign mappings
+- EDC-neutral field definitions and optional target hints
+- Legacy-code collision handling
+- Real Dataset Specialization and activity-context mapping
+- Explicit unmapped and ambiguous outcomes
+- Draft versus approved governance behavior
+- Mapping/COSMoS drift, duplicate identifiers, target-name collisions, and invalid calculations
 
 ## COVERAGE TARGETS
 

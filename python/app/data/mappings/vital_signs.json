@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "library_id": "poc-vital-signs",
+  "library_version": "0.1.0",
+  "status": "draft",
+  "scope": "POC vital-sign mappings. Clinical ranges, requiredness, units, and BMI behavior require domain review before approval.",
+  "cosmos_source_commit": "fc11c9dbdc12aae709653b45c4c9db7f58824cf5",
+  "mappings": [
+    {
+      "mapping_id": "vitals-sysbp",
+      "source": {
+        "specialization": "SYSBP",
+        "bc_id": "C25298",
+        "legacy_codes": ["C49677"],
+        "name_aliases": ["Systolic Blood Pressure", "Systolic BP"]
+      },
+      "field": {
+        "key": "systolic_blood_pressure",
+        "label": "Systolic Blood Pressure",
+        "value_type": "integer",
+        "unit": "mmHg",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 60, "maximum": 250},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "systolic_bp",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "integer"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS supplies SYSBP identity, integer result type, and mmHg unit; limits and requiredness are POC assumptions.",
+        "review_items": ["minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-diabp",
+      "source": {
+        "specialization": "DIABP",
+        "bc_id": "C25299",
+        "legacy_codes": [],
+        "name_aliases": ["Diastolic Blood Pressure", "Diastolic BP"]
+      },
+      "field": {
+        "key": "diastolic_blood_pressure",
+        "label": "Diastolic Blood Pressure",
+        "value_type": "integer",
+        "unit": "mmHg",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 40, "maximum": 150},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "diastolic_bp",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "integer"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS supplies DIABP identity, integer result type, and mmHg unit; limits and requiredness are POC assumptions.",
+        "review_items": ["minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-heart-rate",
+      "source": {
+        "specialization": "HR",
+        "bc_id": "C49677",
+        "legacy_codes": ["C49673"],
+        "name_aliases": ["Heart Rate", "Pulse", "Pulse Rate"]
+      },
+      "field": {
+        "key": "heart_rate",
+        "label": "Heart Rate",
+        "value_type": "integer",
+        "unit": "beats/min",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 30, "maximum": 250},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "heart_rate",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "integer"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS supplies HR identity, integer result type, and beats/min unit; limits and requiredness are POC assumptions.",
+        "review_items": ["minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-respiratory-rate",
+      "source": {
+        "specialization": "RESP",
+        "bc_id": "C49678",
+        "legacy_codes": [],
+        "name_aliases": ["Respiratory Rate", "Resp Rate"]
+      },
+      "field": {
+        "key": "respiratory_rate",
+        "label": "Respiratory Rate",
+        "value_type": "integer",
+        "unit": "breaths/min",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 8, "maximum": 60},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "respiratory_rate",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "integer"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS supplies RESP identity, integer result type, and breaths/min unit; limits and requiredness are POC assumptions.",
+        "review_items": ["minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-temperature",
+      "source": {
+        "specialization": "TEMP",
+        "bc_id": "C174446",
+        "legacy_codes": ["C25206"],
+        "name_aliases": ["Body Temperature", "Temperature"]
+      },
+      "field": {
+        "key": "body_temperature",
+        "label": "Body Temperature",
+        "value_type": "decimal",
+        "unit": "degC",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 35.0, "maximum": 42.0},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "body_temperature",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "number"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS permits multiple temperature units and collection sites; the POC currently selects Celsius.",
+        "review_items": ["unit policy", "collection site", "minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-height",
+      "source": {
+        "specialization": "HEIGHT",
+        "bc_id": "C164634",
+        "legacy_codes": ["C25347"],
+        "name_aliases": ["Height", "Body Height"]
+      },
+      "field": {
+        "key": "height",
+        "label": "Height",
+        "value_type": "decimal",
+        "unit": "cm",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 50.0, "maximum": 250.0},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "height_cm",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "number"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS supplies HEIGHT result semantics but does not mandate the POC unit or limits.",
+        "review_items": ["unit policy", "minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-weight",
+      "source": {
+        "specialization": "WEIGHT",
+        "bc_id": "C81328",
+        "legacy_codes": ["C29463"],
+        "name_aliases": ["Weight", "Body Weight"]
+      },
+      "field": {
+        "key": "weight",
+        "label": "Weight",
+        "value_type": "decimal",
+        "unit": "kg",
+        "required": true,
+        "value_source": "collected",
+        "validation": {"minimum": 1.0, "maximum": 300.0},
+        "target_hints": {
+          "redcap": {
+            "variable_name": "weight_kg",
+            "form_name": "vital_signs",
+            "field_type": "text",
+            "validation_type": "number"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "COSMoS supplies WEIGHT result semantics but does not mandate the POC unit or limits.",
+        "review_items": ["unit policy", "minimum", "maximum", "requiredness"]
+      }
+    },
+    {
+      "mapping_id": "vitals-bmi",
+      "source": {
+        "specialization": "BMI",
+        "bc_id": "C16358",
+        "legacy_codes": [],
+        "name_aliases": ["Body Mass Index", "BMI"]
+      },
+      "field": {
+        "key": "body_mass_index",
+        "label": "Body Mass Index",
+        "value_type": "decimal",
+        "unit": "kg/m2",
+        "required": false,
+        "value_source": "derived",
+        "validation": {"minimum": 10.0, "maximum": 80.0},
+        "calculation": {
+          "expression": "weight / ((height / 100) * (height / 100))",
+          "dependencies": ["weight", "height"]
+        },
+        "target_hints": {
+          "redcap": {
+            "variable_name": "body_mass_index",
+            "form_name": "vital_signs",
+            "field_type": "calc",
+            "validation_type": "number"
+          }
+        }
+      },
+      "governance": {
+        "status": "needs_review",
+        "rationale": "BMI may be collected, calculated, or omitted depending on protocol and target-system policy.",
+        "review_items": ["calculated versus collected", "formula", "minimum", "maximum", "requiredness"]
+      }
+    }
+  ]
+}

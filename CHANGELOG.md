@@ -25,6 +25,18 @@
 - Confirmed all eight current vital-sign specializations resolve without network access
 - Increased the test suite from 31 to 50 passing tests
 
+### Product direction and Gate 3A.3 technical implementation — 2026-06-19
+
+- Added product vision, commercial roadmap, value metrics, and target architecture documents
+- Added Decision 010 establishing an EDC-neutral intermediate field model
+- Added a versioned governed mapping library for eight vital-sign specializations
+- Added neutral validation, calculation, target-hint, governance, and mapping-decision models
+- Implemented mapping by specialization, name, current BC ID, and legacy compatibility code
+- Added explicit mapped, needs-review, unmapped, and ambiguous outcomes
+- Added fail-fast standards drift and identifier-collision checks
+- Added a readable domain-review worksheet; mappings remain unapproved pending review
+- Increased the test suite from 50 to 65 passing tests
+
 ### Changed
 - Split Gate 3 into Gate 3A offline adapter construction and Gate 3B live REDCap verification
 - Removed REDCap access as a blocker for fixture, mapping, COSMoS, preview, and CSV work

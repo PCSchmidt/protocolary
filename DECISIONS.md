@@ -250,3 +250,29 @@ access remains mandatory before `ADAPTER APPROVED`.
 by third parties for informational and standards-development purposes and is not independently
 verified. Preserve provenance and do not treat the platform's technical conformance results as
 clinical, regulatory, or scientific approval.
+
+---
+
+## Decision 010 — EDC-Neutral Intermediate Field Model
+
+**Date:** 2026-06-19
+
+**Decision:** Mapping logic produces governed, EDC-neutral `NeutralFieldDefinition` objects.
+Target-specific formats such as REDCap Data Dictionary rows are produced later by adapters.
+
+**Why:** Directly mapping USDM objects into REDCap CSV would spread REDCap assumptions through the
+standards-processing core and make future Rave, Veeva, or Oracle adapters expensive. Clinical
+meaning—datatype, unit, requiredness, validation intent, calculation, and source context—belongs in
+a neutral model. Target-specific names and rendering types are optional hints.
+
+**Governance:** The checked-in `poc-vital-signs` mapping library is versioned and tied to the pinned
+COSMoS commit. Each mapping records status, rationale, and review items. Current mappings are
+`needs_review`; technical implementation must not promote them to approved.
+
+**How to apply:**
+
+- Target adapters consume neutral fields and never parse raw USDM directly.
+- Mapping libraries fail to load if specializations or BC IDs drift from pinned COSMoS.
+- Duplicate mapping IDs, neutral field keys, and target variable names are rejected.
+- Unmapped, ambiguous, standards-version fallback, and clinical-review states remain explicit.
+- Mapping status becomes `mapped` only when governance status is `approved`.

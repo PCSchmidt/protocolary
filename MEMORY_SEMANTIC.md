@@ -171,6 +171,12 @@ PAT-005: When a fixture references an older COSMoS package, return current pinne
 explicit `fallback` version result; never claim an exact match | Confidence: HIGH |
 Validated in Gate 3A.2
 
+PAT-006: Map USDM/COSMoS concepts into target-neutral field definitions before rendering any EDC
+format; keep REDCap names and types as optional hints | Confidence: HIGH | Validated in Gate 3A.3
+
+PAT-007: Technical mapping success and clinical approval are separate states. Draft mappings emit
+`needs_review`; only governed approval may emit `mapped` | Confidence: HIGH | Validated in Gate 3A.3
+
 ## INVALIDATED ASSUMPTIONS
 # Record things that seemed true but turned out to be wrong.
 # Prevents re-learning the same lesson.

@@ -45,6 +45,21 @@ Format: `[Date] | Focus | Key decisions | Blockers | Next session start point`
 - Test count increased from 31 to 50; all passing
 - Next session start point: Gate 3A.3 domain mapping schema and clinical review
 
+### 2026-06-19 | Product direction docs + Gate 3A.3 technical mapping layer
+
+- Added four strategic documents separating long-term SaaS direction from current POC execution
+- Established the EDC-neutral field model so future adapters do not depend on REDCap assumptions
+- Added versioned, COSMoS-pinned mappings for all eight scoped vital signs
+- Preserved REDCap details only as optional target hints
+- Implemented governed review state and explicit mapped/needs-review/unmapped/ambiguous decisions
+- Legacy synthetic identifiers are reconciled by name and compatibility metadata without
+  overriding current COSMoS identifiers
+- Mapping libraries fail fast on source drift, duplicate fields, and target variable collisions
+- Draft clinical ranges, units, requiredness, BMI formula, and repetition behavior remain pending
+  domain review
+- Test count increased from 50 to 65; all passing
+- Next session start point: conduct domain review, then Gate 3A.4 renderer/API
+
 ### 2026-04-25 | Project reboot + harness setup + Gate 0 pre-work
 
 - Reviewed original .NET POC (essentially documentation + 936-byte skeleton)
