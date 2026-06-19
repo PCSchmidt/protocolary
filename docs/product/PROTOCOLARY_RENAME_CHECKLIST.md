@@ -1,8 +1,8 @@
 # Protocolary Rename Checklist
 
-**Started:** June 19, 2026  
-**Former working name:** Transcelerate  
-**New brand:** Protocolary  
+**Started:** June 19, 2026
+**Former working name:** Transcelerate
+**New brand:** Protocolary
 **Domain:** [protocolary.com](https://protocolary.com)
 
 ## Completed Locally

@@ -1,7 +1,7 @@
 # Protocolary Brand Identity
 
-**Status:** Adopted  
-**Decision date:** June 19, 2026  
+**Status:** Adopted
+**Decision date:** June 19, 2026
 **Website:** [protocolary.com](https://protocolary.com)
 
 ## Naming System

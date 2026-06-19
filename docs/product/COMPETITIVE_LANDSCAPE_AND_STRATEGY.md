@@ -1,7 +1,7 @@
 # Competitive Landscape and Strategic Direction
 
-**Status:** Working strategy brief  
-**Prepared:** June 19, 2026  
+**Status:** Working strategy brief
+**Prepared:** June 19, 2026
 **Scope:** Competitive research, product positioning, and decisions needed to steer the project
 
 ## Executive Summary
@@ -365,93 +365,93 @@ not solely internal preference.
 
 ### Customer and problem
 
-1. **Who is the first narrowly defined buyer and who is the daily user?**  
+1. **Who is the first narrowly defined buyer and who is the daily user?**
    Decide whether the first buyer is a biotech sponsor, CRO data-management leader, clinical data
    manager, or another role. The economic buyer and hands-on user may be different people.
 
-2. **Which single workflow creates enough pain that a customer will participate in a pilot now?**  
+2. **Which single workflow creates enough pain that a customer will participate in a pilot now?**
    Identify the specific transition—for example, approved protocol to reviewed EDC build
    specification—rather than targeting “clinical development automation” broadly.
 
-3. **How is that workflow performed today, by whom, and with what tools?**  
+3. **How is that workflow performed today, by whom, and with what tools?**
    Document the actual Word, Excel, email, standards-library, and EDC handoffs before designing a
    replacement workflow.
 
-4. **What is the present cost of the problem?**  
+4. **What is the present cost of the problem?**
    Establish baseline elapsed time, labor hours, external vendor spending, defects, rework,
    amendment effort, and delay risk.
 
-5. **What minimum result would make a pilot customer call the product successful?**  
+5. **What minimum result would make a pilot customer call the product successful?**
    Agree on measurable thresholds such as build-time reduction, mapping reuse, fewer review
    cycles, or zero silently omitted concepts.
 
 ### Product wedge and workflow
 
-6. **What exact artifact should the first release deliver?**  
+6. **What exact artifact should the first release deliver?**
    Choose the smallest commercially meaningful output: REDCap configuration, EDC-neutral build
    specification, annotated CRF, transformation manifest, or a clearly defined bundle.
 
-7. **Which decisions may the system automate, and which require qualified human approval?**  
+7. **Which decisions may the system automate, and which require qualified human approval?**
    Define the clinical, standards, sponsor, and technical boundaries before adding AI-driven
    recommendations.
 
-8. **What must a reviewer see to trust each generated field and rule?**  
+8. **What must a reviewer see to trust each generated field and rule?**
    Determine the required provenance, source excerpts, terminology versions, mapping rationale,
    confidence state, and approval history.
 
-9. **How should exceptions, ambiguity, and unsupported protocol content be handled?**  
+9. **How should exceptions, ambiguity, and unsupported protocol content be handled?**
    Specify the operational meaning of `needs_review`, `ambiguous`, `unmapped`, intentionally
    excluded, and target-not-supported states.
 
-10. **What is the smallest review experience that fits the customer's existing work?**  
+10. **What is the smallest review experience that fits the customer's existing work?**
     Test whether customers need Excel, Word, a web interface, API output, or some combination
     before building a substantial user interface.
 
 ### Standards, data, and integrations
 
-11. **Which USDM versions and protocol sources must the first commercial workflow support?**  
+11. **Which USDM versions and protocol sources must the first commercial workflow support?**
     Establish whether Protocol Explorer samples are sufficient for development and what licensed
     or customer-provided study definitions are required for credible validation.
 
-12. **Who owns and approves reusable mappings, units, ranges, requiredness, and sponsor rules?**  
+12. **Who owns and approves reusable mappings, units, ranges, requiredness, and sponsor rules?**
     Define governance roles, approval states, effective dates, and the hierarchy among global,
     sponsor, therapeutic-area, study, and target-specific overrides.
 
-13. **Which second EDC target best validates the neutral architecture and market demand?**  
+13. **Which second EDC target best validates the neutral architecture and market demand?**
     Select it using customer access, technical feasibility, market prevalence, and partnership
     potential—not name recognition alone.
 
-14. **What integration method can realistically be obtained for that target?**  
+14. **What integration method can realistically be obtained for that target?**
     Determine whether the product can use a public API, ODM, import template, certified partner
     program, file export, or supervised implementation service.
 
-15. **What data may legally and contractually become part of the product's reusable knowledge?**  
+15. **What data may legally and contractually become part of the product's reusable knowledge?**
     Separate open standards, licensed terminology, customer-confidential mappings, de-identified
     telemetry, and proprietary benchmark data before building a shared library.
 
 ### Evidence, business model, and adoption
 
-16. **Which two or three design partners can provide real workflows and qualified reviewers?**  
+16. **Which two or three design partners can provide real workflows and qualified reviewers?**
     Prioritize partners able to supply sample studies, evaluate outputs, measure baselines, and
     meet regularly—not merely express general interest.
 
-17. **What pilot offer makes adoption low-risk for the customer and informative for us?**  
+17. **What pilot offer makes adoption low-risk for the customer and informative for us?**
     Define scope, duration, services, data handling, success metrics, support, price, and what
     happens after the pilot.
 
-18. **What business model matches the value and buying process?**  
+18. **What business model matches the value and buying process?**
     Compare per-study pricing, annual subscription, platform plus implementation services, and
     usage-based pricing against customer procurement habits and support costs.
 
 ### Enterprise readiness and strategic focus
 
-19. **What intended use and deployment context determine the minimum compliance boundary?**  
+19. **What intended use and deployment context determine the minimum compliance boundary?**
     Decide whether the first product is advisory, generates reviewed specifications, or directly
     configures a regulated system. That choice drives validation, audit, Part 11, security, and
     quality-system obligations.
 
 20. **What explicit evidence must be present before the roadmap expands beyond the EDC build
-    accelerator?**  
+    accelerator?**
     Set a gate—such as two successful design partners, multiple study transformations, measured
     ROI, one commercial EDC pathway, and repeated mapping reuse—to prevent attractive adjacent
     ideas from diluting the initial product.
